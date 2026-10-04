@@ -289,7 +289,7 @@ build\2.0-blue\2.0-blue-moded.jar
 
 ## Disclaimer
 
-Большая часть кода `build.ps1` была написана с помощью ИИ. Возможны ошибки.
+Большая часть кода `build.ps1` и `README.md` была написана с помощью ИИ. Возможны ошибки.
 
 Minecraft и его первоапрельские версии являются собственностью Mojang Studios и Microsoft. Этот проект является неофициальной модификацией и не связан с Mojang Studios или Microsoft.
 
@@ -573,6 +573,6 @@ The language list file can also be replaced or extended according to the require
 
 ## Disclaimer
 
-Most of the `build.ps1` code was written with the assistance of AI. Errors may occur.
+Most of the `build.ps1` code and `README.md` was written with the assistance of AI. Errors may occur.
 
 Minecraft and its April Fools' versions are property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
