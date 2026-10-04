@@ -188,6 +188,34 @@ build\
 
 Затем удалите директорию `META-INF` из JAR.
 
+#### Установка на сервер
+
+Если вы планируете играть с этой модификацией на сервере, мы должны модифицировать и сервер.
+
+Скачайте соответствующую оригинальную серверную версию Minecraft.
+
+Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29).
+
+Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах.
+
+Откройте оригинальный JAR через WinRAR, 7-Zip или другой архиватор.
+
+Скопируйте следующие `.class`-файлы в JAR с заменой существующих файлов.
+
+##### 2.0
+
+Для Blue и Purple версий 2.0 необходимым для модификации файлом является `nm.class`.
+
+Для Red и Preview версий модификация сервера отсутствует (по причине того, что в этих версиях нет сообщений в облачках).
+
+##### Что если я зайду без модификации клиента на модифицированный сервер?
+
+2.0: Вместо сообщений на вашем языке, в облачках будут отображаться ключи перевода.
+
+##### Что если я зайду с модифицированного клиента на немодифицированный сервер?
+
+2.0: Вместо сообщений на вашем языке, в облачках будут отображаться сообщения на английском.
+
 ---
 
 ### 8. Установите модифицированную версию Minecraft
@@ -418,6 +446,34 @@ Copy the generated `.class` files into the JAR, replacing the existing files.
 If the output contains a `lang` directory, copy its contents into the `lang/` directory inside the JAR.
 
 Then remove the `META-INF` directory from the JAR.
+
+#### Server installation
+
+If you plan to play with this modification on a server, the server must also be modified.
+
+Download the corresponding original Minecraft server JAR.
+
+For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages.
+
+All required client and server JAR links are available in the **Downloads** section of the infobox on these pages.
+
+Open the original JAR using WinRAR, 7-Zip, or another archive manager.
+
+Copy the following `.class` files into the JAR, replacing the existing files.
+
+##### 2.0
+
+For the Blue and Purple variants of 2.0, the required server modification is `nm.class`.
+
+The Red and Preview variants do not require server modifications because they do not contain speech bubble messages.
+
+##### What happens if I join a modified server without a modified client?
+
+2.0: Instead of messages in your language, the translation keys will be displayed in speech bubbles.
+
+##### What happens if I join an unmodified server with a modified client?
+
+2.0: Instead of messages in your language, the messages will be displayed in English.
 
 ---
 
