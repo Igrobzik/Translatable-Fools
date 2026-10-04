@@ -180,7 +180,9 @@ build\
 
 Скачайте соответствующую оригинальную версию Minecraft.
 
-Оригинальные JAR-файлы можно найти на [Minecraft Wiki](https://minecraft.wiki/) или другом соответствующем источнике для конкретной версии.
+Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29).
+
+Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
 
 Откройте оригинальный JAR через WinRAR, 7-Zip или другой архиватор.
 
@@ -206,29 +208,16 @@ build\
 
 Если вам нужны только модифицированные классы и вы не хотите использовать изменения переводов, этот шаг можно пропустить.
 
-#### Автоматическая установка (`.jar`-файлы)
-
-Если вы выбрали **Modded `.jar files`**, скрипт создаст готовый JAR по пути:
-
-```text
-build\<версия>\<версия>-moded.jar
-```
-
-Например:
-
-```text
-build\2.0-blue\2.0-blue-moded.jar
-```
-
-В готовый JAR уже включены модифицированные классы, переводы и выбранные дополнительные исправления.
-
-Директория `META-INF` автоматически удаляется.
+---
 
 ### 8. Установите модифицированную версию Minecraft
 
 Добавьте модифицированный JAR в лаунчер как отдельную версию Minecraft.
 
-Для старых версий Minecraft можно использовать инструкции по ручной установке версий на [Minecraft Wiki](https://minecraft.wiki/).
+Для старых версий Minecraft можно использовать инструкции по ручной установке версий:
+
+* [Русская Minecraft Wiki — Пошаговая установка](https://ru.minecraft.wiki/w/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE:%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B9#%D0%9F%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F_%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
+* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
 
 Например, в Prism Launcher создайте экземпляр соответствующей версии Minecraft, затем откройте:
 
@@ -464,7 +453,9 @@ The folder will contain the modified `.class` files and processed translation fi
 
 Download the corresponding original Minecraft version.
 
-Original JAR files can be found on the [Minecraft Wiki](https://minecraft.wiki/) or another appropriate source for the specific version.
+For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages.
+
+All required client and server JAR links are available in the **Downloads** infobox on these pages. The corresponding `.json` files are also available there.
 
 Open the original JAR using WinRAR, 7-Zip, or another archive manager.
 
@@ -490,29 +481,15 @@ Also replace the corresponding language list file, if present.
 
 If you only want the modified classes and do not want to use the translation changes, you can skip this step.
 
-#### Automatic installation (`.jar` files)
-
-If you selected **Modded `.jar files`**, the script creates a ready-to-use JAR at:
-
-```text
-build\<version>\<version>-moded.jar
-```
-
-For example:
-
-```text
-build\2.0-blue\2.0-blue-moded.jar
-```
-
-The resulting JAR already contains the modified classes, translations, and selected additional fixes.
-
-The `META-INF` directory is removed automatically.
+---
 
 ### 8. Install the modified Minecraft version
 
 Add the modified JAR to your launcher as a separate Minecraft version.
 
-For older Minecraft versions, see the manual installation instructions on the [Minecraft Wiki](https://minecraft.wiki/).
+For older Minecraft versions, see the manual version installation instructions:
+
+* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
 
 For example, in Prism Launcher, create an instance of the corresponding Minecraft version, then open:
 
