@@ -51,6 +51,8 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 Скачайте `build.ps1` и папку той версии, которую хотите модифицировать.
 
+Папка `2.0-blue-purple` используется для модификации как **Minecraft 2.0 Blue**, так и **Minecraft 2.0 Purple**.
+
 Для **Minecraft 2.0** также необходимо скачать папку `2.0`, содержащую общие файлы переводов.
 
 Например, для сборки Minecraft 2.0 Blue нужны:
@@ -309,6 +311,8 @@ The build script automatically downloads the required libraries and original Min
 ### 1. Download the project
 
 Download `build.ps1` and the folder for the version you want to modify.
+
+The `2.0-blue-purple` folder is used to modify both **Minecraft 2.0 Blue** and **Minecraft 2.0 Purple**.
 
 For **Minecraft 2.0**, you also need to download the `2.0` folder, which contains the shared translation files.
 
