@@ -340,9 +340,9 @@ For Minecraft 2.0, the optional **MC-23952 font alignment fix** is available.
 
 It fixes the alignment of wide Unicode characters.
 
-The fix is recommended if you use a font-changing resource pack, such as [Minecraft Font (PC)](https://www.curseforge.com/minecraft/texture-packs/minecraft-font-pc).
+The fix is recommended if you use a font-changing texture pack, such as [Minecraft Font (PC)](https://www.curseforge.com/minecraft/texture-packs/minecraft-font-pc).
 
-If you use the vanilla Minecraft font or English without a font-changing resource pack, **you do not need this fix**.
+If you use the vanilla Minecraft font or English without a font-changing texture pack, **you do not need this fix**.
 
 If you simply press **Enter** instead of entering `Y`, the fix will not be applied.
 
