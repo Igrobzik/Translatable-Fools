@@ -1324,10 +1324,10 @@ mco.create.world=Создать
 
 speechBubble.thatHurts=Больно :(
 speechBubble.myEye=Да ну!
-speechBubble.zzzzz=..хр-хр-ХР
-speechBubble.why=За что!?
+speechBubble.zzzzz=...хр-хр-ХР
+speechBubble.why=За что?!
 speechBubble.illBeBack=Я вернусь!
-speechBubble.youDidnt=Ты же не ....
+speechBubble.youDidnt=Ты же не...
 speechBubble.oof=Уф
 speechBubble.censored=(&%!@*#&%!@$#
 speechBubble.ouch=Ай
@@ -1340,7 +1340,7 @@ speechBubble.whiiii=Уииии
 speechBubble.notDroppingAnything=С меня ничего не падает!
 speechBubble.iLikeYou=Ты мне нравишься!
 speechBubble.iHateYou=Я НЕНАВИЖУ тебя!
-speechBubble.youNoTakeCobble=ТВОЯ НЕ БРАТЬ .. БУЛЫГА!
+speechBubble.youNoTakeCobble=ТВОЯ НЕ БРАТЬ... БУЛЫГА!
 speechBubble.imDiamond=Я алмаз
 speechBubble.youPunchedMe=Ты ударил меня
 speechBubble.stopPunchingMe=Хватит меня бить
@@ -1353,4 +1353,3 @@ speechBubble.imTelling=Я предупреждаю
 speechBubble.creeperBehindYou=Сзади крипер!
 speechBubble.didIDoBad=Что я сделал не так?
 speechBubble.hello=Привет
-
