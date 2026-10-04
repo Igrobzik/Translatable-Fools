@@ -462,8 +462,6 @@ In Minecraft 2.0, these entries were renamed:
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
-For older versions, an “updated” Russian language option has been added. In the language list, you can choose either the original Russian language of that version with translations added for content from the April Fools' version, or a translation based on the game's modern Russian localization.
-
 ## Disclaimer
 
 Most of the `build.ps1` and `README.md` code was written with the assistance of AI. Errors may occur.
