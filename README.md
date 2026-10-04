@@ -226,8 +226,8 @@ build\
 
 В Minecraft 2.0 эти надписи были переименованы:
 
-* `Super HD Graphics` — на русском: «Супер HD графика»
-* `Flopper` — на русском: «Рыбрасыватель»
+* `3D анаглиф` → `Супер HD графика`
+* `Выбрасыватель` → `Рыбрасыватель`
 
 Если для языка существует собственный файл перевода, вместо стандартных исправлений применяется соответствующий пользовательский языковой патч.
 
@@ -457,8 +457,8 @@ For example, in Minecraft 2.0, the values of the following keys are replaced wit
 
 In Minecraft 2.0, these entries were renamed:
 
-* `Super HD Graphics` — Russian: «Супер HD графика»
-* `Flopper` — Russian: «Рыбрасыватель»
+* `3D Anaglyph` → `Super HD Graphics`
+* `Dropper` → `Flopper`
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
