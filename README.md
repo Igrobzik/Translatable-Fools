@@ -182,7 +182,7 @@ build\
 
 Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29).
 
-Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
+Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
 
 Откройте оригинальный JAR через WinRAR, 7-Zip или другой архиватор.
 
@@ -455,7 +455,7 @@ Download the corresponding original Minecraft version.
 
 For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages.
 
-All required client and server JAR links are available in the **Downloads** infobox on these pages. The corresponding `.json` files are also available there.
+All required client and server JAR links are available in the **Downloads** section of the infobox on these pages. The corresponding `.json` files are also available there.
 
 Open the original JAR using WinRAR, 7-Zip, or another archive manager.
 
