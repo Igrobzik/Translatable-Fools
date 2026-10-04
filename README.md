@@ -59,7 +59,7 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-blue-purple\
 ```
 
@@ -67,7 +67,7 @@ build.ps1
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-red\
 ```
 
@@ -75,7 +75,7 @@ build.ps1
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-preview\
 ```
 
@@ -320,7 +320,7 @@ For example, to build Minecraft 2.0 Blue:
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-blue-purple\
 ```
 
@@ -328,7 +328,7 @@ For Minecraft 2.0 Red:
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-red\
 ```
 
@@ -336,7 +336,7 @@ For Minecraft 2.0 Preview:
 
 ```text
 build.ps1
-2.0\
+2.0\lang\
 2.0-preview\
 ```
 
