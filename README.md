@@ -366,7 +366,7 @@ build\
     └── lang\
         ├── languages.txt
         ├── en_US.lang
-        ├── ru_RU.lang
+        ├── en_GB.lang
         └── ...
 ```
 
@@ -427,7 +427,6 @@ Add the modified JAR to your launcher as a separate Minecraft version.
 
 For older Minecraft versions, you can use the following manual version installation instructions:
 
-* [Russian Minecraft Wiki — Step-by-step installation](https://ru.minecraft.wiki/w/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE:%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B9#%D0%9F%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F_%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
 * [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial%3AInstalling_a_version#Manual_version_installation)
 
 For example, in Prism Launcher, create an instance of the corresponding Minecraft version, then open:
