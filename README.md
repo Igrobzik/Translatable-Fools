@@ -18,7 +18,6 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 Проект делает контент первоапрельских версий Minecraft переводимым:
 
 * Добавляет отсутствующие ключи перевода для нового контента.
-* Позволяет использовать собственные файлы переводов.
 * Исправляет некоторые переводы для соответствия с современным переводом игры.
 * Содержит необязательные исправления некоторых известных проблем, связанных с отображением текста.
 
@@ -276,7 +275,6 @@ Minecraft и его первоапрельские версии являются
 The project makes content introduced in Minecraft's April Fools' versions translatable:
 
 * Adds missing translation keys for newly introduced content.
-* Allows the use of custom language files.
 * Fixes some translations to match the modern translation of the game.
 * Includes optional fixes for some known text-rendering issues.
 
