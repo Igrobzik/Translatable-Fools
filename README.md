@@ -208,11 +208,11 @@ build\
 
 Для Red и Preview версий модификация сервера отсутствует (по причине того, что в этих версиях нет сообщений в облачках).
 
-##### Что если я зайду без модификации клиента на модифицированный сервер?
+###### Что если я зайду без модификации клиента на модифицированный сервер?
 
 2.0: Вместо сообщений на вашем языке, в облачках будут отображаться ключи перевода.
 
-##### Что если я зайду с модифицированного клиента на немодифицированный сервер?
+###### Что если я зайду с модифицированного клиента на немодифицированный сервер?
 
 2.0: Вместо сообщений на вашем языке, в облачках будут отображаться сообщения на английском.
 
@@ -467,11 +467,11 @@ For the Blue and Purple variants of 2.0, the required server modification is `nm
 
 The Red and Preview variants do not require server modifications because they do not contain speech bubble messages.
 
-##### What happens if I join a modified server without a modified client?
+###### What happens if I join a modified server without a modified client?
 
 2.0: Instead of messages in your language, the translation keys will be displayed in speech bubbles.
 
-##### What happens if I join an unmodified server with a modified client?
+###### What happens if I join an unmodified server with a modified client?
 
 2.0: Instead of messages in your language, the messages will be displayed in English.
 
