@@ -18,7 +18,8 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 Проект делает контент первоапрельских версий Minecraft переводимым:
 
 * Добавляет отсутствующие ключи перевода для нового контента.
-* Исправляет некоторые переводы для соответствия с современным переводом игры.
+* Позволяет использовать собственные файлы переводов.
+* Исправляет некоторые переводы в соответствии с современным переводом игры.
 * Содержит необязательные исправления некоторых известных проблем, связанных с отображением текста.
 
 #### 2.0
@@ -112,7 +113,7 @@ build.ps1
 
 Если вы используете стандартный шрифт Minecraft или английский язык без набора текстур, изменяющего шрифт, **это исправление вам не нужно**.
 
-Если вместо `Y` просто нажать **Enter**, исправление применено не будет.
+Если вместо ввода `Y` просто нажать **Enter**, исправление применено не будет.
 
 Другие версии могут иметь собственные дополнительные исправления.
 
@@ -189,7 +190,7 @@ build\
 
 #### Установка на сервер
 
-Если вы планируете играть с этой модификацией на сервере, мы должны модифицировать и сервер.
+Если вы планируете играть с этой модификацией на сервере, вы должны модифицировать и сервер.
 
 Скачайте соответствующую оригинальную серверную версию Minecraft.
 
@@ -275,6 +276,7 @@ Minecraft и его первоапрельские версии являются
 The project makes content introduced in Minecraft's April Fools' versions translatable:
 
 * Adds missing translation keys for newly introduced content.
+* Allows the use of custom language files.
 * Fixes some translations to match the modern translation of the game.
 * Includes optional fixes for some known text-rendering issues.
 
@@ -517,6 +519,6 @@ If a custom translation file exists for a language, the corresponding custom lan
 
 ## Disclaimer
 
-Most of the `build.ps1` and `README.md` code was written with the assistance of AI. Errors may occur.
+Most of the `build.ps1` code and `README.md` was written with the assistance of AI. Errors may occur.
 
-Minecraft and its April Fools' versions are property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
+Minecraft and its April Fools' versions are the property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
