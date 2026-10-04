@@ -13,11 +13,14 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 ## Возможности
 
-### Minecraft 2.0
+### Minecraft 2.0 — переводы
+
+Проект поддерживает переводимый контент Minecraft 2.0:
 
 * Добавляет ключ перевода для сплэша `APRIL FOOLS!`.
-* Добавляет ключи перевода для всех сообщений в облачках у блоков.
+* Добавляет ключи перевода для сообщений в облачках у блоков в версиях, где они присутствуют.
 * Позволяет использовать собственные файлы переводов.
+* Исправляет некоторые переводы, связанные с изменениями Minecraft 2.0.
 * Содержит необязательное исправление [MC-23952](https://bugs.mojang.com/browse/MC-23952), исправляющее выравнивание широких Unicode-символов при использовании некоторых наборов текстур со сторонними шрифтами.
 
 ### Поддерживаемые версии
@@ -26,6 +29,8 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * Minecraft 2.0 Purple
 * Minecraft 2.0 Red
 * Minecraft 2.0 Preview
+
+Не все версии Minecraft 2.0 имеют одинаковый набор изменений. Поэтому набор модификаций зависит от конкретной версии.
 
 ## Требования
 
@@ -39,11 +44,37 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 ### 1. Скачайте проект
 
-Скачайте `build.ps1` и папки, соответствующие версиям, которые хотите модифицировать.
+Скачайте `build.ps1`, папку `2.0` и папку той версии, которую хотите модифицировать.
 
 Поместите их все в одну директорию.
 
-Папка `2.0` поддерживает все четыре варианта: **Blue, Purple, Red и Preview**.
+Папка `2.0` содержит общие для всех вариантов Minecraft 2.0 файлы переводов. Исходные файлы для каждой версии находятся в отдельной папке этой версии.
+
+Например, для сборки **Minecraft 2.0 Blue** нужны:
+
+```text
+build.ps1
+2.0\
+2.0-blue-purple\
+```
+
+Для **Minecraft 2.0 Red**:
+
+```text
+build.ps1
+2.0\
+2.0-red\
+```
+
+Для **Minecraft 2.0 Preview**:
+
+```text
+build.ps1
+2.0\
+2.0-preview\
+```
+
+Папка `2.0` используется совместно с выбранной версией и не содержит исходные файлы всех четырёх вариантов.
 
 ### 2. Запустите сборщик
 
@@ -59,7 +90,9 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 Выберите одну или несколько версий, которые хотите модифицировать.
 
-Также можно выбрать **All versions**, чтобы выбрать все версии.
+Также можно выбрать **All versions**, чтобы выбрать все поддерживаемые версии.
+
+Если выбрано несколько версий, для каждой из них должна присутствовать соответствующая папка исходных файлов.
 
 ### 4. Дополнительное исправление шрифта
 
@@ -85,7 +118,21 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 #### `.class`-файлы
 
-Создаёт только модифицированные `.class`-файлы.
+Создаёт модифицированные `.class`-файлы и обработанные файлы переводов.
+
+Структура результата выглядит примерно так:
+
+```text
+build\
+└── 2.0-blue\
+    ├── bko.class
+    ├── nm.class
+    └── lang\
+        ├── languages.txt
+        ├── en_US.lang
+        ├── ru_RU.lang
+        └── ...
+```
 
 Этот вариант предназначен для ручной установки.
 
@@ -119,7 +166,7 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 Если вы выбрали `.class files`, в директории `build` появится папка каждой выбранной версии.
 
-Внутри неё будут находиться модифицированные `.class`-файлы.
+Внутри неё будут находиться модифицированные `.class`-файлы и обработанные файлы переводов.
 
 Скачайте соответствующую оригинальную версию Minecraft:
 
@@ -132,11 +179,13 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 Скопируйте созданные `.class`-файлы в JAR с заменой существующих файлов.
 
+Скопируйте содержимое созданной директории `lang` в директорию `lang/` внутри JAR.
+
 Затем удалите директорию `META-INF` из JAR.
 
 ##### Ручная установка переводов
 
-Файлы переводов находятся в директории проекта:
+Также можно использовать файлы переводов непосредственно из проекта:
 
 ```text
 2.0\lang\
@@ -177,7 +226,7 @@ build\2.0-blue\2.0-blue-moded.jar
 Подробнее:
 
 * [Minecraft Wiki — Установка версий Minecraft](https://ru.minecraft.wiki/w/Руководство:Установка_версий#Пошаговая_установка)
-* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
+* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial%3AInstalling_a_version#Manual_version_installation)
 
 Например, в Prism Launcher создайте новый экземпляр Minecraft 1.5.1, затем откройте:
 
@@ -195,12 +244,19 @@ build\2.0-blue\2.0-blue-moded.jar
 
 ## Переводы
 
-Для языков, для которых не существует собственного файла перевода, модификация удаляет переопределения `options.anaglyph` и `tile.dropper.name`, благодаря чему эти надписи отображаются так же, как в английской локализации.
+Для языков, для которых не существует собственного файла перевода, скрипт применяет стандартные исправления переводов Minecraft 2.0.
 
-В Minecraft 2.0 эти надписи были переименованы в:
+В частности, значения следующих ключей заменяются на соответствующие английские названия:
+
+* `options.anaglyph` → `Super HD Graphics`
+* `tile.dropper.name` → `Flopper`
+
+В Minecraft 2.0 эти надписи были переименованы:
 
 * `Super HD Graphics` — на русском: «Супер HD графика»
 * `Flopper` — на русском: «Рыбрасыватель»
+
+Если для языка существует собственный файл перевода в `2.0\lang\`, вместо этих стандартных исправлений применяется соответствующий пользовательский языковой патч.
 
 ### Собственные языки
 
@@ -229,7 +285,7 @@ build\2.0-blue\2.0-blue-moded.jar
 2.0\lang\languages.txt
 ```
 
-всегда добавляется в готовый JAR.
+используется для списка языков и добавляется в готовый JAR.
 
 ## Отказ от ответственности
 
@@ -241,11 +297,14 @@ Minecraft и его первоапрельские версии являются
 
 ## Features
 
-### Minecraft 2.0
+### Minecraft 2.0 — translations
+
+The project focuses on making content introduced in Minecraft 2.0 translatable:
 
 * Adds a translation key for the `APRIL FOOLS!` splash text.
-* Adds translation keys for all block speech bubbles.
+* Adds translation keys for block speech bubbles in versions where they are present.
 * Allows the use of custom language patches.
+* Fixes some translations related to changes introduced in Minecraft 2.0.
 * Includes an optional fix for [MC-23952](https://bugs.mojang.com/browse/MC-23952), which fixes the alignment of wide Unicode glyphs when using certain font texture packs.
 
 ### Supported versions
@@ -254,6 +313,8 @@ Minecraft и его первоапрельские версии являются
 * Minecraft 2.0 Purple
 * Minecraft 2.0 Red
 * Minecraft 2.0 Preview
+
+Not all Minecraft 2.0 versions contain the same changes, so the set of modifications depends on the specific version.
 
 ## Requirements
 
@@ -267,11 +328,37 @@ The build script automatically downloads the required LWJGL libraries and origin
 
 ### 1. Download the project
 
-Download `build.ps1` and the folders corresponding to the versions you want to modify.
+Download `build.ps1`, the `2.0` folder, and the folder corresponding to the version you want to modify.
 
 Place them all in the same directory.
 
-The `2.0` folder supports all four variants: **Blue, Purple, Red, and Preview**.
+The `2.0` folder contains translation files shared by all Minecraft 2.0 variants. The source files for each version are stored in that version's separate folder.
+
+For example, to build **Minecraft 2.0 Blue**, you need:
+
+```text
+build.ps1
+2.0\
+2.0-blue-purple\
+```
+
+For **Minecraft 2.0 Red**:
+
+```text
+build.ps1
+2.0\
+2.0-red\
+```
+
+For **Minecraft 2.0 Preview**:
+
+```text
+build.ps1
+2.0\
+2.0-preview\
+```
+
+The `2.0` folder is shared with the selected version and does not contain the source files for all four variants.
 
 ### 2. Run the build script
 
@@ -288,6 +375,8 @@ Before being used, downloaded Minecraft JARs are verified using their SHA-256 ch
 Choose one or more versions you want to modify.
 
 You can also select **All versions** to select every supported version.
+
+If you select multiple versions, the corresponding source folder must be present for each selected version.
 
 ### 4. Optional font fix
 
@@ -313,7 +402,21 @@ The build script provides two options:
 
 #### `.class` files
 
-Creates only the modified `.class` files.
+Creates the modified `.class` files and processed translation files.
+
+The resulting structure looks approximately like this:
+
+```text
+build\
+└── 2.0-blue\
+    ├── bko.class
+    ├── nm.class
+    └── lang\
+        ├── languages.txt
+        ├── en_US.lang
+        ├── ru_RU.lang
+        └── ...
+```
 
 This option is intended for manual installation.
 
@@ -347,7 +450,7 @@ After a successful build, the result will be placed in the `build` directory.
 
 If you selected `.class files`, the `build` directory will contain a folder for each selected version.
 
-The folder will contain the modified `.class` files.
+The folder will contain the modified `.class` files and processed translation files.
 
 Download the corresponding original Minecraft version:
 
@@ -360,11 +463,13 @@ Open the original JAR using WinRAR, 7-Zip, or another archive manager.
 
 Copy the generated `.class` files into the JAR and replace the existing files.
 
+Copy the contents of the generated `lang` directory into the `lang/` directory inside the JAR.
+
 Then remove the `META-INF` directory from the JAR.
 
 ##### Installing translations manually
 
-Translation files are located in the project's:
+Translation files can also be taken directly from the project:
 
 ```text
 2.0\lang\
@@ -405,7 +510,7 @@ Add the modified JAR to your launcher as a separate Minecraft version.
 See the installation guides:
 
 * [Minecraft Wiki — Installing Minecraft versions (Russian)](https://ru.minecraft.wiki/w/Руководство:Установка_версий#Пошаговая_установка)
-* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
+* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial%3AInstalling_a_version#Manual_version_installation)
 
 For example, in Prism Launcher, create a new Minecraft 1.5.1 instance, then open:
 
@@ -423,12 +528,19 @@ It can be safely deleted. If you run the build script again, the required files 
 
 ## Translations
 
-For languages without a custom translation patch, the modification removes the `options.anaglyph` and `tile.dropper.name` overrides so that these entries are displayed the same way as in the English localization.
+For languages without a custom translation patch, the script applies the standard Minecraft 2.0 translation fixes.
+
+In particular, the following keys are replaced with their corresponding English names:
+
+* `options.anaglyph` → `Super HD Graphics`
+* `tile.dropper.name` → `Flopper`
 
 In Minecraft 2.0, these entries were renamed to:
 
 * `Super HD Graphics` — Russian: «Супер HD графика»
 * `Flopper` — Russian: «Рыбрасыватель»
+
+If a custom language file exists in `2.0\lang\`, the corresponding custom language patch is applied instead of these standard fixes.
 
 ### Custom languages
 
@@ -457,10 +569,10 @@ The file:
 2.0\lang\languages.txt
 ```
 
-is always added to the resulting JAR.
+is used for the language list and is added to the resulting JAR.
 
 ## Disclaimer
 
 Most of the `build.ps1` code was written with the assistance of AI. Errors may occur.
 
-Minecraft and its April Fools' versions are property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
+Minecraft and its April Fools' versions are property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft. </writing>
