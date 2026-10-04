@@ -473,7 +473,7 @@ The Red and Preview variants do not require server modifications because they do
 
 ###### What happens if I join an unmodified server with a modified client?
 
-2.0: Instead of messages in your language, the messages will be displayed in English.
+2.0: Instead of messages in your language, the messages in English will be displayed in speech bubbles.
 
 ---
 
