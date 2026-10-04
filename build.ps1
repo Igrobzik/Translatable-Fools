@@ -627,6 +627,102 @@ function Fix-Vanilla-SpecialTranslations {
 }
 
 # ============================================================
+# Process one language file
+#
+# This is shared by both:
+#
+# - modded JAR output
+# - .class files output
+#
+# Therefore both output modes use exactly the same
+# translation logic.
+# ============================================================
+
+function Process-LanguageContent {
+
+    param(
+        [string]$LanguageName,
+        [string]$ArchiveContent
+    )
+
+    $CustomLanguagePath = Join-Path `
+        $LangDir `
+        $LanguageName
+
+    if (Test-Path $CustomLanguagePath) {
+
+        # ====================================================
+        # CUSTOM PATCH EXISTS
+        # ====================================================
+
+        Write-Host "Patching language: $LanguageName"
+
+        $PatchContent = Read-Utf8File `
+            $CustomLanguagePath
+
+        return Apply-LanguagePatch `
+            $ArchiveContent `
+            $PatchContent
+    }
+    else {
+
+        # ====================================================
+        # NO CUSTOM PATCH
+        #
+        # Only replace existing:
+        #
+        # options.anaglyph
+        # tile.dropper.name
+        #
+        # Never add missing ones.
+        # ====================================================
+
+        Write-Host "Fixing special translations: $LanguageName"
+
+        return Fix-Vanilla-SpecialTranslations `
+            $ArchiveContent
+    }
+}
+
+# ============================================================
+# Read language entry from JAR
+# ============================================================
+
+function Read-LanguageEntry {
+
+    param(
+        [System.IO.Compression.ZipArchiveEntry]$Entry
+    )
+
+    $InputStream = $null
+    $Reader = $null
+
+    try {
+
+        $InputStream = $Entry.Open()
+
+        $Reader = New-Object System.IO.StreamReader(
+            $InputStream,
+            [System.Text.Encoding]::UTF8,
+            $true
+        )
+
+        return $Reader.ReadToEnd()
+
+    }
+    finally {
+
+        if ($Reader) {
+            $Reader.Dispose()
+        }
+
+        if ($InputStream) {
+            $InputStream.Dispose()
+        }
+    }
+}
+
+# ============================================================
 # Write text entry to ZIP
 # ============================================================
 
@@ -664,6 +760,146 @@ function Add-TextEntry {
             $OutputStream.Dispose()
         }
     }
+}
+
+# ============================================================
+# Export processed languages to normal directory
+# ============================================================
+
+function Export-ProcessedLanguages {
+
+    param(
+        [string]$MinecraftJar,
+        [string]$OutputDir
+    )
+
+    $OutputLangDir = Join-Path $OutputDir "lang"
+
+    if (Test-Path $OutputLangDir) {
+        Remove-Item $OutputLangDir -Recurse -Force
+    }
+
+    New-Item `
+        -ItemType Directory `
+        -Force `
+        -Path $OutputLangDir | Out-Null
+
+    Write-Host ""
+    Write-Host "Preparing language files for manual installation..."
+
+    $ArchiveLanguages = @{}
+    $SourceArchive = $null
+
+    try {
+
+        $SourceArchive = [System.IO.Compression.ZipFile]::OpenRead(
+            $MinecraftJar
+        )
+
+        # ====================================================
+        # Process languages from original JAR
+        # ====================================================
+
+        foreach ($Entry in $SourceArchive.Entries) {
+
+            $EntryName = $Entry.FullName
+
+            if (
+                $EntryName.StartsWith(
+                    "lang/",
+                    [System.StringComparison]::OrdinalIgnoreCase
+                ) -and
+                $EntryName.EndsWith(
+                    ".lang",
+                    [System.StringComparison]::OrdinalIgnoreCase
+                )
+            ) {
+
+                $LanguageName = [System.IO.Path]::GetFileName(
+                    $EntryName
+                )
+
+                $ArchiveLanguages[$LanguageName] = $true
+
+                # --------------------------------------------
+                # Read original language
+                # --------------------------------------------
+
+                $ArchiveContent = Read-LanguageEntry $Entry
+
+                # --------------------------------------------
+                # Apply exactly the same translation processing
+                # as JAR output
+                # --------------------------------------------
+
+                $FinalContent = Process-LanguageContent `
+                    $LanguageName `
+                    $ArchiveContent
+
+                # --------------------------------------------
+                # Write processed language
+                # --------------------------------------------
+
+                $OutputLanguagePath = Join-Path `
+                    $OutputLangDir `
+                    $LanguageName
+
+                [System.IO.File]::WriteAllText(
+                    $OutputLanguagePath,
+                    $FinalContent,
+                    [System.Text.Encoding]::UTF8
+                )
+            }
+        }
+
+        # ====================================================
+        # Add custom languages which do not exist in JAR
+        # ====================================================
+
+        foreach ($LanguageFile in $CustomLanguageFiles) {
+
+            $LanguageName = $LanguageFile.Name
+
+            if ($ArchiveLanguages.ContainsKey($LanguageName)) {
+                continue
+            }
+
+            Write-Host "Adding new language: $LanguageName"
+
+            $Content = Read-Utf8File `
+                $LanguageFile.FullName
+
+            $OutputLanguagePath = Join-Path `
+                $OutputLangDir `
+                $LanguageName
+
+            [System.IO.File]::WriteAllText(
+                $OutputLanguagePath,
+                $Content,
+                [System.Text.Encoding]::UTF8
+            )
+        }
+
+        # ====================================================
+        # Replace languages.txt
+        # ====================================================
+
+        Write-Host "Adding custom: lang/languages.txt"
+
+        Copy-Item `
+            $LanguagesFile `
+            (Join-Path $OutputLangDir "languages.txt") `
+            -Force
+
+    }
+    finally {
+
+        if ($SourceArchive) {
+            $SourceArchive.Dispose()
+        }
+    }
+
+    Write-Host "Language files prepared: $OutputLangDir"
 }
 
 # ============================================================
@@ -789,6 +1025,17 @@ The downloaded file was deleted.
         }
 
         Write-Host "Created: $ClassOutput"
+    }
+
+    # ========================================================
+    # Export processed languages for .class files
+    # ========================================================
+
+    if ($OutputFormat -eq "classes") {
+
+        Export-ProcessedLanguages `
+            $MinecraftJar `
+            $OutputDir
     }
 
     # ========================================================
@@ -945,79 +1192,15 @@ The downloaded file was deleted.
                         # Read original language
                         # -----------------------------------------
 
-                        $ArchiveContent = ""
-
-                        $InputStream = $null
-                        $Reader = $null
-
-                        try {
-
-                            $InputStream = $Entry.Open()
-
-                            $Reader = New-Object System.IO.StreamReader(
-                                $InputStream,
-                                [System.Text.Encoding]::UTF8,
-                                $true
-                            )
-
-                            $ArchiveContent = $Reader.ReadToEnd()
-
-                        }
-                        finally {
-
-                            if ($Reader) {
-                                $Reader.Dispose()
-                            }
-
-                            if ($InputStream) {
-                                $InputStream.Dispose()
-                            }
-                        }
+                        $ArchiveContent = Read-LanguageEntry $Entry
 
                         # -----------------------------------------
-                        # Check whether this language has a
-                        # custom patch
+                        # Apply shared translation processing
                         # -----------------------------------------
 
-                        $CustomLanguagePath = Join-Path `
-                            $LangDir `
-                            $LanguageName
-
-                        if (Test-Path $CustomLanguagePath) {
-
-                            # ====================================
-                            # CUSTOM PATCH EXISTS
-                            # ====================================
-
-                            Write-Host "Patching language: $LanguageName"
-
-                            $PatchContent = Read-Utf8File `
-                                $CustomLanguagePath
-
-                            $FinalContent = Apply-LanguagePatch `
-                                $ArchiveContent `
-                                $PatchContent
-
-                        }
-                        else {
-
-                            # ====================================
-                            # NO CUSTOM PATCH
-                            #
-                            # Only replace existing:
-                            #
-                            # options.anaglyph
-                            # tile.dropper.name
-                            #
-                            # Never add missing ones.
-                            # ====================================
-
-                            Write-Host "Fixing special translations: $LanguageName"
-
-                            $FinalContent = `
-                                Fix-Vanilla-SpecialTranslations `
-                                $ArchiveContent
-                        }
+                        $FinalContent = Process-LanguageContent `
+                            $LanguageName `
+                            $ArchiveContent
 
                         # -----------------------------------------
                         # Write language into output JAR
@@ -1219,7 +1402,6 @@ try {
         else {
 
             Write-Host "  build\$($Version.Id)\"
-
         }
     }
 
