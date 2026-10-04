@@ -222,7 +222,7 @@ if ($Has2Point0) {
 
     Write-Host ""
     Write-Host "Optional fix for Minecraft 2.0:"
-    Write-Host "MC-70915 - fixes wide Unicode glyph alignment."
+    Write-Host "MC-23952 - fixes wide Unicode glyph alignment."
     Write-Host ""
     Write-Host "This fix is only needed if you use a font texture pack."
     Write-Host "If you use English or the vanilla Minecraft font, you do NOT need this fix."
@@ -233,19 +233,19 @@ if ($Has2Point0) {
     Write-Host "  2.0 Preview      -> ayb.class"
     Write-Host ""
 
-    $FontFixChoice = Read-Host "Apply the MC-70915 font alignment fix? [Y/N]"
+    $FontFixChoice = Read-Host "Apply the MC-23952 font alignment fix? [Y/N]"
 
     if ($FontFixChoice -match "^[Yy]$") {
 
         $UseFontFix = $true
 
-        Write-Host "MC-70915 font alignment fix: ENABLED"
+        Write-Host "MC-23952 font alignment fix: ENABLED"
     }
     else {
 
         $UseFontFix = $false
 
-        Write-Host "MC-70915 font alignment fix: DISABLED"
+        Write-Host "MC-23952 font alignment fix: DISABLED"
     }
 }
 
