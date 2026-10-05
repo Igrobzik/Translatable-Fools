@@ -49,13 +49,11 @@ $Versions = @(
 
         Sources = @(
             "2.0-blue-purple\bko.java"
-            "2.0-blue-purple\nm.java"
             "2.0-blue-purple\bia.java"
         )
 
         Classes = @(
             "bko.class"
-            "nm.class"
             "bia.class"
         )
 
@@ -75,13 +73,11 @@ $Versions = @(
 
         Sources = @(
             "2.0-blue-purple\bko.java"
-            "2.0-blue-purple\nm.java"
             "2.0-blue-purple\bia.java"
         )
 
         Classes = @(
             "bko.class"
-            "nm.class"
             "bia.class"
         )
 
