@@ -235,7 +235,7 @@ if ($Has2Point0) {
 
     $FontFixChoice = Read-Host "Apply the MC-23952 font alignment fix? [Y/N]"
 
-    if ($FontFixChoice -match "^[Yy]$") {
+    if ($FontFixChoice -match "^[Yy2]$") {
 
         $UseFontFix = $true
 
@@ -1413,7 +1413,7 @@ try {
 
     $CleanCache = Read-Host "Clean build cache (.build-deps)? [Y/N]"
 
-    if ($CleanCache -match "^[Yy]$") {
+    if ($CleanCache -match "^[Yy2]$") {
 
         if (Test-Path $DepsDir) {
 
