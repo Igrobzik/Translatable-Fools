@@ -26,12 +26,17 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * Добавляет ключи перевода для сплэша `APRIL FOOLS!`.
 * Добавляет перевод для сообщений в облачках у блоков.
 
+#### 15w14a
+* Добавляет ключи перевода для сплэша `Minecraft is love, Minecraft is life`.
+* Добавляет ключи перевода для названия создаваемого мира в меню создания мира, меню сброса мира и в файле level.dat мира, видного при загрузки этого мира в другую версию.
+
 ### Поддерживаемые версии
 
 * Minecraft 2.0 Blue
 * Minecraft 2.0 Purple
 * Minecraft 2.0 Red
 * Minecraft 2.0 Preview
+* Minecraft 15w14a
 
 Список поддерживаемых версий будет расширяться по мере добавления новых первоапрельских версий Minecraft.
 
@@ -71,15 +76,12 @@ build.ps1
 2.0-red\
 ```
 
-Для Minecraft 2.0 Preview:
+Для Minecraft 15w14a:
 
 ```text
 build.ps1
-2.0\lang\
-2.0-preview\
+15w14a\
 ```
-
-Папка `2.0` содержит общие файлы переводов, используемые вариантами Minecraft 2.0.
 
 В будущих версиях Minecraft структура файлов может отличаться. Если для конкретной версии требуются дополнительные общие файлы, это будет указано в её разделе.
 
@@ -178,7 +180,8 @@ build\
 
 Скачайте соответствующую оригинальную версию Minecraft.
 
-Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29).
+Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **Minecraft 15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a
+](https://minecraft.wiki/w/Java_Edition_15w14a).
 
 Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
 
@@ -235,6 +238,14 @@ build\
 
 Для старых версий у русского языка добавлен «обновлённый» вариант. В списке языков вы сможете выбрать оригинальный русский язык той версии, с добавленными переводами контента первоапрельской версии, или перевод, основанный на современной русской локализации.
 
+Для Minecraft 15w14a сборщик использует языковые файлы, содержащиеся в оригинальном наборе ресурсов этой версии.
+
+Файл 15w14a\lang\en_US.lang используется как глобальный набор английских значений. Ключи, присутствующие в этом файле, заменяют соответствующие значения во всех языках.
+
+После этого применяется пользовательский файл конкретного языка, например 15w14a\lang\ru_RU.lang, поэтому он может переопределить глобальное английское значение.
+
+Если для языка нет собственного пользовательского файла, используются обработанные значения исходного языкового файла с учётом глобальных английских переопределений и стандартных исправлений.
+
 ## Нужно ли модифицировать сервер?
 
 Сервер модифицировать не нужно. Модификация работает полностью со стороны клиента.
@@ -263,12 +274,20 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 * Adds translation keys for the `APRIL FOOLS!` splash.
 * Adds translation support for block speech bubble messages.
 
+#### 15w14a
+
+* Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
+* Adds translation keys for the world name used in the world creation menu, world reset menu, and `level.dat`.
+* Includes language files for the languages available in 15w14a.
+* Allows `15w14a/lang/en_US.lang` to define English values that are applied to the corresponding keys in every language.
+
 ### Supported versions
 
 * Minecraft 2.0 Blue
 * Minecraft 2.0 Purple
 * Minecraft 2.0 Red
 * Minecraft 2.0 Preview
+* Minecraft 15w14a
 
 The list of supported versions will expand as new Minecraft April Fools' versions are added.
 
@@ -308,12 +327,11 @@ build.ps1
 2.0-red\
 ```
 
-For Minecraft 2.0 Preview:
+For Minecraft 15w14a:
 
 ```text
 build.ps1
-2.0\lang\
-2.0-preview\
+15w14a\
 ```
 
 The `2.0` folder contains shared translation files used by the different Minecraft 2.0 variants.
@@ -415,7 +433,7 @@ The folder will contain the modified `.class` files and processed translation fi
 
 Download the corresponding original version of Minecraft.
 
-For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages.
+For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **Minecraft 15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page.
 
 All required client and server JAR links are available in the **Downloads** section of the infobox on these pages. The corresponding `.json` files are also available there.
 
@@ -468,6 +486,14 @@ In Minecraft 2.0, these entries were renamed:
 * `Dropper` → `Flopper`
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
+
+For Minecraft 15w14a, the build script uses the language files available in the original resource set for this version.
+
+The 15w14a\lang\en_US.lang file is used as a global set of English values. Keys present in this file replace the corresponding values in every language.
+
+After that, the custom language file for a specific language is applied. For example, 15w14a\lang\ru_RU.lang can override the global English values.
+
+If a language does not have a custom translation file, its processed original language file is used with the global English overrides and standard fixes applied.
 
 ## Do I need to modify the server?
 
