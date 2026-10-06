@@ -20,13 +20,6 @@ $Root = Split-Path -Parent $MyInvocation.MyCommand.Path
 $BuildDir = Join-Path $Root "build"
 $DepsDir = Join-Path $Root ".build-deps"
 
-# ============================================================
-# Translation directory
-# ============================================================
-
-$LangDir = Join-Path $Root "2.0\lang"
-$LanguagesFile = Join-Path $LangDir "languages.txt"
-
 Add-Type -AssemblyName System.IO.Compression
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
@@ -35,6 +28,30 @@ $JavaUtilJar = "https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl_util/2.9.4
 
 $LwjglJar = Join-Path $DepsDir "lwjgl-2.9.4-nightly-20150209.jar"
 $LwjglUtilJar = Join-Path $DepsDir "lwjgl_util-2.9.4-nightly-20150209.jar"
+
+$CommonsLangJarUrl = "https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar"
+$CommonsLangJar = Join-Path $DepsDir "commons-lang3-3.3.2.jar"
+
+$GuavaJarUrl = "https://libraries.minecraft.net/com/google/guava/guava/17.0/guava-17.0.jar"
+$GuavaJar = Join-Path $DepsDir "guava-17.0.jar"
+
+$CommonsIoJarUrl = "https://libraries.minecraft.net/commons-io/commons-io/2.4/commons-io-2.4.jar"
+$CommonsIoJar = Join-Path $DepsDir "commons-io-2.4.jar"
+
+$Log4jApiJarUrl = "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-api/2.0-beta9/log4j-api-2.0-beta9.jar"
+$Log4jApiJar = Join-Path $DepsDir "log4j-api-2.0-beta9.jar"
+
+$Log4jCoreJarUrl = "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar"
+$Log4jCoreJar = Join-Path $DepsDir "log4j-core-2.0-beta9.jar"
+
+# ============================================================
+# 15w14a language source
+# ============================================================
+
+$15w14aLanguageListUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/15w14a/assets/minecraft/lang/_list.json"
+$15w14aLanguageBaseUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/15w14a/assets/minecraft/lang"
+
+$15w14aLanguageCache = Join-Path $DepsDir "15w14a-lang"
 
 # ============================================================
 # Version configuration
@@ -47,6 +64,12 @@ $Versions = @(
         Id          = "2.0-blue"
         JarName     = "2.0-blue.jar"
 
+        TranslationDir     = "2.0\lang"
+        TranslationJarPath = "lang"
+
+        HasLanguagesFile = $true
+        ExternalLanguageSource = $false
+
         Sources = @(
             "2.0-blue-purple\bko.java"
             "2.0-blue-purple\bia.java"
@@ -57,7 +80,6 @@ $Versions = @(
             "bia.class"
         )
 
-        # Optional 2.0 font centering fix
         FontFixSource = "2.0-blue-purple\awz.java"
         FontFixClass  = "awz.class"
 
@@ -71,6 +93,12 @@ $Versions = @(
         Id          = "2.0-purple"
         JarName     = "2.0-purple.jar"
 
+        TranslationDir     = "2.0\lang"
+        TranslationJarPath = "lang"
+
+        HasLanguagesFile = $true
+        ExternalLanguageSource = $false
+
         Sources = @(
             "2.0-blue-purple\bko.java"
             "2.0-blue-purple\bia.java"
@@ -81,7 +109,6 @@ $Versions = @(
             "bia.class"
         )
 
-        # Optional 2.0 font centering fix
         FontFixSource = "2.0-blue-purple\awz.java"
         FontFixClass  = "awz.class"
 
@@ -95,6 +122,12 @@ $Versions = @(
         Id          = "2.0-red"
         JarName     = "2.0-red.jar"
 
+        TranslationDir     = "2.0\lang"
+        TranslationJarPath = "lang"
+
+        HasLanguagesFile = $true
+        ExternalLanguageSource = $false
+
         Sources = @(
             "2.0-red\bkg.java"
         )
@@ -103,7 +136,6 @@ $Versions = @(
             "bkg.class"
         )
 
-        # Optional 2.0 font centering fix
         FontFixSource = "2.0-red\awv.java"
         FontFixClass  = "awv.class"
 
@@ -117,6 +149,12 @@ $Versions = @(
         Id          = "2.0-preview"
         JarName     = "2.0-preview.jar"
 
+        TranslationDir     = "2.0\lang"
+        TranslationJarPath = "lang"
+
+        HasLanguagesFile = $true
+        ExternalLanguageSource = $false
+
         Sources = @(
             "2.0-preview\bma.java"
         )
@@ -125,13 +163,38 @@ $Versions = @(
             "bma.class"
         )
 
-        # Optional 2.0 font centering fix
         FontFixSource = "2.0-preview\ayb.java"
         FontFixClass  = "ayb.class"
 
         Sha256 = "555D0F7A887964CA34676825AB76D0CBA69E52FDA9BACEA0FEBA7921EABD22CB"
 
         Url = "https://vault.omniarchive.uk/archive/java/client-april-fools/2.0-preview.jar"
+    }
+
+    @{
+        DisplayName = "15w14a"
+        Id          = "15w14a"
+        JarName     = "15w14a.jar"
+
+        TranslationDir     = "15w14a\lang"
+        TranslationJarPath = "assets/minecraft/lang"
+
+        HasLanguagesFile = $false
+        ExternalLanguageSource = $true
+
+        Sources = @(
+            "15w14a\axe.java"
+            "15w14a\aye.java"
+        )
+
+        Classes = @(
+            "axe.class"
+            "aye.class"
+        )
+
+        Sha256 = "82F24F74D7649F0D0E82CC1AB31079C4D5996E6330A9F7B1CF91EEC9EC77522E"
+
+        Url = "https://piston-data.mojang.com/v1/objects/1bea9340956b96f2b5452aa576e0cf460990efc6/client.jar"
     }
 
 )
@@ -235,16 +298,15 @@ if ($Has2Point0) {
 
     $FontFixChoice = Read-Host "Apply the MC-23952 font alignment fix? [Y/N]"
 
-    if ($FontFixChoice -match "^[Yy2]$") {
+    if ($FontFixChoice -match "^[Yy12]$") {
 
         $UseFontFix = $true
-
         Write-Host "MC-23952 font alignment fix: ENABLED"
+
     }
     else {
 
         $UseFontFix = $false
-
         Write-Host "MC-23952 font alignment fix: DISABLED"
     }
 }
@@ -368,58 +430,6 @@ New-Item -ItemType Directory -Force -Path $BuildDir | Out-Null
 New-Item -ItemType Directory -Force -Path $DepsDir | Out-Null
 
 # ============================================================
-# Check translation directory
-# ============================================================
-
-if (-not (Test-Path $LangDir)) {
-
-    throw @"
-Translation directory not found:
-
-$LangDir
-
-Create:
-
-2.0\lang\
-"@
-}
-
-if (-not (Test-Path $LanguagesFile)) {
-
-    throw @"
-languages.txt was not found:
-
-$LanguagesFile
-
-Create:
-
-2.0\lang\languages.txt
-"@
-}
-
-$CustomLanguageFiles = @(
-    Get-ChildItem `
-        -Path $LangDir `
-        -Filter "*.lang" `
-        -File
-)
-
-Write-Host ""
-Write-Host "Translation patches found:"
-
-if ($CustomLanguageFiles.Count -eq 0) {
-
-    Write-Host "  None"
-
-}
-else {
-
-    foreach ($LanguageFile in $CustomLanguageFiles) {
-        Write-Host "  $($LanguageFile.Name)"
-    }
-}
-
-# ============================================================
 # Download helper
 # ============================================================
 
@@ -433,7 +443,6 @@ function Download-File {
     if (Test-Path $Destination) {
 
         Write-Host "Already downloaded: $(Split-Path $Destination -Leaf)"
-
         return
     }
 
@@ -446,11 +455,80 @@ function Download-File {
 }
 
 # ============================================================
-# Download LWJGL
+# Download libraries
 # ============================================================
 
 Download-File $JavaJar $LwjglJar
 Download-File $JavaUtilJar $LwjglUtilJar
+Download-File $CommonsLangJarUrl $CommonsLangJar
+Download-File $GuavaJarUrl $GuavaJar
+Download-File $CommonsIoJarUrl $CommonsIoJar
+Download-File $Log4jApiJarUrl $Log4jApiJar
+Download-File $Log4jCoreJarUrl $Log4jCoreJar
+
+# ============================================================
+# Download 15w14a languages
+# ============================================================
+
+function Prepare-15w14a-Languages {
+
+    New-Item `
+        -ItemType Directory `
+        -Force `
+        -Path $15w14aLanguageCache | Out-Null
+
+    $ListTemp = Join-Path $DepsDir "15w14a-lang-list.json"
+
+    try {
+
+        Write-Host ""
+        Write-Host "Downloading 15w14a language list..."
+
+        Invoke-WebRequest `
+            -Uri $15w14aLanguageListUrl `
+            -OutFile $ListTemp `
+            -UseBasicParsing
+
+        $LanguageList = Get-Content `
+            -Path $ListTemp `
+            -Raw `
+            -Encoding UTF8 |
+            ConvertFrom-Json
+
+        if (-not $LanguageList.files) {
+            throw "15w14a language list does not contain any files."
+        }
+
+        $LanguageFiles = @(
+            $LanguageList.files |
+            Where-Object {
+                $_ -like "*.lang"
+            }
+        )
+
+        Write-Host "15w14a languages found: $($LanguageFiles.Count)"
+
+        foreach ($LanguageName in $LanguageFiles) {
+
+            $Destination = Join-Path `
+                $15w14aLanguageCache `
+                $LanguageName
+
+            $Url = "$15w14aLanguageBaseUrl/$LanguageName"
+
+            Download-File $Url $Destination
+        }
+
+    }
+    finally {
+
+        if (Test-Path $ListTemp) {
+            Remove-Item $ListTemp -Force
+        }
+    }
+
+    Write-Host "15w14a language files ready."
+}
 
 # ============================================================
 # Language helper functions
@@ -504,18 +582,67 @@ function Convert-LangToMap {
 }
 
 # ============================================================
+# Apply English overrides
+#
+# Values from 15w14a\lang\en_US.lang are applied to every
+# language first.
+# ============================================================
+
+function Apply-EnglishOverrides {
+
+    param(
+        [string]$ArchiveContent,
+        [hashtable]$EnglishOverrideMap
+    )
+
+    if (-not $EnglishOverrideMap -or $EnglishOverrideMap.Count -eq 0) {
+        return $ArchiveContent
+    }
+
+    $Lines = $ArchiveContent -split "\r?\n"
+
+    $Result = New-Object System.Collections.Generic.List[string]
+
+    $UsedKeys = @{}
+
+    foreach ($Line in $Lines) {
+
+        $Equals = $Line.IndexOf("=")
+
+        if ($Equals -gt 0) {
+
+            $Key = $Line.Substring(0, $Equals)
+
+            if ($EnglishOverrideMap.Contains($Key)) {
+
+                $Result.Add(
+                    "$Key=$($EnglishOverrideMap[$Key])"
+                )
+
+                $UsedKeys[$Key] = $true
+
+                continue
+            }
+        }
+
+        $Result.Add($Line)
+    }
+
+    foreach ($Key in $EnglishOverrideMap.Keys) {
+
+        if (-not $UsedKeys.ContainsKey($Key)) {
+
+            $Result.Add(
+                "$Key=$($EnglishOverrideMap[$Key])"
+            )
+        }
+    }
+
+    return ($Result -join "`r`n")
+}
+
+# ============================================================
 # Apply a translation patch
-#
-# Rules:
-#
-# 1. Existing key:
-#       replace its value.
-#
-# 2. Missing key:
-#       add it to the end.
-#
-# 3. All other vanilla lines:
-#       remain unchanged.
 # ============================================================
 
 function Apply-LanguagePatch {
@@ -556,10 +683,6 @@ function Apply-LanguagePatch {
         $Result.Add($Line)
     }
 
-    # --------------------------------------------------------
-    # Add patch keys which did not exist in the vanilla file
-    # --------------------------------------------------------
-
     foreach ($Key in $PatchMap.Keys) {
 
         if (-not $UsedKeys.ContainsKey($Key)) {
@@ -574,13 +697,7 @@ function Apply-LanguagePatch {
 }
 
 # ============================================================
-# Fix special keys for languages without a custom patch
-#
-# IMPORTANT:
-#
-# These keys are ONLY REPLACED if they already exist.
-#
-# They are NEVER added to a language that does not have them.
+# Fix special keys
 # ============================================================
 
 function Fix-Vanilla-SpecialTranslations {
@@ -627,15 +744,20 @@ function Fix-Vanilla-SpecialTranslations {
 }
 
 # ============================================================
+# Prepare English override map
+# ============================================================
+
+function Get-EnglishOverrideMap {
+
+    if (-not $script:EnglishOverrideMap) {
+        return @{}
+    }
+
+    return $script:EnglishOverrideMap
+}
+
+# ============================================================
 # Process one language file
-#
-# This is shared by both:
-#
-# - modded JAR output
-# - .class files output
-#
-# Therefore both output modes use exactly the same
-# translation logic.
 # ============================================================
 
 function Process-LanguageContent {
@@ -645,43 +767,53 @@ function Process-LanguageContent {
         [string]$ArchiveContent
     )
 
+    $FinalContent = $ArchiveContent
+
+    # --------------------------------------------------------
+    # 1. 15w14a: apply values from custom en_US.lang
+    #    to every language
+    # --------------------------------------------------------
+
+    if ($script:EnglishOverrideMap -and
+        $script:EnglishOverrideMap.Count -gt 0) {
+
+        Write-Host "Applying English overrides: $LanguageName"
+
+        $FinalContent = Apply-EnglishOverrides `
+            $FinalContent `
+            $script:EnglishOverrideMap
+    }
+
+    # --------------------------------------------------------
+    # 2. Apply language-specific patch
+    # --------------------------------------------------------
+
     $CustomLanguagePath = Join-Path `
         $LangDir `
         $LanguageName
 
     if (Test-Path $CustomLanguagePath) {
 
-        # ====================================================
-        # CUSTOM PATCH EXISTS
-        # ====================================================
-
         Write-Host "Patching language: $LanguageName"
 
         $PatchContent = Read-Utf8File `
             $CustomLanguagePath
 
-        return Apply-LanguagePatch `
-            $ArchiveContent `
+        $FinalContent = Apply-LanguagePatch `
+            $FinalContent `
             $PatchContent
     }
-    else {
 
-        # ====================================================
-        # NO CUSTOM PATCH
-        #
-        # Only replace existing:
-        #
-        # options.anaglyph
-        # tile.dropper.name
-        #
-        # Never add missing ones.
-        # ====================================================
+    # --------------------------------------------------------
+    # 3. Special vanilla replacements
+    # --------------------------------------------------------
 
-        Write-Host "Fixing special translations: $LanguageName"
+    Write-Host "Fixing special translations: $LanguageName"
 
-        return Fix-Vanilla-SpecialTranslations `
-            $ArchiveContent
-    }
+    $FinalContent = Fix-Vanilla-SpecialTranslations `
+        $FinalContent
+
+    return $FinalContent
 }
 
 # ============================================================
@@ -763,17 +895,92 @@ function Add-TextEntry {
 }
 
 # ============================================================
-# Export processed languages to normal directory
+# Read external language file
+# ============================================================
+
+function Read-ExternalLanguage {
+
+    param(
+        [string]$LanguageName
+    )
+
+    $ExternalPath = Join-Path `
+        $15w14aLanguageCache `
+        $LanguageName
+
+    if (-not (Test-Path $ExternalPath)) {
+        throw "15w14a language file not found: $ExternalPath"
+    }
+
+    return Read-Utf8File $ExternalPath
+}
+
+# ============================================================
+# Get language names available for a version
+# ============================================================
+
+function Get-VersionLanguageNames {
+
+    param(
+        [hashtable]$Info,
+        [System.IO.Compression.ZipArchive]$SourceArchive
+    )
+
+    $Names = [ordered]@{}
+
+    $LanguagePrefix = "$($Info["TranslationJarPath"])/"
+
+    foreach ($Entry in $SourceArchive.Entries) {
+
+        $EntryName = $Entry.FullName
+
+        if (
+            $EntryName.StartsWith(
+                $LanguagePrefix,
+                [System.StringComparison]::OrdinalIgnoreCase
+            ) -and
+            $EntryName.EndsWith(
+                ".lang",
+                [System.StringComparison]::OrdinalIgnoreCase
+            )
+        ) {
+
+            $LanguageName = [System.IO.Path]::GetFileName($EntryName)
+
+            $Names[$LanguageName] = $true
+        }
+    }
+
+    if ($Info["ExternalLanguageSource"]) {
+
+        foreach ($File in Get-ChildItem `
+            -Path $15w14aLanguageCache `
+            -Filter "*.lang" `
+            -File) {
+
+            $Names[$File.Name] = $true
+        }
+    }
+
+    return $Names.Keys
+}
+
+# ============================================================
+# Export processed languages
 # ============================================================
 
 function Export-ProcessedLanguages {
 
     param(
+        [hashtable]$Info,
         [string]$MinecraftJar,
-        [string]$OutputDir
+        [string]$OutputDir,
+        [bool]$HasLanguagesFile
     )
 
-    $OutputLangDir = Join-Path $OutputDir "lang"
+    $OutputLangDir = Join-Path `
+        $OutputDir `
+        $Info["TranslationJarPath"]
 
     if (Test-Path $OutputLangDir) {
         Remove-Item $OutputLangDir -Recurse -Force
@@ -787,7 +994,6 @@ function Export-ProcessedLanguages {
     Write-Host ""
     Write-Host "Preparing language files for manual installation..."
 
-    $ArchiveLanguages = @{}
     $SourceArchive = $null
 
     try {
@@ -796,71 +1002,77 @@ function Export-ProcessedLanguages {
             $MinecraftJar
         )
 
-        # ====================================================
-        # Process languages from original JAR
-        # ====================================================
+        $LanguageNames = @(
+            Get-VersionLanguageNames `
+                $Info `
+                $SourceArchive
+        )
 
-        foreach ($Entry in $SourceArchive.Entries) {
+        foreach ($LanguageName in $LanguageNames) {
 
-            $EntryName = $Entry.FullName
+            if ($Info["ExternalLanguageSource"]) {
 
-            if (
-                $EntryName.StartsWith(
-                    "lang/",
-                    [System.StringComparison]::OrdinalIgnoreCase
-                ) -and
-                $EntryName.EndsWith(
-                    ".lang",
-                    [System.StringComparison]::OrdinalIgnoreCase
-                )
-            ) {
-
-                $LanguageName = [System.IO.Path]::GetFileName(
-                    $EntryName
-                )
-
-                $ArchiveLanguages[$LanguageName] = $true
-
-                # --------------------------------------------
-                # Read original language
-                # --------------------------------------------
-
-                $ArchiveContent = Read-LanguageEntry $Entry
-
-                # --------------------------------------------
-                # Apply exactly the same translation processing
-                # as JAR output
-                # --------------------------------------------
-
-                $FinalContent = Process-LanguageContent `
-                    $LanguageName `
-                    $ArchiveContent
-
-                # --------------------------------------------
-                # Write processed language
-                # --------------------------------------------
-
-                $OutputLanguagePath = Join-Path `
-                    $OutputLangDir `
+                $ExternalPath = Join-Path `
+                    $15w14aLanguageCache `
                     $LanguageName
 
-                [System.IO.File]::WriteAllText(
-                    $OutputLanguagePath,
-                    $FinalContent,
-                    [System.Text.Encoding]::UTF8
-                )
-            }
-        }
+                if (Test-Path $ExternalPath) {
 
-        # ====================================================
-        # Add custom languages which do not exist in JAR
-        # ====================================================
+                    $ArchiveContent = Read-Utf8File `
+                        $ExternalPath
+
+                }
+                else {
+
+                    $Entry = $SourceArchive.GetEntry(
+                        "$($Info["TranslationJarPath"])/$LanguageName"
+                    )
+
+                    if (-not $Entry) {
+                        continue
+                    }
+
+                    $ArchiveContent = Read-LanguageEntry $Entry
+                }
+
+            }
+            else {
+
+                $Entry = $SourceArchive.GetEntry(
+                    "$($Info["TranslationJarPath"])/$LanguageName"
+                )
+
+                if (-not $Entry) {
+                    continue
+                }
+
+                $ArchiveContent = Read-LanguageEntry $Entry
+            }
+
+            $FinalContent = Process-LanguageContent `
+                $LanguageName `
+                $ArchiveContent
+
+            $OutputLanguagePath = Join-Path `
+                $OutputLangDir `
+                $LanguageName
+
+            [System.IO.File]::WriteAllText(
+                $OutputLanguagePath,
+                $FinalContent,
+                [System.Text.Encoding]::UTF8
+            )
+        }
 
         foreach ($LanguageFile in $CustomLanguageFiles) {
 
             $LanguageName = $LanguageFile.Name
 
-            if ($ArchiveLanguages.ContainsKey($LanguageName)) {
+            $OutputLanguagePath = Join-Path `
+                $OutputLangDir `
+                $LanguageName
+
+            if (Test-Path $OutputLanguagePath) {
                 continue
             }
 
@@ -869,10 +1081,6 @@ function Export-ProcessedLanguages {
             $Content = Read-Utf8File `
                 $LanguageFile.FullName
 
-            $OutputLanguagePath = Join-Path `
-                $OutputLangDir `
-                $LanguageName
-
             [System.IO.File]::WriteAllText(
                 $OutputLanguagePath,
                 $Content,
@@ -880,16 +1088,18 @@ function Export-ProcessedLanguages {
             )
         }
 
-        # ====================================================
-        # Replace languages.txt
-        # ====================================================
+        if ($HasLanguagesFile) {
 
-        Write-Host "Adding custom: lang/languages.txt"
+            if (Test-Path $LanguagesFile) {
 
-        Copy-Item `
-            $LanguagesFile `
-            (Join-Path $OutputLangDir "languages.txt") `
-            -Force
+                Write-Host "Adding custom: $($Info["TranslationJarPath"])/languages.txt"
+
+                Copy-Item `
+                    $LanguagesFile `
+                    (Join-Path $OutputLangDir "languages.txt") `
+                    -Force
+            }
+        }
 
     }
     finally {
@@ -912,30 +1122,141 @@ function Build-Version {
         [hashtable]$Info
     )
 
+    $script:LangDir = Join-Path `
+        $Root `
+        $Info["TranslationDir"]
+
+    $script:LanguagesFile = Join-Path `
+        $LangDir `
+        "languages.txt"
+
+    # Reset English override map for every version.
+    $script:EnglishOverrideMap = @{}
+
+    if (-not (Test-Path $LangDir)) {
+
+        throw @"
+Translation directory not found:
+
+$LangDir
+
+Create:
+
+$($Info["TranslationDir"])\
+"@
+    }
+
+    if ($Info["HasLanguagesFile"]) {
+
+        if (Test-Path $LanguagesFile) {
+
+            Write-Host "languages.txt found: $LanguagesFile"
+
+        }
+        else {
+
+            Write-Host "languages.txt not found - it will not be copied."
+        }
+    }
+
+    # --------------------------------------------------------
+    # 15w14a external language source
+    # --------------------------------------------------------
+
+    if ($Info["ExternalLanguageSource"]) {
+
+        Prepare-15w14a-Languages
+    }
+
+    # --------------------------------------------------------
+    # Find custom language patches
+    # --------------------------------------------------------
+
+    $script:CustomLanguageFiles = @(
+        Get-ChildItem `
+            -Path $LangDir `
+            -Filter "*.lang" `
+            -File
+    )
+
+    # --------------------------------------------------------
+    # Read en_US.lang as a GLOBAL English override
+    # --------------------------------------------------------
+
+    if ($Info["ExternalLanguageSource"]) {
+
+        $EnglishOverridePath = Join-Path `
+            $LangDir `
+            "en_US.lang"
+
+        if (Test-Path $EnglishOverridePath) {
+
+            Write-Host ""
+            Write-Host "Loading global English overrides:"
+            Write-Host "  $EnglishOverridePath"
+
+            $EnglishOverrideContent = Read-Utf8File `
+                $EnglishOverridePath
+
+            $script:EnglishOverrideMap = Convert-LangToMap `
+                $EnglishOverrideContent
+
+            Write-Host "English override keys: $($script:EnglishOverrideMap.Count)"
+
+        }
+        else {
+
+            Write-Host ""
+            Write-Host "No custom en_US.lang found."
+            Write-Host "Global English overrides are disabled."
+        }
+    }
+
+    Write-Host ""
+    Write-Host "Translation directory: $($Info["TranslationDir"])"
+    Write-Host "Translation patches found:"
+
+    if ($CustomLanguageFiles.Count -eq 0) {
+
+        Write-Host "  None"
+
+    }
+    else {
+
+        foreach ($LanguageFile in $CustomLanguageFiles) {
+            Write-Host "  $($LanguageFile.Name)"
+        }
+    }
+
     Write-Host ""
     Write-Host "============================================================"
-    Write-Host "Building $($Info.DisplayName)"
+    Write-Host "Building $($Info["DisplayName"])"
     Write-Host "============================================================"
 
-    $MinecraftJar = Join-Path $DepsDir $Info.JarName
+    $JarName = [string]$Info["JarName"]
+    $MinecraftJar = Join-Path $DepsDir $JarName
 
-    Download-File $Info.Url $MinecraftJar
+    Write-Host "Minecraft JAR: $MinecraftJar"
+
+    Download-File `
+        ([string]$Info["Url"]) `
+        $MinecraftJar
 
     # ========================================================
-    # Verify Minecraft .jar
+    # Verify Minecraft JAR
     # ========================================================
 
     $Hash = (Get-FileHash $MinecraftJar -Algorithm SHA256).Hash
 
-    if ($Hash.ToUpper() -ne $Info.Sha256.ToUpper()) {
+    if ($Hash.ToUpper() -ne $Info["Sha256"].ToUpper()) {
 
         Remove-Item $MinecraftJar -Force
 
         throw @"
-SHA-256 mismatch for $($Info.DisplayName)!
+SHA-256 mismatch for $($Info["DisplayName"])!
 
 Expected:
-$($Info.Sha256)
+$($Info["Sha256"])
 
 Got:
 $Hash
@@ -950,69 +1271,91 @@ The downloaded file was deleted.
     # Prepare output directory
     # ========================================================
 
-    $OutputDir = Join-Path $BuildDir $Info.Id
+    $OutputDir = Join-Path `
+        $BuildDir `
+        $Info["Id"]
 
     if (Test-Path $OutputDir) {
         Remove-Item $OutputDir -Recurse -Force
     }
 
-    New-Item -ItemType Directory -Force -Path $OutputDir | Out-Null
+    New-Item `
+        -ItemType Directory `
+        -Force `
+        -Path $OutputDir | Out-Null
 
     # ========================================================
     # Prepare source/class lists
     # ========================================================
 
     $SourcesToCompile = @(
-        $Info.Sources
+        $Info["Sources"]
     )
 
     $ClassesToReplace = @(
-        $Info.Classes
+        $Info["Classes"]
     )
 
-    if ($UseFontFix -and $Info.FontFixSource) {
+    if ($UseFontFix -and $Info["FontFixSource"]) {
 
-        $SourcesToCompile += $Info.FontFixSource
-        $ClassesToReplace += $Info.FontFixClass
+        $SourcesToCompile += $Info["FontFixSource"]
+        $ClassesToReplace += $Info["FontFixClass"]
 
         Write-Host ""
         Write-Host "Font centering fix enabled:"
-        Write-Host "  Source: $($Info.FontFixSource)"
-        Write-Host "  Class:  $($Info.FontFixClass)"
+        Write-Host "  Source: $($Info["FontFixSource"])"
+        Write-Host "  Class:  $($Info["FontFixClass"])"
     }
 
     $SourcesToCompile = @(
-        $SourcesToCompile | Select-Object -Unique
+        $SourcesToCompile |
+        Select-Object -Unique
     )
 
     $ClassesToReplace = @(
-        $ClassesToReplace | Select-Object -Unique
+        $ClassesToReplace |
+        Select-Object -Unique
     )
 
     # ========================================================
     # Compile sources
     # ========================================================
 
+    $Classpath = @(
+        $MinecraftJar
+        $LwjglJar
+        $LwjglUtilJar
+        $CommonsLangJar
+        $GuavaJar
+        $CommonsIoJar
+        $Log4jApiJar
+        $Log4jCoreJar
+    ) -join [System.IO.Path]::PathSeparator
+
     foreach ($SourceRelative in $SourcesToCompile) {
 
-        $Source = Join-Path $Root $SourceRelative
+        $Source = Join-Path `
+            $Root `
+            $SourceRelative
 
         if (-not (Test-Path $Source)) {
             throw "Source file not found: $Source"
         }
 
-        $SourceName = [System.IO.Path]::GetFileNameWithoutExtension($Source)
+        $SourceName = [System.IO.Path]::GetFileNameWithoutExtension(
+            $Source
+        )
 
-        $ClassOutput = Join-Path $OutputDir "$SourceName.class"
+        $ClassOutput = Join-Path `
+            $OutputDir `
+            "$SourceName.class"
 
         Write-Host ""
         Write-Host "Compiling $SourceRelative"
 
-        $Classpath = "$MinecraftJar;$LwjglJar;$LwjglUtilJar"
-
         & $Javac `
             --release 8 `
-            -cp $Classpath `
+            -classpath $Classpath `
             -d $OutputDir `
             $Source
 
@@ -1034,38 +1377,39 @@ The downloaded file was deleted.
     if ($OutputFormat -eq "classes") {
 
         Export-ProcessedLanguages `
+            $Info `
             $MinecraftJar `
-            $OutputDir
+            $OutputDir `
+            $Info["HasLanguagesFile"]
     }
 
     # ========================================================
-    # Create modded .jar
+    # Create modded JAR
     # ========================================================
 
     if ($OutputFormat -eq "jar") {
 
-        $ModdedJar = Join-Path $OutputDir "$($Info.Id)-moded.jar"
-        $TempJar = Join-Path $OutputDir "$($Info.Id)-moded-temp.jar"
+        $ModdedJar = Join-Path `
+            $OutputDir `
+            "$($Info["Id"])-moded.jar"
+
+        $TempJar = Join-Path `
+            $OutputDir `
+            "$($Info["Id"])-moded-temp.jar"
 
         Write-Host ""
         Write-Host "Creating modded .jar without extracting..."
 
-        # ----------------------------------------------------
-        # Check compiled classes
-        # ----------------------------------------------------
-
         foreach ($ClassName in $ClassesToReplace) {
 
-            $CompiledClass = Join-Path $OutputDir $ClassName
+            $CompiledClass = Join-Path `
+                $OutputDir `
+                $ClassName
 
             if (-not (Test-Path $CompiledClass)) {
                 throw "Compiled class not found: $ClassName"
             }
         }
-
-        # ----------------------------------------------------
-        # Remove old temporary archives
-        # ----------------------------------------------------
 
         if (Test-Path $TempJar) {
             Remove-Item $TempJar -Force
@@ -1074,10 +1418,6 @@ The downloaded file was deleted.
         if (Test-Path $ModdedJar) {
             Remove-Item $ModdedJar -Force
         }
-
-        # ----------------------------------------------------
-        # Track language files from original JAR
-        # ----------------------------------------------------
 
         $ArchiveLanguages = @{}
 
@@ -1096,16 +1436,14 @@ The downloaded file was deleted.
             )
 
             # =================================================
-            # Copy original JAR
+            # Copy original JAR entries
             # =================================================
 
             foreach ($Entry in $SourceArchive.Entries) {
 
                 $EntryName = $Entry.FullName
 
-                # ---------------------------------------------
                 # Completely remove META-INF
-                # ---------------------------------------------
 
                 if (
                     $EntryName -eq "META-INF" -or
@@ -1117,13 +1455,10 @@ The downloaded file was deleted.
                 ) {
 
                     Write-Host "Removed: $EntryName"
-
                     continue
                 }
 
-                # ---------------------------------------------
                 # Skip classes that will be replaced
-                # ---------------------------------------------
 
                 $ReplaceClass = $false
 
@@ -1132,7 +1467,6 @@ The downloaded file was deleted.
                     if ($EntryName -eq $ClassName) {
 
                         $ReplaceClass = $true
-
                         break
                     }
                 }
@@ -1140,84 +1474,71 @@ The downloaded file was deleted.
                 if ($ReplaceClass) {
 
                     Write-Host "Replacing: $EntryName"
-
                     continue
                 }
 
                 # =================================================
-                # LANGUAGE FILES
+                # Language files
                 # =================================================
 
                 if (
                     $EntryName.StartsWith(
-                        "lang/",
+                        "$($Info["TranslationJarPath"])/",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    ) -and
+                    $EntryName.EndsWith(
+                        ".lang",
                         [System.StringComparison]::OrdinalIgnoreCase
                     )
                 ) {
 
-                    # ---------------------------------------------
-                    # languages.txt is always replaced
-                    # ---------------------------------------------
+                    $LanguageName = [System.IO.Path]::GetFileName(
+                        $EntryName
+                    )
 
-                    if (
-                        $EntryName.Equals(
-                            "lang/languages.txt",
-                            [System.StringComparison]::OrdinalIgnoreCase
-                        )
-                    ) {
+                    $ArchiveLanguages[$LanguageName] = $true
 
-                        Write-Host "Replacing: $EntryName"
+                    # 15w14a gets language files from the external
+                    # Minecraft assets repository instead of the JAR.
 
-                        continue
+                    if ($Info["ExternalLanguageSource"]) {
+
+                        $ExternalPath = Join-Path `
+                            $15w14aLanguageCache `
+                            $LanguageName
+
+                        if (Test-Path $ExternalPath) {
+
+                            $ArchiveContent = Read-Utf8File `
+                                $ExternalPath
+
+                        }
+                        else {
+
+                            $ArchiveContent = Read-LanguageEntry `
+                                $Entry
+                        }
+
+                    }
+                    else {
+
+                        $ArchiveContent = Read-LanguageEntry `
+                            $Entry
                     }
 
-                    # ---------------------------------------------
-                    # Process .lang files
-                    # ---------------------------------------------
+                    $FinalContent = Process-LanguageContent `
+                        $LanguageName `
+                        $ArchiveContent
 
-                    if (
-                        $EntryName.EndsWith(
-                            ".lang",
-                            [System.StringComparison]::OrdinalIgnoreCase
-                        )
-                    ) {
+                    Add-TextEntry `
+                        $OutputArchive `
+                        $EntryName `
+                        $FinalContent
 
-                        $LanguageName = [System.IO.Path]::GetFileName(
-                            $EntryName
-                        )
-
-                        $ArchiveLanguages[$LanguageName] = $true
-
-                        # -----------------------------------------
-                        # Read original language
-                        # -----------------------------------------
-
-                        $ArchiveContent = Read-LanguageEntry $Entry
-
-                        # -----------------------------------------
-                        # Apply shared translation processing
-                        # -----------------------------------------
-
-                        $FinalContent = Process-LanguageContent `
-                            $LanguageName `
-                            $ArchiveContent
-
-                        # -----------------------------------------
-                        # Write language into output JAR
-                        # -----------------------------------------
-
-                        Add-TextEntry `
-                            $OutputArchive `
-                            $EntryName `
-                            $FinalContent
-
-                        continue
-                    }
+                    continue
                 }
 
-                # =================================================
                 # NORMAL FILE
-                # =================================================
 
                 $NewEntry = $OutputArchive.CreateEntry(
                     $EntryName,
@@ -1251,7 +1572,42 @@ The downloaded file was deleted.
             }
 
             # =================================================
-            # ADD LANGUAGES WHICH DO NOT EXIST IN ORIGINAL JAR
+            # Add external 15w14a languages
+            # =================================================
+
+            if ($Info["ExternalLanguageSource"]) {
+
+                foreach ($LanguageFile in Get-ChildItem `
+                    -Path $15w14aLanguageCache `
+                    -Filter "*.lang" `
+                    -File) {
+
+                    $LanguageName = $LanguageFile.Name
+
+                    if ($ArchiveLanguages.ContainsKey($LanguageName)) {
+                        continue
+                    }
+
+                    Write-Host "Adding language: $LanguageName"
+
+                    $Content = Read-Utf8File `
+                        $LanguageFile.FullName
+
+                    $FinalContent = Process-LanguageContent `
+                        $LanguageName `
+                        $Content
+
+                    Add-TextEntry `
+                        $OutputArchive `
+                        "$($Info["TranslationJarPath"])/$LanguageName" `
+                        $FinalContent
+
+                    $ArchiveLanguages[$LanguageName] = $true
+                }
+            }
+
+            # =================================================
+            # Add custom languages which don't exist yet
             # =================================================
 
             foreach ($LanguageFile in $CustomLanguageFiles) {
@@ -1267,28 +1623,46 @@ The downloaded file was deleted.
                 $Content = Read-Utf8File `
                     $LanguageFile.FullName
 
+                $FinalContent = Process-LanguageContent `
+                    $LanguageName `
+                    $Content
+
                 Add-TextEntry `
                     $OutputArchive `
-                    "lang/$LanguageName" `
-                    $Content
+                    "$($Info["TranslationJarPath"])/$LanguageName" `
+                    $FinalContent
+
+                $ArchiveLanguages[$LanguageName] = $true
             }
 
             # =================================================
-            # REPLACE languages.txt
+            # Replace languages.txt
+            #
+            # ONLY FOR 2.0
             # =================================================
 
-            Write-Host "Adding custom: lang/languages.txt"
+            if ($Info["HasLanguagesFile"]) {
 
-            $LanguagesContent = Read-Utf8File `
-                $LanguagesFile
+                if (Test-Path $LanguagesFile) {
 
-            Add-TextEntry `
-                $OutputArchive `
-                "lang/languages.txt" `
-                $LanguagesContent
+                    Write-Host "Adding custom: $($Info["TranslationJarPath"])/languages.txt"
+
+                    $LanguagesContent = Read-Utf8File `
+                        $LanguagesFile
+
+                    Add-TextEntry `
+                        $OutputArchive `
+                        "$($Info["TranslationJarPath"])/languages.txt" `
+                        $LanguagesContent
+                }
+                else {
+
+                    Write-Host "languages.txt not found - skipping"
+                }
+            }
 
             # =================================================
-            # ADD MODIFIED CLASSES
+            # Add modified classes
             # =================================================
 
             foreach ($ClassName in $ClassesToReplace) {
@@ -1413,7 +1787,7 @@ try {
 
     $CleanCache = Read-Host "Clean build cache (.build-deps)? [Y/N]"
 
-    if ($CleanCache -match "^[Yy2]$") {
+    if ($CleanCache -match "^[Yy12]$") {
 
         if (Test-Path $DepsDir) {
 
