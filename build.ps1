@@ -192,6 +192,10 @@ $Versions = @(
             "aye.class"
         )
 
+        # Optional Unicode glyph-width fix for 15w14a
+        FontFixSource = "15w14a\avq.java"
+        FontFixClass  = "avq.class"
+
         Sha256 = "82F24F74D7649F0D0E82CC1AB31079C4D5996E6330A9F7B1CF91EEC9EC77522E"
 
         Url = "https://piston-data.mojang.com/v1/objects/1bea9340956b96f2b5452aa576e0cf460990efc6/client.jar"
@@ -269,45 +273,47 @@ foreach ($Version in $SelectedVersions) {
 }
 
 # ============================================================
-# 2.0 font centering fix
+# Optional Unicode glyph-width fix (Minecraft 2.0 / 15w14a)
 # ============================================================
 
-$Has2Point0 = @(
+$HasFontFixVersion = @(
     $SelectedVersions |
     Where-Object {
-        $_.DisplayName -like "2.0 *"
+        $_.ContainsKey("FontFixSource") -and
+        -not [string]::IsNullOrWhiteSpace($_["FontFixSource"])
     }
 ).Count -gt 0
 
 $UseFontFix = $false
 
-if ($Has2Point0) {
+if ($HasFontFixVersion) {
 
     Write-Host ""
-    Write-Host "Optional fix for Minecraft 2.0:"
+    Write-Host "Optional Unicode font alignment fix:"
     Write-Host "MC-23952 - fixes wide Unicode glyph alignment."
     Write-Host ""
     Write-Host "This fix is only needed if you use a font texture pack."
     Write-Host "If you use English or the vanilla Minecraft font, you do NOT need this fix."
     Write-Host ""
-    Write-Host "This will use:"
+    Write-Host "The fix will be included only for selected versions that support it:"
     Write-Host "  2.0 Blue/Purple  -> awz.class"
     Write-Host "  2.0 Red          -> awv.class"
     Write-Host "  2.0 Preview      -> ayb.class"
+    Write-Host "  15w14a           -> avq.class"
     Write-Host ""
 
-    $FontFixChoice = Read-Host "Apply the MC-23952 font alignment fix? [Y/N]"
+    $FontFixChoice = Read-Host "Apply the Unicode font alignment fix? [Y/N]"
 
     if ($FontFixChoice -match "^[Yy12]$") {
 
         $UseFontFix = $true
-        Write-Host "MC-23952 font alignment fix: ENABLED"
+        Write-Host "Unicode font alignment fix: ENABLED"
 
     }
     else {
 
         $UseFontFix = $false
-        Write-Host "MC-23952 font alignment fix: DISABLED"
+        Write-Host "Unicode font alignment fix: DISABLED"
     }
 }
 
@@ -791,13 +797,16 @@ function Process-LanguageContent {
     }
 
     # --------------------------------------------------------
-    # 3. Special vanilla replacements
+    # 3. Special vanilla replacements (Minecraft 2.0 only)
     # --------------------------------------------------------
 
-    Write-Host "Fixing special translations: $LanguageName"
+    if ($script:CurrentVersionId -ne "15w14a") {
 
-    $FinalContent = Fix-Vanilla-SpecialTranslations `
-        $FinalContent
+        Write-Host "Fixing special translations: $LanguageName"
+
+        $FinalContent = Fix-Vanilla-SpecialTranslations `
+            $FinalContent
+    }
 
     return $FinalContent
 }
@@ -1196,6 +1205,87 @@ function Export-ProcessedLanguages {
     Write-Host "Language files prepared: $OutputLangDir"
 }
 
+
+# ============================================================
+# Patch 15w14a's original avq.class without recompiling it.
+# This avoids requiring ICU4J, which avq.java imports.
+# ============================================================
+
+function Patch-15w14aFontFixClass {
+    param(
+        [string]$MinecraftJar,
+        [string]$OutputClass
+    )
+
+    $Archive = $null
+    $InputStream = $null
+
+    try {
+        $Archive = [System.IO.Compression.ZipFile]::OpenRead($MinecraftJar)
+        $Entry = $Archive.GetEntry("avq.class")
+
+        if ($null -eq $Entry) {
+            throw "Original avq.class was not found in $MinecraftJar"
+        }
+
+        $InputStream = $Entry.Open()
+        $Memory = New-Object System.IO.MemoryStream
+        try {
+            $InputStream.CopyTo($Memory)
+            [byte[]]$Bytes = $Memory.ToArray()
+        }
+        finally {
+            $Memory.Dispose()
+        }
+    }
+    finally {
+        if ($InputStream) { $InputStream.Dispose() }
+        if ($Archive) { $Archive.Dispose() }
+    }
+
+    # Exact bytecode sequence in avq.a(char), including surrounding
+    # instructions. Keep code length and branch offsets unchanged.
+    [byte[]]$Pattern = @(
+        0x15, 0x04, 0x10, 0x07, 0xA4, 0x00, 0x09,
+        0x10, 0x0F, 0x36, 0x04, 0x03, 0x3E,
+        0x84, 0x04, 0x01, 0x15, 0x04, 0x1D, 0x64,
+        0x05, 0x6C, 0x04, 0x60, 0xAC
+    )
+
+    # Pop the two comparison operands, jump over the obsolete
+    # wide-glyph adjustment, and NOP the remaining bytes.
+    [byte[]]$Replacement = @(
+        0x58, 0xA7, 0x00, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00
+    )
+
+    $MatchIndex = -1
+    $MatchCount = 0
+
+    for ($i = 0; $i -le ($Bytes.Length - $Pattern.Length); $i++) {
+        $Matches = $true
+        for ($j = 0; $j -lt $Pattern.Length; $j++) {
+            if ($Bytes[$i + $j] -ne $Pattern[$j]) {
+                $Matches = $false
+                break
+            }
+        }
+
+        if ($Matches) {
+            $MatchIndex = $i
+            $MatchCount++
+        }
+    }
+
+    if ($MatchCount -ne 1) {
+        throw "Could not safely patch avq.class: expected one exact bytecode match, found $MatchCount. No class was modified."
+    }
+
+    [Array]::Copy($Replacement, 0, $Bytes, ($MatchIndex + 4), $Replacement.Length)
+
+    [System.IO.File]::WriteAllBytes($OutputClass, $Bytes)
+    Write-Host "Applied MC-23952 bytecode patch to original avq.class."
+}
+
 # ============================================================
 # Build one version
 # ============================================================
@@ -1205,6 +1295,8 @@ function Build-Version {
     param(
         [hashtable]$Info
     )
+
+    $script:CurrentVersionId = $Info["Id"]
 
     $script:LangDir = Join-Path `
         $Root `
@@ -1398,13 +1490,23 @@ The downloaded file was deleted.
 
     if ($UseFontFix -and $Info["FontFixSource"]) {
 
-        $SourcesToCompile += $Info["FontFixSource"]
         $ClassesToReplace += $Info["FontFixClass"]
 
-        Write-Host ""
-        Write-Host "Font centering fix enabled:"
-        Write-Host "  Source: $($Info["FontFixSource"])"
-        Write-Host "  Class:  $($Info["FontFixClass"])"
+        if ($Info["Id"] -eq "15w14a") {
+            Write-Host ""
+            Write-Host "Font centering fix enabled:"
+            Write-Host "  Source: original avq.class (bytecode patch)"
+            Write-Host "  Class:  avq.class"
+            Write-Host "  Note: avq.java is not recompiled, so ICU4J is not required."
+        }
+        else {
+            $SourcesToCompile += $Info["FontFixSource"]
+
+            Write-Host ""
+            Write-Host "Font centering fix enabled:"
+            Write-Host "  Source: $($Info["FontFixSource"])"
+            Write-Host "  Class:  $($Info["FontFixClass"])"
+        }
     }
 
     $SourcesToCompile = @(
@@ -1468,6 +1570,15 @@ The downloaded file was deleted.
         }
 
         Write-Host "Created: $ClassOutput"
+    }
+
+    # ========================================================
+    # Apply 15w14a font fix to the original class bytecode
+    # ========================================================
+
+    if ($UseFontFix -and $Info["Id"] -eq "15w14a") {
+        $PatchedFontClass = Join-Path $OutputDir "avq.class"
+        Patch-15w14aFontFixClass $MinecraftJar $PatchedFontClass
     }
 
     # ========================================================
