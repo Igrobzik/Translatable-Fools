@@ -75,7 +75,7 @@ gameMode.adventure=Режимъ приключеній
 gameMode.hardcore=Кошмаръ!
 gameMode.changed=Вашъ игровой режимъ измѣнёнъ
 
-selectWorld.gameMode=Режимъ игры
+selectWorld.gameMode=Режимъ игры:
 selectWorld.gameMode.survival=Выживаніе
 selectWorld.gameMode.survival.line1=Ищите ресурсы, мастерите, поднимайте свой
 selectWorld.gameMode.survival.line2=уровень, слѣдите за здоровьемъ и голодомъ
