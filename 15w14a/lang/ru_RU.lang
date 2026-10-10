@@ -1,4 +1,4 @@
-menu.singleplayer=Играть в мир
+menu.singleplayer=Играть в мире
 
 selectWorld.cheats=Суперсилы
 
@@ -42,22 +42,22 @@ entity.PrimedTnt.name=Бомба любви
 
 death.attack.lightningBolt=%1$s был залюблен молнией
 death.attack.inFire=%1$s сгорел в любви
-death.attack.inFire.player=%1$s перегорел в погоне за %2$s
+death.attack.inFire.player=%1$s сгорел в огне в погоне за %2$s
 death.attack.onFire=%1$s был залюблен до смерти
 death.attack.onFire.player=%1$s был сожжён дотла в погоне за %2$s
 death.attack.lava=%1$s решил поплавать в сыре
-death.attack.lava.player=%1$s решил поплавать в сыре, убегая от %2$s
+death.attack.lava.player=%1$s упал в сыр, убегая от %2$s
 death.attack.explosion=%1$s был залюблен
 death.attack.explosion.player=%1$s был залюблен %2$s
 death.attack.magic=%1$s был залюблен магией
-death.attack.anvil=%1$s был залюблен упавшей наковальней
-death.attack.fallingBlock=%1$s был залюблен падающим блоком
+death.attack.anvil=%1$s залюблен упавшей наковальней
+death.attack.fallingBlock=%1$s залюблен падающим блоком
 death.attack.indirectMagic=%1$s был залюблен %2$s с помощью магии
 death.attack.indirectMagic.item=%1$s был залюблен %2$s с помощью %3$s
 death.attack.thorns=%1$s был залюблен, пытаясь обнять %2$s
 
 potion.moveSlowdown=Забота
-potion.harm=Мгновенная любовь
+potion.harm=Моментальная любовь
 potion.jump=Счастье
 potion.confusion=Веселье
 potion.invisibility=Веселье
@@ -79,8 +79,8 @@ itemGroup.inventory=Инвентарь существования
 
 attribute.name.generic.attackDamage=Сила любви
 
-createWorld.aprilWorldName=Может быть только один
-resultFolder.aprilWorldName=ПА15 Существование
+createWorld.aprilWorldName=Может быть лишь один
+resultFolder.aprilWorldName=Существование — ПА15
 
 menu.aprilSplash=Minecraft — это любовь, Minecraft — это жизнь
 selectWorld.aprilWorldName=Мой любимый мир
