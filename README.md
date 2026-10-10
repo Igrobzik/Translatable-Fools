@@ -238,7 +238,7 @@ build\
 
 Для старых версий у русского языка добавлен «обновлённый» вариант. В списке языков вы сможете выбрать оригинальный русский язык той версии, с добавленными переводами контента первоапрельской версии, или перевод, основанный на современной русской локализации.
 
-Для 15w14a создаётся набор ресурсов с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
+Для 15w14a создаётся набор ресурсов `additional_languages_resourcepack.zip` с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
 
 ## Нужно ли модифицировать сервер?
 Сервер модифицировать не нужно. Модификация работает полностью со стороны клиента.
@@ -474,7 +474,7 @@ In 2.0, these entries were renamed:
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
-For 15w14a, a resource pack containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
+For 15w14a, a resource pack `additional_languages_resourcepack.zip` containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
 
 ## Do I need to modify the server?
 
