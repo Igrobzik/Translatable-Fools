@@ -5,7 +5,7 @@
 Modifications of Minecraft's April Fools' versions that add missing translation keys for content introduced in these versions.
 
 <details>
-<summary>Русский перевод</summary>
+<summary>Русское описание</summary>
 
 *«Делает непереводимые шутки переводимыми».*
 
