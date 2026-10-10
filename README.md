@@ -442,7 +442,7 @@ Add the modified JAR to your launcher as a separate Minecraft version.
 
 For older versions, you can use the following manual installation guides:
 
-- [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
+- [Minecraft Wiki - Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
 
 For example, in Prism Launcher, create an instance of the corresponding version, then open:
 
