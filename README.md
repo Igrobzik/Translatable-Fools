@@ -488,4 +488,4 @@ Most of the `build.ps1` code and `README.md` were written with the assistance of
 
 Minecraft and its April Fools' versions are the property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
 
-The translations were contributed by ordinary Minecraft players on [Crowdin](https://ru.crowdin.com/project/translatable-fools), rather than professional translators, and may therefore contain errors, inaccuracies, or other imperfections. Translations into some languages may be identical or similar to those in the [Minecraft Wiki's April Fools' versions translation project](https://github.com/mc-wiki/mcaf-resourcepack).
+The translations were contributed by ordinary Minecraft players on [Crowdin](https://crowdin.com/project/translatable-fools), rather than professional translators, and may therefore contain errors, inaccuracies, or other imperfections. Translations into some languages may be identical or similar to those in the [Minecraft Wiki's April Fools' versions translation project](https://github.com/mc-wiki/mcaf-resourcepack).
