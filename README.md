@@ -32,15 +32,15 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 ### Поддерживаемые версии
 
-* Minecraft 2.0 Blue
-* Minecraft 2.0 Purple
-* Minecraft 2.0 Red
-* Minecraft 2.0 Preview
-* Minecraft 15w14a
+* 2.0 Blue
+* 2.0 Purple
+* 2.0 Red
+* 2.0 Preview
+* 15w14a
 
 Список поддерживаемых версий будет расширяться по мере добавления новых первоапрельских версий Minecraft.
 
-Не все варианты одной версии Minecraft содержат одинаковый набор изменений, поэтому набор модификаций зависит от конкретного варианта.
+Не все варианты одной версии 2.0 содержат одинаковый набор изменений, поэтому набор модификаций зависит от конкретного варианта.
 
 ## Требования
 
@@ -56,11 +56,11 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 Скачайте `build.ps1` и папку той версии, которую хотите модифицировать.
 
-Папка `2.0-blue-purple` используется для модификации как **Minecraft 2.0 Blue**, так и **Minecraft 2.0 Purple**.
+Папка `2.0-blue-purple` используется для модификации как **2.0 Blue**, так и **2.0 Purple**.
 
-Для **Minecraft 2.0** также необходимо скачать папку `2.0`, содержащую общие файлы переводов.
+Для **2.0** также необходимо скачать папку `2.0`, содержащую общие файлы переводов.
 
-Например, для сборки Minecraft 2.0 Blue нужны:
+Например, для сборки 2.0 Blue нужны:
 
 ```text
 build.ps1
@@ -68,7 +68,7 @@ build.ps1
 2.0-blue-purple\
 ```
 
-Для Minecraft 2.0 Red:
+Для 2.0 Red:
 
 ```text
 build.ps1
@@ -76,14 +76,14 @@ build.ps1
 2.0-red\
 ```
 
-Для Minecraft 15w14a:
+Для 15w14a:
 
 ```text
 build.ps1
 15w14a\
 ```
 
-В будущих версиях Minecraft структура файлов может отличаться. Если для конкретной версии требуются дополнительные общие файлы, это будет указано в её разделе.
+В будущих версиях структура файлов может отличаться. Если для конкретной версии требуются дополнительные общие файлы, это будет указано в её разделе.
 
 Поместите все необходимые файлы и папки в одну директорию.
 
@@ -109,7 +109,7 @@ build.ps1
 
 Некоторые версии могут иметь дополнительные исправления, которые сборщик предлагает применить отдельно.
 
-Для Minecraft 2.0 доступно необязательное **исправление выравнивания шрифта MC-23952**.
+Для 2.0 и 15w14a доступно необязательное **исправление выравнивания шрифта MC-23952**.
 
 Оно исправляет выравнивание широких Unicode-символов.
 
@@ -180,7 +180,7 @@ build\
 
 Скачайте соответствующую оригинальную версию Minecraft.
 
-Для **Minecraft 2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **Minecraft 15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a
+Для **2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a
 ](https://minecraft.wiki/w/Java_Edition_15w14a).
 
 Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
@@ -199,7 +199,7 @@ build\
 
 Добавьте модифицированный JAR в лаунчер как отдельную версию Minecraft.
 
-Для старых версий Minecraft можно использовать инструкции по ручной установке версий:
+Для старых версий можно использовать инструкции по ручной установке версий:
 
 * [Русская Minecraft Wiki — Пошаговая установка](https://ru.minecraft.wiki/w/%D0%A0%D1%83%D0%BA%D0%BE%D0%B2%D0%BE%D0%B4%D1%81%D1%82%D0%B2%D0%BE:%D0%A3%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0_%D0%B2%D0%B5%D1%80%D1%81%D0%B8%D0%B9#%D0%9F%D0%BE%D1%88%D0%B0%D0%B3%D0%BE%D0%B2%D0%B0%D1%8F_%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0)
 * [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
@@ -222,32 +222,25 @@ build\
 
 Каждая поддерживаемая версия может иметь собственные изменения переводов.
 
-Для языков, для которых не существует собственного файла перевода, сборщик может применять стандартные исправления, необходимые для конкретной версии.
+Для языков, для которых не существует собственного файла перевода в папке версии, сборщик может применять стандартные исправления, необходимые для конкретной версии.
 
-Например, в Minecraft 2.0 значения следующих ключей заменяются на соответствующие английские названия:
+Например, в 2.0 значения следующих ключей заменяются на соответствующие английские названия:
 
 * `options.anaglyph` → `Super HD Graphics`
 * `tile.dropper.name` → `Flopper`
 
-В Minecraft 2.0 эти надписи были переименованы:
+В 2.0 эти надписи были переименованы:
 
 * `3D анаглиф` → `Супер HD графика`
 * `Выбрасыватель` → `Рыбрасыватель`
 
-Если для языка существует собственный файл перевода, вместо стандартных исправлений применяется соответствующий пользовательский языковой патч.
+Если для языка существует собственный файл перевода в папке версии, вместо стандартных исправлений применяется соответствующий пользовательский языковой патч.
 
 Для старых версий у русского языка добавлен «обновлённый» вариант. В списке языков вы сможете выбрать оригинальный русский язык той версии, с добавленными переводами контента первоапрельской версии, или перевод, основанный на современной русской локализации.
 
-Для Minecraft 15w14a сборщик использует языковые файлы, содержащиеся в оригинальном наборе ресурсов этой версии.
-
-Файл 15w14a\lang\en_US.lang используется как глобальный набор английских значений. Ключи, присутствующие в этом файле, заменяют соответствующие значения во всех языках.
-
-После этого применяется пользовательский файл конкретного языка, например 15w14a\lang\ru_RU.lang, поэтому он может переопределить глобальное английское значение.
-
-Если для языка нет собственного пользовательского файла, используются обработанные значения исходного языкового файла с учётом глобальных английских переопределений и стандартных исправлений.
+Для 15w14a создаётся набор ресурсов с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
 
 ## Нужно ли модифицировать сервер?
-
 Сервер модифицировать не нужно. Модификация работает полностью со стороны клиента.
 
 ## Отказ от ответственности
@@ -264,42 +257,40 @@ Minecraft и его первоапрельские версии являются
 
 The project makes content introduced in Minecraft's April Fools' versions translatable:
 
-* Adds missing translation keys for newly introduced content.
-* Allows the use of custom language files.
-* Fixes some translations to match the modern translation of the game.
-* Includes optional fixes for some known text-rendering issues.
+- Adds missing translation keys for new content.
+- Allows the use of custom language files.
+- Updates some translations to match the modern translation of the game.
+- Includes optional fixes for some known text-rendering issues.
 
 #### 2.0
 
-* Adds translation keys for the `APRIL FOOLS!` splash.
-* Adds translation support for block speech bubble messages.
+- Adds translation keys for the `APRIL FOOLS!` splash.
+- Adds translation support for block speech bubble messages.
 
 #### 15w14a
 
-* Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
-* Adds translation keys for the world name used in the world creation menu, world reset menu, and `level.dat`.
-* Includes language files for the languages available in 15w14a.
-* Allows `15w14a/lang/en_US.lang` to define English values that are applied to the corresponding keys in every language.
+- Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
+- Adds translation keys for the name of the created world in the world creation menu, the world reset menu, and the world's `level.dat` file, where it can be seen when the world is loaded in another version.
 
 ### Supported versions
 
-* Minecraft 2.0 Blue
-* Minecraft 2.0 Purple
-* Minecraft 2.0 Red
-* Minecraft 2.0 Preview
-* Minecraft 15w14a
+- 2.0 Blue
+- 2.0 Purple
+- 2.0 Red
+- 2.0 Preview
+- 15w14a
 
 The list of supported versions will expand as new Minecraft April Fools' versions are added.
 
-Not all variants of a Minecraft version contain the same set of changes, so the set of modifications depends on the specific variant.
+Not all variants of a 2.0 version contain the same set of changes, so the set of modifications depends on the specific variant.
 
 ## Requirements
 
-* Windows
-* PowerShell
-* **JDK 9 or newer**
+- Windows
+- PowerShell
+- **JDK 9 or newer**
 
-The build script automatically downloads the required libraries and original Minecraft JARs.
+The build script automatically downloads the required libraries and original Minecraft JAR files.
 
 ## Installation
 
@@ -307,11 +298,11 @@ The build script automatically downloads the required libraries and original Min
 
 Download `build.ps1` and the folder for the version you want to modify.
 
-The `2.0-blue-purple` folder is used to modify both **Minecraft 2.0 Blue** and **Minecraft 2.0 Purple**.
+The `2.0-blue-purple` folder is used to modify both **2.0 Blue** and **2.0 Purple**.
 
-For **Minecraft 2.0**, you also need to download the `2.0` folder, which contains the shared translation files.
+For **2.0**, you also need to download the `2.0` folder, which contains the shared translation files.
 
-For example, to build Minecraft 2.0 Blue:
+For example, to build 2.0 Blue:
 
 ```text
 build.ps1
@@ -319,7 +310,7 @@ build.ps1
 2.0-blue-purple\
 ```
 
-For Minecraft 2.0 Red:
+For 2.0 Red:
 
 ```text
 build.ps1
@@ -327,16 +318,14 @@ build.ps1
 2.0-red\
 ```
 
-For Minecraft 15w14a:
+For 15w14a:
 
 ```text
 build.ps1
 15w14a\
 ```
 
-The `2.0` folder contains shared translation files used by the different Minecraft 2.0 variants.
-
-In future Minecraft versions, the file structure may differ. If a particular version requires additional shared files, this will be specified in its respective section.
+In future versions, the file structure may differ. If a particular version requires additional shared files, this will be specified in its respective section.
 
 Place all required files and folders in the same directory.
 
@@ -346,9 +335,9 @@ Run `build.ps1` using PowerShell:
 
 **Right-click `build.ps1` → Run with PowerShell**
 
-The script automatically downloads the required dependencies and original Minecraft JARs.
+The script automatically downloads the required dependencies and original Minecraft JAR files.
 
-Before being used, downloaded Minecraft JARs are verified using their SHA-256 checksums.
+Downloaded JAR files are verified using their SHA-256 checksums before being used.
 
 ### 3. Select the versions
 
@@ -362,13 +351,13 @@ If multiple variants are selected, the corresponding source folders must be pres
 
 Some versions may have additional fixes that the build script offers separately.
 
-For Minecraft 2.0, the optional **MC-23952 font alignment fix** is available.
+For 2.0 and 15w14a, the optional **MC-23952 font alignment fix** is available.
 
 It fixes the alignment of wide Unicode characters.
 
 The fix is recommended if you use a font-changing texture pack, such as [Minecraft Font (PC)](https://www.curseforge.com/minecraft/texture-packs/minecraft-font-pc).
 
-If you use the vanilla Minecraft font or English without a font-changing texture pack, **you do not need this fix**.
+If you use the standard Minecraft font or play in English without a font-changing texture pack, **you do not need this fix**.
 
 If you simply press **Enter** instead of entering `Y`, the fix will not be applied.
 
@@ -402,11 +391,11 @@ This option is intended for manual installation.
 
 Creates a ready-to-use Minecraft JAR containing:
 
-* modified `.class` files;
-* modified translations;
-* new language files;
-* updated language lists;
-* additional fixes, if selected.
+- Modified `.class` files.
+- Updated translations.
+- New language files.
+- Updated language lists.
+- Additional fixes, if selected.
 
 The entire `META-INF` directory is removed from the resulting JAR.
 
@@ -414,11 +403,11 @@ The entire `META-INF` directory is removed from the resulting JAR.
 
 After you select the options, the script will:
 
-1. Download the original Minecraft JAR.
+1. Download the original Minecraft JAR file.
 2. Verify its SHA-256 checksum.
 3. Compile the modified Java source files.
 4. Apply the translation files.
-5. Apply selected additional fixes.
+5. Apply the selected additional fixes.
 6. Create the selected output format.
 
 After a successful build, the result will be placed in the `build` directory.
@@ -429,11 +418,11 @@ After a successful build, the result will be placed in the `build` directory.
 
 If you selected `.class files`, the `build` directory will contain a folder for each selected variant.
 
-The folder will contain the modified `.class` files and processed translation files.
+Each folder will contain the modified `.class` files and processed translation files.
 
 Download the corresponding original version of Minecraft.
 
-For **Minecraft 2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **Minecraft 15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page.
+For **2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page.
 
 All required client and server JAR links are available in the **Downloads** section of the infobox on these pages. The corresponding `.json` files are also available there.
 
@@ -445,17 +434,15 @@ If the output contains a `lang` directory, copy its contents into the `lang/` di
 
 Then remove the `META-INF` directory from the JAR.
 
----
-
-### 8. Install the modified Minecraft version
+### 8. Install the modified version of Minecraft
 
 Add the modified JAR to your launcher as a separate Minecraft version.
 
-For older Minecraft versions, you can use the following manual version installation instructions:
+For older versions, you can use the following manual installation guides:
 
-* [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial%3AInstalling_a_version#Manual_version_installation)
+- [Minecraft Wiki — Manual version installation](https://minecraft.wiki/w/Tutorial:Installing_a_version#Manual_version_installation)
 
-For example, in Prism Launcher, create an instance of the corresponding Minecraft version, then open:
+For example, in Prism Launcher, create an instance of the corresponding version, then open:
 
 **Edit → Version → Replace Minecraft.jar**
 
@@ -465,7 +452,7 @@ Select the JAR created by the build script.
 
 After a successful build, the script will ask whether you want to remove the `.build-deps` directory.
 
-This directory contains downloaded dependencies and original Minecraft JARs.
+This directory contains downloaded dependencies and original Minecraft JAR files.
 
 It can be safely deleted. If you run the build script again, the required files will be downloaded again.
 
@@ -473,34 +460,28 @@ It can be safely deleted. If you run the build script again, the required files 
 
 Each supported version may have its own translation changes.
 
-For languages without a custom translation file, the build script may apply standard fixes required for the specific version.
+For languages without a custom translation file in the version's folder, the build script may apply standard fixes required for that particular version.
 
-For example, in Minecraft 2.0, the values of the following keys are replaced with their corresponding English names:
+For example, in 2.0, the values of the following keys are replaced with their corresponding English names:
 
-* `options.anaglyph` → `Super HD Graphics`
-* `tile.dropper.name` → `Flopper`
+- `options.anaglyph` → `Super HD Graphics`
+- `tile.dropper.name` → `Flopper`
 
-In Minecraft 2.0, these entries were renamed:
+In 2.0, these entries were renamed:
 
-* `3D Anaglyph` → `Super HD Graphics`
-* `Dropper` → `Flopper`
+- `3D Anaglyph` → `Super HD Graphics`
+- `Dropper` → `Flopper`
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
-For Minecraft 15w14a, the build script uses the language files available in the original resource set for this version.
-
-The 15w14a\lang\en_US.lang file is used as a global set of English values. Keys present in this file replace the corresponding values in every language.
-
-After that, the custom language file for a specific language is applied. For example, 15w14a\lang\ru_RU.lang can override the global English values.
-
-If a language does not have a custom translation file, its processed original language file is used with the global English overrides and standard fixes applied.
+For 15w14a, a resource pack containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
 
 ## Do I need to modify the server?
 
-There is no need to modify the server. The modification operates entirely on the client side.
+No. The server does not need to be modified. The modification operates entirely on the client side.
 
 ## Disclaimer
 
-Most of the `build.ps1` code and `README.md` was written with the assistance of AI. Errors may occur.
+Most of the `build.ps1` code and `README.md` were written with the assistance of AI. Errors may occur.
 
 Minecraft and its April Fools' versions are the property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
