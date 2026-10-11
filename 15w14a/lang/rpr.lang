@@ -42,7 +42,7 @@ entity.PrimedTnt.name=Активированная бомба любви
 
 death.attack.lightningBolt=%1$s былъ залюбленъ молніей
 death.attack.inFire=%1$s сгорѣлъ въ любви
-death.attack.inFire.player=%1$s cгорѣлъ въ погонѣ за %2$s
+death.attack.inFire.player=%1$s сгорѣлъ въ огнѣ въ погонѣ за %2$s
 death.attack.onFire=%1$s былъ залюбленъ до смерти
 death.attack.onFire.player=%1$s былъ сожжёнъ дотла въ погонѣ за %2$s
 death.attack.lava=%1$s рѣшилъ поплавать въ сырѣ
