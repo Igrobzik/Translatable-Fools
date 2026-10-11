@@ -18,7 +18,7 @@ selectWorld.gameMode.adventure.line1=Подобенъ режиму сущест�
 selectWorld.allowCommands=Разрѣшить сверхспособности:
 
 menu.playdemo=Создать міръ
-menu.resetdemo=Пересоздать міръ
+menu.resetdemo=Сбросить міръ
 
 key.attack=Любить
 
@@ -42,7 +42,7 @@ entity.PrimedTnt.name=Активированная бомба любви
 
 death.attack.lightningBolt=%1$s былъ залюбленъ молніей
 death.attack.inFire=%1$s сгорѣлъ въ любви
-death.attack.inFire.player=%1$s сгорѣлъ въ огнѣ въ погонѣ за %2$s
+death.attack.inFire.player=%1$s cгорѣлъ въ погонѣ за %2$s
 death.attack.onFire=%1$s былъ залюбленъ до смерти
 death.attack.onFire.player=%1$s былъ сожжёнъ дотла въ погонѣ за %2$s
 death.attack.lava=%1$s рѣшилъ поплавать въ сырѣ
@@ -97,7 +97,7 @@ achievement.breedCow=Перенаселеніе
 achievement.breedCow.desc=Размножьте двухъ коровъ пшеницей
 achievement.buildBetterPickaxe=Эка вещица!
 achievement.buildBetterPickaxe.desc=Сдѣлайте кирку попрочнѣй
-achievement.buildFurnace=Горячая штучка
+achievement.buildFurnace=Накалъ страстей
 achievement.buildFurnace.desc=Сдѣлайте печь изъ восьми булыжниковъ
 achievement.buildHoe=Дачный сезонъ!
 achievement.buildHoe.desc=Соберите мотыгу изъ досокъ и палокъ
