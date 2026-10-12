@@ -794,7 +794,7 @@ entity.XPOrb.name=Сфера опыта
 entity.SmallFireball.name=Малый файербол
 entity.Fireball.name=Файербол
 
-entity.Arrow.name=стрела
+entity.Arrow.name=Стрела
 entity.Snowball.name=Снежок
 entity.Painting.name=Картина
 

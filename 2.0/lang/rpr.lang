@@ -794,7 +794,7 @@ entity.XPOrb.name=Сфера мудрости
 entity.SmallFireball.name=Малый огненный шаръ
 entity.Fireball.name=Огненный шаръ
 
-entity.Arrow.name=стрѣла
+entity.Arrow.name=Стрѣла
 entity.Snowball.name=Снѣжокъ
 entity.Painting.name=Картина
 
@@ -1152,7 +1152,7 @@ commands.time.set=Установлено время: %d
 commands.players.list=Въ салонѣ %d изъ %d игроковъ:
 commands.banlist.ips=%d I.P.-адресовъ заблокировано:
 commands.banlist.players=%d игроковъ заблокировано:
-commands.banlist.usage=/banlist [I.P.-адреса|игроки]
+commands.banlist.usage=/banlist [ips|players]
 commands.kick.success=Игрокъ %s исключёнъ
 commands.kick.success.reason=Игрокъ %s исключенъ. Причина: %s
 commands.kick.usage=/kick <игрокъ> [причина ...]
@@ -1301,7 +1301,7 @@ inventory.binSlot=Удалить вещь
 
 advMode.setCommand=Задайте приказъ для блока
 advMode.command=Консольный приказъ
-advMode.nearestPlayer=Используйте «@p» для выбора ближайшихъ игроковъ
+advMode.nearestPlayer=Используйте «@p» для выбора ближайшаго игрока
 advMode.randomPlayer=Используйте «@r» для выбора случайнаго игрока
 advMode.allPlayers=Используйте «@a» для выбора всѣхъ игроковъ
 
