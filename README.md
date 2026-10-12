@@ -249,7 +249,7 @@ build\
 
 ## Отказ от ответственности
 
-Большая часть кода `build.ps1` и `README.md` были написаны с помощью ИИ. Возможны ошибки.
+Большая часть кода, `build.ps1` и перевод `README.md` были написаны с помощью ИИ. Возможны ошибки.
 
 Minecraft и его первоапрельские версии являются собственностью Mojang Studios и Microsoft. Этот проект является неофициальной модификацией и не связан с Mojang Studios или Microsoft.
 
@@ -489,7 +489,7 @@ No. The server does not need to be modified. The modification operates entirely 
 
 ## Disclaimer
 
-Most of the `build.ps1` code and `README.md` were written with the assistance of AI. Errors may occur.
+Most of the code, the `build.ps1`, and the English translation of `README.md` were written with the assistance of AI. Errors may occur.
 
 Minecraft and its April Fools' versions are the property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
 
