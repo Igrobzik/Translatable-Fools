@@ -1,0 +1,18 @@
+{
+    "language": {
+        "ru_NEW": {
+            "region": "обновлённый перевод",
+            "name": "Русский (Россия)",
+            "bidirectional": false
+        },
+        "rpr": {
+            "region": "Россійская имперія",
+            "name": "Русскій дореформенный",
+            "bidirectional": false
+        }
+    },
+    "pack": {
+        "description": "Additional languages for version 1.RV-Pre1",
+        "pack_format": 2
+    }
+}

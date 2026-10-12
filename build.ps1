@@ -45,16 +45,31 @@ $Log4jCoreJarUrl = "https://libraries.minecraft.net/org/apache/logging/log4j/log
 $Log4jCoreJar = Join-Path $DepsDir "log4j-core-2.0-beta9.jar"
 
 # ============================================================
-# 15w14a language source
+# External language sources
 # ============================================================
 
+# 15w14a: language list from the InventivetalentDev assets repository
 $15w14aLanguageListUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/15w14a/assets/minecraft/lang/_list.json"
 $15w14aLanguageBaseUrl = "https://raw.githubusercontent.com/InventivetalentDev/minecraft-assets/15w14a/assets/minecraft/lang"
 
-$15w14aLanguageCache = Join-Path $DepsDir "15w14a-lang"
+# 1.RV-Pre1: languages are taken from the official Mojang asset index
+$MojangVersionManifestUrl = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
+$MojangResourcesBaseUrl = "https://resources.download.minecraft.net"
 
 # ============================================================
 # Version configuration
+# ============================================================
+#
+# LanguageSourceType:
+#   "InventiveTalent" - _list.json + raw files from GitHub
+#   "MojangAssets"    - assetIndex from the official version JSON
+#
+# ApplyVanillaFixes:
+#   $false -> skip Fix-Vanilla-SpecialTranslations (2.0 only fix)
+#
+# TextureDir / TextureJarPath:
+#   Files from TextureDir are inserted into the JAR under TextureJarPath
+#   (or copied to the output directory in .class mode).
 # ============================================================
 
 $Versions = @(
@@ -181,6 +196,9 @@ $Versions = @(
 
         HasLanguagesFile = $false
         ExternalLanguageSource = $true
+        LanguageSourceType     = "InventiveTalent"
+
+        ApplyVanillaFixes = $false
 
         Sources = @(
             "15w14a\axe.java"
@@ -199,6 +217,44 @@ $Versions = @(
         Sha256 = "82F24F74D7649F0D0E82CC1AB31079C4D5996E6330A9F7B1CF91EEC9EC77522E"
 
         Url = "https://piston-data.mojang.com/v1/objects/1bea9340956b96f2b5452aa576e0cf460990efc6/client.jar"
+    }
+
+    @{
+        DisplayName = "1.RV-Pre1"
+        Id          = "1.RV-Pre1"
+        JarName     = "1.RV-Pre1.jar"
+
+        TranslationDir     = "1.RV-Pre1\lang"
+        TranslationJarPath = "assets/minecraft/lang"
+
+        HasLanguagesFile = $false
+
+        # Languages come from the Mojang asset index.
+        # Original languages -> patched and put into the JAR.
+        # Custom languages   -> additional_languages_resourcepack.zip
+        ExternalLanguageSource = $true
+        LanguageSourceType     = "MojangAssets"
+        MojangVersionId        = "1.RV-Pre1"
+
+        ApplyVanillaFixes = $false
+
+        # Sign textures inserted into the JAR
+        TextureDir     = "1.RV-Pre1\textures"
+        TextureJarPath = "assets/minecraft/textures"
+
+        Sources = @(
+            "1.RV-Pre1\bpq.java"
+            "1.RV-Pre1\bvh.java"
+        )
+
+        Classes = @(
+            "bpq.class"
+            "bvh.class"
+        )
+
+        Sha1 = "3843FAE71DD283E68897EAD618255FA1DDCF4C8D"
+
+        Url = "https://piston-data.mojang.com/v1/objects/3843fae71dd283e68897ead618255fa1ddcf4c8d/client.jar"
     }
 
 )
@@ -473,22 +529,22 @@ Download-File $Log4jApiJarUrl $Log4jApiJar
 Download-File $Log4jCoreJarUrl $Log4jCoreJar
 
 # ============================================================
-# Download 15w14a languages
+# Download languages: InventiveTalent source (15w14a)
 # ============================================================
 
-function Prepare-15w14a-Languages {
+function Prepare-InventiveTalentLanguages {
 
-    New-Item `
-        -ItemType Directory `
-        -Force `
-        -Path $15w14aLanguageCache | Out-Null
+    param(
+        [hashtable]$Info,
+        [string]$CacheDir
+    )
 
-    $ListTemp = Join-Path $DepsDir "15w14a-lang-list.json"
+    $ListTemp = Join-Path $DepsDir "$($Info["Id"])-lang-list.json"
 
     try {
 
         Write-Host ""
-        Write-Host "Downloading 15w14a language list..."
+        Write-Host "Downloading $($Info["DisplayName"]) language list..."
 
         Invoke-WebRequest `
             -Uri $15w14aLanguageListUrl `
@@ -502,7 +558,7 @@ function Prepare-15w14a-Languages {
             ConvertFrom-Json
 
         if (-not $LanguageList.files) {
-            throw "15w14a language list does not contain any files."
+            throw "Language list does not contain any files."
         }
 
         $LanguageFiles = @(
@@ -512,14 +568,11 @@ function Prepare-15w14a-Languages {
             }
         )
 
-        Write-Host "15w14a languages found: $($LanguageFiles.Count)"
+        Write-Host "Languages found: $($LanguageFiles.Count)"
 
         foreach ($LanguageName in $LanguageFiles) {
 
-            $Destination = Join-Path `
-                $15w14aLanguageCache `
-                $LanguageName
-
+            $Destination = Join-Path $CacheDir $LanguageName
             $Url = "$15w14aLanguageBaseUrl/$LanguageName"
 
             Download-File $Url $Destination
@@ -532,8 +585,110 @@ function Prepare-15w14a-Languages {
             Remove-Item $ListTemp -Force
         }
     }
+}
 
-    Write-Host "15w14a language files ready."
+# ============================================================
+# Download languages: Mojang asset index source (1.RV-Pre1)
+# ============================================================
+
+function Prepare-MojangAssetLanguages {
+
+    param(
+        [hashtable]$Info,
+        [string]$CacheDir
+    )
+
+    $VersionId = [string]$Info["MojangVersionId"]
+
+    Write-Host ""
+    Write-Host "Downloading Mojang version manifest..."
+
+    $Manifest = Invoke-RestMethod `
+        -Uri $MojangVersionManifestUrl `
+        -UseBasicParsing
+
+    $VersionEntry = @(
+        $Manifest.versions |
+        Where-Object { $_.id -eq $VersionId }
+    ) | Select-Object -First 1
+
+    if ($null -eq $VersionEntry) {
+        throw "Version $VersionId was not found in the Mojang version manifest."
+    }
+
+    Write-Host "Downloading version JSON: $VersionId"
+
+    $VersionJson = Invoke-RestMethod `
+        -Uri $VersionEntry.url `
+        -UseBasicParsing
+
+    if (-not $VersionJson.assetIndex -or -not $VersionJson.assetIndex.url) {
+        throw "Version JSON for $VersionId does not contain assetIndex."
+    }
+
+    Write-Host "Downloading asset index: $($VersionJson.assetIndex.id)"
+
+    $AssetIndex = Invoke-RestMethod `
+        -Uri $VersionJson.assetIndex.url `
+        -UseBasicParsing
+
+    $LanguageObjects = @(
+        $AssetIndex.objects.PSObject.Properties |
+        Where-Object {
+            $_.Name -like "minecraft/lang/*.lang"
+        }
+    )
+
+    if ($LanguageObjects.Count -eq 0) {
+        throw "Asset index does not contain any minecraft/lang/*.lang entries."
+    }
+
+    Write-Host "Languages found: $($LanguageObjects.Count)"
+
+    foreach ($Property in $LanguageObjects) {
+
+        $LanguageName = [System.IO.Path]::GetFileName($Property.Name)
+        $Hash = [string]$Property.Value.hash
+        $Prefix = $Hash.Substring(0, 2)
+
+        $Destination = Join-Path $CacheDir $LanguageName
+        $Url = "$MojangResourcesBaseUrl/$Prefix/$Hash"
+
+        Download-File $Url $Destination
+    }
+}
+
+function Prepare-ExternalLanguages {
+
+    param(
+        [hashtable]$Info
+    )
+
+    $CacheDir = Join-Path $DepsDir "$($Info["Id"])-lang"
+
+    New-Item `
+        -ItemType Directory `
+        -Force `
+        -Path $CacheDir | Out-Null
+
+    $script:ExternalLanguageCache = $CacheDir
+
+    switch ($Info["LanguageSourceType"]) {
+
+        "InventiveTalent" {
+            Prepare-InventiveTalentLanguages $Info $CacheDir
+        }
+
+        "MojangAssets" {
+            Prepare-MojangAssetLanguages $Info $CacheDir
+        }
+
+        default {
+            throw "Unknown LanguageSourceType: $($Info["LanguageSourceType"])"
+        }
+    }
+
+    Write-Host "$($Info["DisplayName"]) language files ready."
 }
 
 # ============================================================
@@ -590,7 +745,7 @@ function Convert-LangToMap {
 # ============================================================
 # Apply English overrides
 #
-# Values from 15w14a\lang\en_US.lang are applied to every
+# Values from <version>\lang\en_US.lang are applied to every
 # language first.
 # ============================================================
 
@@ -800,7 +955,7 @@ function Process-LanguageContent {
     # 3. Special vanilla replacements (Minecraft 2.0 only)
     # --------------------------------------------------------
 
-    if ($script:CurrentVersionId -ne "15w14a") {
+    if ($script:ApplyVanillaFixes) {
 
         Write-Host "Fixing special translations: $LanguageName"
 
@@ -930,10 +1085,53 @@ function Add-FileEntry {
 }
 
 # ============================================================
-# Create 15w14a additional language resource pack
+# Texture helpers
+#
+# Returns an ordered map:  jar entry name -> full file path
 # ============================================================
 
-function Create-15w14aAdditionalLanguagesPack {
+function Get-TextureEntries {
+
+    param(
+        [hashtable]$Info
+    )
+
+    $Result = [ordered]@{}
+
+    if (-not $Info.ContainsKey("TextureDir")) {
+        return $Result
+    }
+
+    $TextureRoot = Join-Path $Root $Info["TextureDir"]
+
+    if (-not (Test-Path $TextureRoot)) {
+        Write-Host "Texture directory not found - skipping textures: $TextureRoot"
+        return $Result
+    }
+
+    $TextureRoot = (Resolve-Path $TextureRoot).Path.TrimEnd('\', '/')
+
+    $JarBase = ([string]$Info["TextureJarPath"]).Trim('/', '\')
+
+    foreach ($File in Get-ChildItem -Path $TextureRoot -Recurse -File) {
+
+        $Relative = $File.FullName.Substring($TextureRoot.Length).TrimStart('\', '/')
+        $Relative = $Relative -replace '\\', '/'
+
+        $Result["$JarBase/$Relative"] = $File.FullName
+    }
+
+    return $Result
+}
+
+# ============================================================
+# Create additional language resource pack
+#
+# Contains only custom languages which are NOT part of the
+# original language set of the version.
+# ============================================================
+
+function Create-AdditionalLanguagesPack {
 
     param(
         [hashtable]$Info,
@@ -951,12 +1149,12 @@ function Create-15w14aAdditionalLanguagesPack {
     if (-not (Test-Path $PackMetaPath)) {
 
         throw @"
-15w14a resource pack pack.mcmeta was not found:
+Resource pack pack.mcmeta was not found:
 
 $PackMetaPath
 
 Create:
-15w14a\lang\pack.mcmeta
+$($Info["TranslationDir"])\pack.mcmeta
 "@
     }
 
@@ -969,9 +1167,10 @@ Create:
     }
 
     Write-Host ""
-    Write-Host "Creating 15w14a additional language resource pack..."
+    Write-Host "Creating $($Info["DisplayName"]) additional language resource pack..."
 
     $OutputArchive = $null
+    $AddedLanguages = 0
 
     try {
 
@@ -992,34 +1191,26 @@ Create:
             $PackMetaPath
 
         # ----------------------------------------------------
-        # Find languages supplied by the original 15w14a
-        # asset list.
-        #
+        # Languages supplied by the original language set.
         # Everything in this cache belongs in the JAR.
         # ----------------------------------------------------
 
         $ExternalLanguages = @{}
 
         foreach ($LanguageFile in Get-ChildItem `
-            -Path $15w14aLanguageCache `
+            -Path $script:ExternalLanguageCache `
             -Filter "*.lang" `
             -File) {
 
             $ExternalLanguages[$LanguageFile.Name] = $true
         }
 
-        Write-Host "Languages from 15w14a asset list: $($ExternalLanguages.Count)"
+        Write-Host "Original languages: $($ExternalLanguages.Count)"
 
         # ----------------------------------------------------
         # Add only custom languages which are NOT part of
-        # the original 15w14a language set.
-        #
-        # Example:
-        #   ru_RU.lang  -> original -> JAR
-        #   ru_NEW.lang -> custom   -> resource pack
+        # the original language set.
         # ----------------------------------------------------
-
-        $AddedLanguages = 0
 
         foreach ($LanguageFile in $script:CustomLanguageFiles) {
 
@@ -1072,14 +1263,20 @@ function Export-ProcessedLanguages {
         [bool]$HasLanguagesFile
     )
 
+    if ($Info["ProcessLanguages"] -eq $false) {
+        Write-Host "Language processing disabled for $($Info["DisplayName"])."
+        return
+    }
+
     # --------------------------------------------------------
-    # 15w14a languages are installed through the resource pack.
+    # Versions with an external language source install their
+    # additional languages through the resource pack.
     # Do NOT create assets/minecraft/lang in the .class output.
     # --------------------------------------------------------
 
     if ($Info["ExternalLanguageSource"]) {
         Write-Host ""
-        Write-Host "15w14a languages are provided by additional_languages_resourcepack.zip."
+        Write-Host "Languages are provided by additional_languages_resourcepack.zip."
         Write-Host "No language files will be exported to the .class output."
         return
     }
@@ -1205,6 +1402,45 @@ function Export-ProcessedLanguages {
     Write-Host "Language files prepared: $OutputLangDir"
 }
 
+# ============================================================
+# Export textures for .class output
+# ============================================================
+
+function Export-Textures {
+
+    param(
+        [System.Collections.IDictionary]$TextureEntries,
+        [string]$OutputDir
+    )
+
+    if (-not $TextureEntries -or $TextureEntries.Count -eq 0) {
+        return
+    }
+
+    Write-Host ""
+    Write-Host "Copying textures for manual installation..."
+
+    foreach ($EntryName in $TextureEntries.Keys) {
+
+        $Destination = Join-Path `
+            $OutputDir `
+            ($EntryName -replace '/', '\')
+
+        $DestinationDir = Split-Path $Destination -Parent
+
+        New-Item `
+            -ItemType Directory `
+            -Force `
+            -Path $DestinationDir | Out-Null
+
+        Copy-Item `
+            $TextureEntries[$EntryName] `
+            $Destination `
+            -Force
+
+        Write-Host "Texture: $EntryName"
+    }
+}
 
 # ============================================================
 # Patch 15w14a's original avq.class without recompiling it.
@@ -1306,10 +1542,12 @@ function Build-Version {
         $LangDir `
         "languages.txt"
 
-    # Reset English override map for every version.
+    # Reset per-version state.
     $script:EnglishOverrideMap = @{}
+    $script:ExternalLanguageCache = $null
+    $script:ApplyVanillaFixes = ($Info["ApplyVanillaFixes"] -ne $false)
 
-    if (-not (Test-Path $LangDir)) {
+    if ($Info["ProcessLanguages"] -ne $false -and -not (Test-Path $LangDir)) {
 
         throw @"
 Translation directory not found:
@@ -1336,24 +1574,29 @@ $($Info["TranslationDir"])\
     }
 
     # --------------------------------------------------------
-    # 15w14a external language source
+    # External language source (15w14a, 1.RV-Pre1)
     # --------------------------------------------------------
 
     if ($Info["ExternalLanguageSource"]) {
 
-        Prepare-15w14a-Languages
+        Prepare-ExternalLanguages $Info
     }
 
     # --------------------------------------------------------
     # Find custom language patches
     # --------------------------------------------------------
 
-    $script:CustomLanguageFiles = @(
-        Get-ChildItem `
-            -Path $LangDir `
-            -Filter "*.lang" `
-            -File
-    )
+    if ($Info["ProcessLanguages"] -eq $false) {
+        $script:CustomLanguageFiles = @()
+    }
+    else {
+        $script:CustomLanguageFiles = @(
+            Get-ChildItem `
+                -Path $LangDir `
+                -Filter "*.lang" `
+                -File
+        )
+    }
 
     # --------------------------------------------------------
     # Read en_US.lang as a GLOBAL English override
@@ -1404,6 +1647,19 @@ $($Info["TranslationDir"])\
         }
     }
 
+    # --------------------------------------------------------
+    # Textures
+    # --------------------------------------------------------
+
+    $TextureEntries = Get-TextureEntries $Info
+
+    Write-Host ""
+    Write-Host "Textures found: $($TextureEntries.Count)"
+
+    foreach ($TextureName in $TextureEntries.Keys) {
+        Write-Host "  $TextureName"
+    }
+
     Write-Host ""
     Write-Host "============================================================"
     Write-Host "Building $($Info["DisplayName"])"
@@ -1425,26 +1681,36 @@ $($Info["TranslationDir"])\
     # Verify Minecraft JAR
     # ========================================================
 
-    $Hash = (Get-FileHash $MinecraftJar -Algorithm SHA256).Hash
-
-    if ($Hash.ToUpper() -ne $Info["Sha256"].ToUpper()) {
-
-        Remove-Item $MinecraftJar -Force
-
-        throw @"
-SHA-256 mismatch for $($Info["DisplayName"])!
-
+    if ($Info.ContainsKey("Sha1")) {
+        $Hash = (Get-FileHash $MinecraftJar -Algorithm SHA1).Hash
+        if ($Hash.ToUpper() -ne $Info["Sha1"].ToUpper()) {
+            Remove-Item $MinecraftJar -Force
+            throw @"
+SHA-1 mismatch for $($Info["DisplayName"])!
 Expected:
-$($Info["Sha256"])
-
+$($Info["Sha1"])
 Got:
 $Hash
-
 The downloaded file was deleted.
 "@
+        }
+        Write-Host "SHA-1 OK."
     }
-
-    Write-Host "SHA-256 OK."
+    else {
+        $Hash = (Get-FileHash $MinecraftJar -Algorithm SHA256).Hash
+        if ($Hash.ToUpper() -ne $Info["Sha256"].ToUpper()) {
+            Remove-Item $MinecraftJar -Force
+            throw @"
+SHA-256 mismatch for $($Info["DisplayName"])!
+Expected:
+$($Info["Sha256"])
+Got:
+$Hash
+The downloaded file was deleted.
+"@
+        }
+        Write-Host "SHA-256 OK."
+    }
 
     # ========================================================
     # Prepare output directory
@@ -1464,14 +1730,14 @@ The downloaded file was deleted.
         -Path $OutputDir | Out-Null
 
     # ========================================================
-    # Prepare 15w14a additional language resource pack
+    # Prepare additional language resource pack
     #
     # This is created for BOTH output modes.
     # ========================================================
 
     if ($Info["ExternalLanguageSource"]) {
 
-        Create-15w14aAdditionalLanguagesPack `
+        Create-AdditionalLanguagesPack `
             $Info `
             $OutputDir
     }
@@ -1534,41 +1800,39 @@ The downloaded file was deleted.
         $Log4jCoreJar
     ) -join [System.IO.Path]::PathSeparator
 
+    $SourcePaths = @()
     foreach ($SourceRelative in $SourcesToCompile) {
-
-        $Source = Join-Path `
-            $Root `
-            $SourceRelative
-
+        $Source = Join-Path $Root $SourceRelative
         if (-not (Test-Path $Source)) {
             throw "Source file not found: $Source"
         }
+        Write-Host "Source: $SourceRelative"
+        $SourcePaths += $Source
+    }
+    Write-Host ""
+    Write-Host "Compiling all selected sources together..."
+    & $Javac `
+        --release 8 `
+        -classpath $Classpath `
+        -d $OutputDir `
+        $SourcePaths
+    if ($LASTEXITCODE -ne 0) {
+        throw "Compilation failed."
+    }
+    foreach ($ClassName in $ClassesToReplace) {
 
-        $SourceName = [System.IO.Path]::GetFileNameWithoutExtension(
-            $Source
-        )
-
-        $ClassOutput = Join-Path `
-            $OutputDir `
-            "$SourceName.class"
-
-        Write-Host ""
-        Write-Host "Compiling $SourceRelative"
-
-        & $Javac `
-            --release 8 `
-            -classpath $Classpath `
-            -d $OutputDir `
-            $Source
-
-        if ($LASTEXITCODE -ne 0) {
-            throw "Compilation failed: $SourceRelative"
+        # 15w14a avq.class is created later by the bytecode patch,
+        # not by javac.
+        if ($UseFontFix -and
+            $Info["Id"] -eq "15w14a" -and
+            $ClassName -eq "avq.class") {
+            continue
         }
 
+        $ClassOutput = Join-Path $OutputDir $ClassName
         if (-not (Test-Path $ClassOutput)) {
             throw "Compilation finished but $ClassOutput was not created."
         }
-
         Write-Host "Created: $ClassOutput"
     }
 
@@ -1582,7 +1846,7 @@ The downloaded file was deleted.
     }
 
     # ========================================================
-    # Export processed languages for .class files
+    # Export processed languages + textures for .class files
     # ========================================================
 
     if ($OutputFormat -eq "classes") {
@@ -1592,6 +1856,10 @@ The downloaded file was deleted.
             $MinecraftJar `
             $OutputDir `
             $Info["HasLanguagesFile"]
+
+        Export-Textures `
+            $TextureEntries `
+            $OutputDir
     }
 
     # ========================================================
@@ -1599,6 +1867,21 @@ The downloaded file was deleted.
     # ========================================================
 
     if ($OutputFormat -eq "jar") {
+
+        # javac may generate extra top-level class files for anonymous or
+        # inner classes (for example, bvh$1.class). Include all generated
+        # class files in the JAR, not only the explicitly listed classes.
+        $CompiledClassFiles = @(
+            Get-ChildItem -Path $OutputDir -Filter "*.class" -File |
+            Sort-Object Name
+        )
+        if ($CompiledClassFiles.Count -eq 0) {
+            throw "No compiled .class files were found in $OutputDir"
+        }
+        $CompiledClassNames = @{}
+        foreach ($CompiledClassFile in $CompiledClassFiles) {
+            $CompiledClassNames[$CompiledClassFile.Name] = $true
+        }
 
         $ModdedJar = Join-Path `
             $OutputDir `
@@ -1672,23 +1955,20 @@ The downloaded file was deleted.
                 }
 
                 # -------------------------------------------------
-                # Skip classes that will be replaced
+                # Skip every class generated by javac, including
+                # anonymous/inner classes such as bvh$1.class.
                 # -------------------------------------------------
-
-                $ReplaceClass = $false
-
-                foreach ($ClassName in $ClassesToReplace) {
-
-                    if ($EntryName -eq $ClassName) {
-
-                        $ReplaceClass = $true
-                        break
-                    }
+                if ($CompiledClassNames.ContainsKey($EntryName)) {
+                    Write-Host "Replacing: $EntryName"
+                    continue
                 }
 
-                if ($ReplaceClass) {
-
-                    Write-Host "Replacing: $EntryName"
+                # -------------------------------------------------
+                # Skip original files which are replaced by our
+                # own textures (they are added below).
+                # -------------------------------------------------
+                if ($TextureEntries.Contains($EntryName)) {
+                    Write-Host "Replacing texture: $EntryName"
                     continue
                 }
 
@@ -1698,10 +1978,12 @@ The downloaded file was deleted.
                 # Only language files which already exist in the
                 # original JAR are processed here.
                 #
-                # 15w14a additional languages are NOT added here.
+                # Additional languages are NOT added here for
+                # versions with an external language source.
                 # -------------------------------------------------
 
                 if (
+                    $Info["ProcessLanguages"] -ne $false -and
                     $EntryName.StartsWith(
                         "$($Info["TranslationJarPath"])/",
                         [System.StringComparison]::OrdinalIgnoreCase
@@ -1720,13 +2002,12 @@ The downloaded file was deleted.
 
                     $ArchiveContent = Read-LanguageEntry $Entry
 
-                    # For 15w14a, if the language exists in the
-                    # external asset source, use that version as
-                    # the source content.
+                    # If the language exists in the external source,
+                    # use that version as the source content.
                     if ($Info["ExternalLanguageSource"]) {
 
                         $ExternalPath = Join-Path `
-                            $15w14aLanguageCache `
+                            $script:ExternalLanguageCache `
                             $LanguageName
 
                         if (Test-Path $ExternalPath) {
@@ -1784,22 +2065,27 @@ The downloaded file was deleted.
             }
 
             # =================================================
-            # Add 15w14a languages from the original asset list
+            # Add original languages from the external source
             #
-            # These are the normal 15w14a languages and belong
-            # in the JAR.
+            # These are the normal languages of the version and
+            # belong in the JAR.
             # =================================================
 
             if ($Info["ExternalLanguageSource"]) {
 
                 foreach ($LanguageFile in Get-ChildItem `
-                    -Path $15w14aLanguageCache `
+                    -Path $script:ExternalLanguageCache `
                     -Filter "*.lang" `
                     -File) {
 
                     $LanguageName = $LanguageFile.Name
 
-                    Write-Host "Adding 15w14a language to JAR: $LanguageName"
+                    # Already written from the original JAR entry.
+                    if ($ArchiveLanguages.ContainsKey($LanguageName)) {
+                        continue
+                    }
+
+                    Write-Host "Adding $($Info["DisplayName"]) language to JAR: $LanguageName"
 
                     $Content = Read-Utf8File `
                         $LanguageFile.FullName
@@ -1820,8 +2106,9 @@ The downloaded file was deleted.
             # =================================================
             # Add custom languages which don't exist yet
             #
-            # 15w14a is EXCLUDED here because its additional
-            # languages belong in additional_languages_resourcepack.zip.
+            # Versions with an external language source are
+            # EXCLUDED here: their additional languages belong
+            # in additional_languages_resourcepack.zip.
             # =================================================
 
             if (-not $Info["ExternalLanguageSource"]) {
@@ -1879,48 +2166,43 @@ The downloaded file was deleted.
             }
 
             # =================================================
+            # Add textures (sign textures etc.)
+            # =================================================
+
+            foreach ($TextureName in $TextureEntries.Keys) {
+
+                Write-Host "Adding texture to JAR: $TextureName"
+
+                Add-FileEntry `
+                    $OutputArchive `
+                    $TextureName `
+                    $TextureEntries[$TextureName]
+            }
+
+            # =================================================
             # Add modified classes
             # =================================================
 
-            foreach ($ClassName in $ClassesToReplace) {
-
-                $CompiledClass = Join-Path `
-                    $OutputDir `
-                    $ClassName
-
+            foreach ($CompiledClassFile in $CompiledClassFiles) {
+                $ClassName = $CompiledClassFile.Name
+                $CompiledClass = $CompiledClassFile.FullName
                 Write-Host "Adding modified class: $ClassName"
-
                 $NewEntry = $OutputArchive.CreateEntry(
                     $ClassName,
                     [System.IO.Compression.CompressionLevel]::Optimal
                 )
-
                 $InputStream = $null
                 $OutputStream = $null
-
                 try {
-
-                    $InputStream = [System.IO.File]::OpenRead(
-                        $CompiledClass
-                    )
-
+                    $InputStream = [System.IO.File]::OpenRead($CompiledClass)
                     $OutputStream = $NewEntry.Open()
-
                     $InputStream.CopyTo($OutputStream)
-
                 }
                 finally {
-
-                    if ($OutputStream) {
-                        $OutputStream.Dispose()
-                    }
-
-                    if ($InputStream) {
-                        $InputStream.Dispose()
-                    }
+                    if ($OutputStream) { $OutputStream.Dispose() }
+                    if ($InputStream) { $InputStream.Dispose() }
                 }
             }
-
         }
         finally {
 
@@ -1943,17 +2225,13 @@ The downloaded file was deleted.
             -Force
 
         # ========================================================
-        # Remove compiled class files
+        # Remove all compiled .class files after adding them to the JAR.
+        # Keep the final JAR and any additional resource-pack ZIP.
         # ========================================================
 
-        foreach ($ClassName in $ClassesToReplace) {
-
-            $CompiledClass = Join-Path `
-                $OutputDir `
-                $ClassName
-
-            if (Test-Path $CompiledClass) {
-                Remove-Item $CompiledClass -Force
+        foreach ($CompiledClassFile in $CompiledClassFiles) {
+            if (Test-Path $CompiledClassFile.FullName) {
+                Remove-Item $CompiledClassFile.FullName -Force
             }
         }
 
@@ -1992,22 +2270,10 @@ try {
         }
         else {
 
-            if ($Version["ExternalLanguageSource"]) {
-
-                Write-Host "  build\$($Version.Id)\"
-                Write-Host "  build\$($Version.Id)\additional_languages_resourcepack.zip"
-
-            }
-            else {
-
-                Write-Host "  build\$($Version.Id)\"
-            }
+            Write-Host "  build\$($Version.Id)\"
         }
 
-        if (
-            $OutputFormat -eq "jar" -and
-            $Version["ExternalLanguageSource"]
-        ) {
+        if ($Version["ExternalLanguageSource"]) {
 
             Write-Host "  build\$($Version.Id)\additional_languages_resourcepack.zip"
         }
