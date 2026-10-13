@@ -1047,10 +1047,10 @@ stat.mobKills=Убито мобов
 stat.playerKills=Убито игроков
 stat.fishCaught=Поймано рыбы
 
-stat.mineBlock=%1$s добыто
-stat.craftItem=%1$s создано
-stat.useItem=%1$s использовано
-stat.breakItem=%1$s сломано
+stat.mineBlock=Добыто %1$s
+stat.breakItem=Создано %1$s
+stat.useItem=Использовано %1$s
+stat.breakItem=Сломано %1$s
 
 achievement.get=Новое достижение!
 
