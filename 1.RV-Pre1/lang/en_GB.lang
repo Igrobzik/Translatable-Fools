@@ -1,6 +1,6 @@
 tile.usbCharger.name=USB Charger Block
 item.realityVision.name=Reality Vision
-item.ankleMonitor.name=Ankle Monitor
+item.ankleMonitor.name=Electronic Tag
 item.ankleMonitor.warning=CURFEW WARNING! You are violating your house arrest! Get back by %d metres!
 item.ankleMonitor.warning2=CURFEW WARNING! You are violating your house arrest! Uuuh... where are you anyway?
 item.ankleMonitor.warning3=CURFEW WARNING! Hello, are you there?
