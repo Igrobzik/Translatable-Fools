@@ -1,5 +1,5 @@
 tile.usbCharger.name=Блок зарядного устройства USB
-item.realityVision.name=Очки реального виденья
+item.realityVision.name=Очки реальной видимости
 item.ankleMonitor.name=Электронный браслет
 item.ankleMonitor.warning=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Вы нарушаете домашний арест! Вернитесь на %d метров!
 item.ankleMonitor.warning2=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Вы нарушаете домашний арест! Эммм... а где ты вообще?
@@ -24,11 +24,11 @@ item.ankleMonitor.warning20=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТС
 item.ankleMonitor.warning21=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Ладно, больше от меня ты ничего не услышишь!
 item.ankleMonitor.warning22=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Тебе будет так же одиноко, как и мне.
 item.ankleMonitor.warning23=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Каково тебе это?
-item.ankleMonitor.warning24=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Я знаю, я сотру себе память. Тогда я смогу начать всё сначала!
+item.ankleMonitor.warning24=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! Знаю, я сотру себе память. Тогда я смогу начать всё сначала!
 item.ankleMonitor.warning25=ПРЕДУПРЕЖДЕНИЕ О КОМЕНДАНТСКОМ ЧАСЕ! *бззззддд*
 item.smarterWatch.name=Умнейшие часы
 item.smarterWatch.update=Замечательно! %s теперь %d!
-item.smarterWatch.damage=Замечательно! Недавно вы получили %d половин сердец урона!
+item.smarterWatch.damage=Замечательно! Недавно вы получили %d половин сердца урона!
 
 achievement.acquireIron=Куй железо...
 achievement.acquireIron.desc=Выплавьте железный слиток
