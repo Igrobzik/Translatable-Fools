@@ -32,7 +32,10 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 
 #### 15w14a
 * Добавляет ключи перевода для сплэша `Minecraft is love, Minecraft is life`.
-* Добавляет ключи перевода для названия создаваемого мира в меню создания мира, меню сброса мира и в файле level.dat мира, видного при загрузки этого мира в другую версию.
+* Добавляет ключи перевода для названия создаваемого мира в меню создания мира, меню сброса мира и в файле `level.dat` мира, отображаемого при загрузки этого мира в другой версии.
+
+#### 1.RV-Pre1
+* Добавляет возможность перевести текст на текстуре таблички `sign2.png` с текстом «OBEY» («ПОДЧИНЯЙТЕСЬ»). Текстура определяется по коду языка: `sign2_<код_языка>.png`, например, `sign2_ru_ru.png` для русского. В случае отсутствия текстуры используется `sign2.png`.
 
 ### Поддерживаемые версии
 
@@ -41,6 +44,7 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * 2.0 Red
 * 2.0 Preview
 * 15w14a
+* 1.RV-Pre1
 
 Список поддерживаемых версий будет расширяться по мере добавления новых первоапрельских версий Minecraft.
 
@@ -85,6 +89,13 @@ build.ps1
 ```text
 build.ps1
 15w14a\
+```
+
+Для 1.RV-Pre1:
+
+```text
+build.ps1
+1.RV-Pre1\
 ```
 
 В будущих версиях структура файлов может отличаться. Если для конкретной версии требуются дополнительные общие файлы, это будет указано в её разделе.
@@ -184,8 +195,7 @@ build\
 
 Скачайте соответствующую оригинальную версию Minecraft.
 
-Для **2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a
-](https://minecraft.wiki/w/Java_Edition_15w14a).
+Для **2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a). Для **1.RV-Pre1** оригинальные JAR-файлы можно найти на странице [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1).
 
 Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
 
@@ -242,7 +252,7 @@ build\
 
 Для старых версий у русского языка добавлен «обновлённый» вариант. В списке языков вы сможете выбрать оригинальный русский язык той версии, с добавленными переводами контента первоапрельской версии, или перевод, основанный на современной русской локализации. Я не могу гарантировать правильность перевода команд и их вывода (строки, начинающиеся с `commands.`). В их переводах могут встречаться ошибки и неточности.
 
-Для 15w14a создаётся набор ресурсов `additional_languages_resourcepack.zip` с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
+Для 15w14a и 1.RV-Pre1 создаётся набор ресурсов `additional_languages_resourcepack.zip` с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
 
 ## Нужно ли модифицировать сервер?
 Сервер модифицировать не нужно. Модификация работает полностью со стороны клиента.
@@ -253,7 +263,7 @@ build\
 
 Minecraft и его первоапрельские версии являются собственностью Mojang Studios и Microsoft. Этот проект является неофициальной модификацией и не связан с Mojang Studios или Microsoft.
 
-Перевод выполнен обычными игроками Minecraft на платформе [Crowdin](https://ru.crowdin.com/project/translatable-fools), а не профессиональными переводчиками, поэтому может содержать ошибки, неточности и недочёты. Переводы на некоторые языки могут быть идентичны или схожи с переводами из [проекта Minecraft Wiki по переводу первоапрельских версий Minecraft](https://github.com/mc-wiki/mcaf-resourcepack).
+Перевод выполнен волонтёрами на платформе [Crowdin](https://ru.crowdin.com/project/translatable-fools), а не профессиональными переводчиками, поэтому может содержать ошибки, неточности и недочёты. Переводы на некоторые языки могут быть идентичны или схожи с переводами из [проекта Minecraft Wiki по переводу первоапрельских версий Minecraft](https://github.com/mc-wiki/mcaf-resourcepack).
 
 
 </details>
@@ -277,7 +287,11 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 #### 15w14a
 
 - Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
-- Adds translation keys for the name of the created world in the world creation menu, the world reset menu, and the world's `level.dat` file, where it can be seen when the world is loaded in another version.
+- Adds translation keys for the created world's name in the world creation menu and the world reset menu. Also translates the world name stored in `level.dat`, which is visible when the world is loaded in another version.
+
+#### 1.RV-Pre1
+
+- Allows the text "OBEY" on the `sign2.png` sign texture to be translated. Language-specific textures use the language code in their filenames, following the `sign2_<language_code>.png` format. For example, `sign2_en_gb.png` is used for UK English. If a language-specific texture is unavailable, the game falls back to `sign2.png`.
 
 ### Supported versions
 
@@ -286,6 +300,7 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 - 2.0 Red
 - 2.0 Preview
 - 15w14a
+- 1.RV-Pre1
 
 The list of supported versions will expand as new Minecraft April Fools' versions are added.
 
@@ -330,6 +345,13 @@ For 15w14a:
 ```text
 build.ps1
 15w14a\
+```
+
+For 1.RV-Pre1:
+
+```text
+build.ps1
+1.RV-Pre1\
 ```
 
 In future versions, the file structure may differ. If a particular version requires additional shared files, this will be specified in its respective section.
@@ -429,7 +451,7 @@ Each folder will contain the modified `.class` files and processed translation f
 
 Download the corresponding original version of Minecraft.
 
-For **2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page.
+For **2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page. For **1.RV-Pre1**, the original JAR files can be found on the [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1).
 
 All required client and server JAR links are available in the **Downloads** section of the infobox on these pages. The corresponding `.json` files are also available there.
 
@@ -481,7 +503,7 @@ In 2.0, these entries were renamed:
 
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
-For 15w14a, a resource pack `additional_languages_resourcepack.zip` containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
+For 15w14a and 1.RV-Pre1, a resource pack `additional_languages_resourcepack.zip` containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
 
 ## Do I need to modify the server?
 
@@ -489,8 +511,8 @@ No. The server does not need to be modified. The modification operates entirely 
 
 ## Disclaimer
 
-Most of the code, the `build.ps1`, and the English translation of `README.md` were written with the assistance of AI. Errors may occur.
+Most of the code, the `build.ps1` script, and the English translation of `README.md` were written with the assistance of AI. Errors may occur.
 
 Minecraft and its April Fools' versions are the property of Mojang Studios and Microsoft. This project is an unofficial modification and is not affiliated with or endorsed by Mojang Studios or Microsoft.
 
-The translations were contributed by ordinary Minecraft players on [Crowdin](https://crowdin.com/project/translatable-fools), rather than professional translators, and may therefore contain errors, inaccuracies, or other imperfections. Translations into some languages may be identical or similar to those in the [Minecraft Wiki's April Fools' versions translation project](https://github.com/mc-wiki/mcaf-resourcepack).
+The translations were contributed by volunteers on [Crowdin](https://crowdin.com/project/translatable-fools), rather than professional translators, and may therefore contain errors, inaccuracies, or other imperfections. Translations into some languages may be identical or similar to those in the [Minecraft Wiki's April Fools' versions translation project](https://github.com/mc-wiki/mcaf-resourcepack).
