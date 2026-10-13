@@ -43,8 +43,8 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * 2.0 Purple
 * 2.0 Red
 * 2.0 Preview
-* 15w14a
-* 1.RV-Pre1
+* 15w14a (The Love and Hugs Update)
+* 1.RV-Pre1 (Trendy Update)
 
 Список поддерживаемых версий будет расширяться по мере добавления новых первоапрельских версий Minecraft.
 
@@ -299,8 +299,8 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 - 2.0 Purple
 - 2.0 Red
 - 2.0 Preview
-- 15w14a
-- 1.RV-Pre1
+- 15w14a (The Love and Hugs Update)
+- 1.RV-Pre1 (Trendy Update)
 
 The list of supported versions will expand as new Minecraft April Fools' versions are added.
 
