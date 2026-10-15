@@ -28,6 +28,10 @@ $JavaUtilJar = "https://libraries.minecraft.net/org/lwjgl/lwjgl/lwjgl_util/2.9.4
 
 $LwjglJar = Join-Path $DepsDir "lwjgl-2.9.4-nightly-20150209.jar"
 $LwjglUtilJar = Join-Path $DepsDir "lwjgl_util-2.9.4-nightly-20150209.jar"
+$Lwjgl3JarUrl = "https://libraries.minecraft.net/org/lwjgl/lwjgl/3.2.1/lwjgl-3.2.1.jar"
+$Lwjgl3Jar = Join-Path $DepsDir "lwjgl-3.2.1.jar"
+$LwjglGlfwJarUrl = "https://libraries.minecraft.net/org/lwjgl/lwjgl-glfw/3.2.1/lwjgl-glfw-3.2.1.jar"
+$LwjglGlfwJar = Join-Path $DepsDir "lwjgl-glfw-3.2.1.jar"
 
 $CommonsLangJarUrl = "https://libraries.minecraft.net/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar"
 $CommonsLangJar = Join-Path $DepsDir "commons-lang3-3.3.2.jar"
@@ -43,6 +47,20 @@ $Log4jApiJar = Join-Path $DepsDir "log4j-api-2.0-beta9.jar"
 
 $Log4jCoreJarUrl = "https://libraries.minecraft.net/org/apache/logging/log4j/log4j-core/2.0-beta9/log4j-core-2.0-beta9.jar"
 $Log4jCoreJar = Join-Path $DepsDir "log4j-core-2.0-beta9.jar"
+
+$BrigadierJarUrl = "https://libraries.minecraft.net/com/mojang/brigadier/1.0.17/brigadier-1.0.17.jar"
+$BrigadierJar = Join-Path $DepsDir "brigadier-1.0.17.jar"
+
+# Extra libraries required when compiling the decompiled 3D Shareware classes.
+$GsonJarUrl = "https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar"
+$GsonJar = Join-Path $DepsDir "gson-2.8.5.jar"
+$AuthlibJarUrl = "https://libraries.minecraft.net/com/mojang/authlib/1.5.25/authlib-1.5.25.jar"
+$AuthlibJar = Join-Path $DepsDir "authlib-1.5.25.jar"
+$DataFixerUpperJarUrl = "https://libraries.minecraft.net/com/mojang/datafixerupper/2.0.24/datafixerupper-2.0.24.jar"
+$DataFixerUpperJar = Join-Path $DepsDir "datafixerupper-2.0.24.jar"
+$Jsr305JarUrl = "https://libraries.minecraft.net/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar"
+$Jsr305Jar = Join-Path $DepsDir "jsr305-3.0.2.jar"
+
 
 # ============================================================
 # External language sources
@@ -256,6 +274,69 @@ $Versions = @(
 
         Url = "https://piston-data.mojang.com/v1/objects/3843fae71dd283e68897ead618255fa1ddcf4c8d/client.jar"
     }
+
+
+    @{
+        DisplayName = "3D Shareware v1.34"
+        Id          = "3D-Shareware-v1.34"
+        JarName     = "3D-Shareware-v1.34.jar"
+
+        TranslationDir     = "3D Shareware v1.34\lang"
+        TranslationJarPath = "assets/minecraft/lang"
+
+        HasLanguagesFile       = $false
+        ExternalLanguageSource = $true
+        ProcessLanguages       = $true
+        JsonLanguageProcessing = $true
+        JsonLanguagesInResourcePack = $true
+        LanguageSourceType     = "MojangAssets"
+        MojangVersionId        = "3D Shareware v1.34"
+        LanguageCacheDir       = "3D Shareware v1.34-lang"
+        LanguageFileExtension  = ".json"
+        LoadingTextureDir      = "3D Shareware v1.34\loading"
+        HotbarTextureDir       = "3D Shareware v1.34\hotbar"
+        BossModeTextureDir     = "3D Shareware v1.34\boss_mode"
+        SplashDir              = "3D Shareware v1.34\splashes"
+
+        ApplyVanillaFixes = $false
+
+        Sources = @(
+            "3D Shareware v1.34\bbr.java"
+            "3D Shareware v1.34\bcu.java"
+            "3D Shareware v1.34\cuw.java"
+            "3D Shareware v1.34\cux.java"
+            "3D Shareware v1.34\cvq.java"
+            "3D Shareware v1.34\cyn.java"
+            "3D Shareware v1.34\cyo.java"
+            "3D Shareware v1.34\cys.java"
+            "3D Shareware v1.34\cyu.java"
+            "3D Shareware v1.34\cyv.java"
+            "3D Shareware v1.34\cyw.java"
+            "3D Shareware v1.34\dke.java"
+            "3D Shareware v1.34\dux.java"
+        )
+
+        Classes = @(
+            "bbr.class"
+            "bcu.class"
+            "cuw.class"
+            "cux.class"
+            "cvq.class"
+            "cyn.class"
+            "cyo.class"
+            "cys.class"
+            "cyu.class"
+            "cyv.class"
+            "cyw.class"
+            "dke.class"
+            "dux.class"
+        )
+
+        Sha1 = "44DB7D7BCD5A1BEE6F54F6A623F26A1B3D1E293F"
+
+        Url = "https://piston-data.mojang.com/v1/objects/44db7d7bcd5a1bee6f54f6a623f26a1b3d1e293f/client.jar"
+    }
+
 
 )
 
@@ -527,6 +608,14 @@ Download-File $GuavaJarUrl $GuavaJar
 Download-File $CommonsIoJarUrl $CommonsIoJar
 Download-File $Log4jApiJarUrl $Log4jApiJar
 Download-File $Log4jCoreJarUrl $Log4jCoreJar
+Download-File $BrigadierJarUrl $BrigadierJar
+Write-Host "Gson download source: $GsonJarUrl"
+Download-File $GsonJarUrl $GsonJar
+Download-File $AuthlibJarUrl $AuthlibJar
+Download-File $DataFixerUpperJarUrl $DataFixerUpperJar
+Download-File $Jsr305JarUrl $Jsr305Jar
+Download-File $Lwjgl3JarUrl $Lwjgl3Jar
+Download-File $LwjglGlfwJarUrl $LwjglGlfwJar
 
 # ============================================================
 # Download languages: InventiveTalent source (15w14a)
@@ -632,15 +721,21 @@ function Prepare-MojangAssetLanguages {
         -Uri $VersionJson.assetIndex.url `
         -UseBasicParsing
 
+    $LanguageExtension = [string]$Info["LanguageFileExtension"]
+    if ([string]::IsNullOrWhiteSpace($LanguageExtension)) {
+        $LanguageExtension = ".lang"
+    }
+    $LanguagePattern = "minecraft/lang/*$LanguageExtension"
+
     $LanguageObjects = @(
         $AssetIndex.objects.PSObject.Properties |
         Where-Object {
-            $_.Name -like "minecraft/lang/*.lang"
+            $_.Name -like $LanguagePattern
         }
     )
 
     if ($LanguageObjects.Count -eq 0) {
-        throw "Asset index does not contain any minecraft/lang/*.lang entries."
+        throw "Asset index does not contain any minecraft/lang/*$LanguageExtension entries."
     }
 
     Write-Host "Languages found: $($LanguageObjects.Count)"
@@ -658,13 +753,64 @@ function Prepare-MojangAssetLanguages {
     }
 }
 
+function Copy-EnglishLanguageFromJarToCache {
+
+    param(
+        [string]$MinecraftJar,
+        [hashtable]$Info
+    )
+
+    if (-not $Info["ExternalLanguageSource"] -or
+        [string]::IsNullOrWhiteSpace([string]$script:ExternalLanguageCache)) {
+        return
+    }
+
+    $LanguageRoot = ([string]$Info["TranslationJarPath"]).TrimEnd('/') + '/'
+    $Archive = $null
+
+    try {
+        $Archive = [System.IO.Compression.ZipFile]::OpenRead($MinecraftJar)
+        $EnglishEntry = $Archive.Entries | Where-Object {
+            $_.FullName.StartsWith($LanguageRoot, [System.StringComparison]::OrdinalIgnoreCase) -and
+            [System.IO.Path]::GetFileName($_.FullName) -match '^en_us\.(json|lang)$'
+        } | Select-Object -First 1
+
+        if (-not $EnglishEntry) {
+            Write-Host "English language file en_us.json/en_us.lang not found in the original JAR."
+            return
+        }
+
+        $Destination = Join-Path $script:ExternalLanguageCache ([System.IO.Path]::GetFileName($EnglishEntry.FullName))
+        $InputStream = $null
+        $OutputStream = $null
+        try {
+            $InputStream = $EnglishEntry.Open()
+            $OutputStream = [System.IO.File]::Create($Destination)
+            $InputStream.CopyTo($OutputStream)
+        }
+        finally {
+            if ($OutputStream) { $OutputStream.Dispose() }
+            if ($InputStream) { $InputStream.Dispose() }
+        }
+
+        Write-Host "Extracted English language from original JAR: $Destination"
+    }
+    finally {
+        if ($Archive) { $Archive.Dispose() }
+    }
+}
+
 function Prepare-ExternalLanguages {
 
     param(
         [hashtable]$Info
     )
 
-    $CacheDir = Join-Path $DepsDir "$($Info["Id"])-lang"
+    $CacheName = [string]$Info["LanguageCacheDir"]
+    if ([string]::IsNullOrWhiteSpace($CacheName)) {
+        $CacheName = "$($Info["Id"])-lang"
+    }
+    $CacheDir = Join-Path $DepsDir $CacheName
 
     New-Item `
         -ItemType Directory `
@@ -1085,6 +1231,184 @@ function Add-FileEntry {
 }
 
 # ============================================================
+# JSON language helpers (3D Shareware v1.34)
+# ============================================================
+
+function Apply-JsonLanguagePatch {
+    param([string]$ArchiveContent, [string]$PatchContent)
+
+    $BaseObject = $ArchiveContent | ConvertFrom-Json
+    $PatchObject = $PatchContent | ConvertFrom-Json
+    $Merged = [ordered]@{}
+
+    if ($null -ne $BaseObject) {
+        foreach ($Property in $BaseObject.PSObject.Properties) {
+            $Merged[$Property.Name] = $Property.Value
+        }
+    }
+    if ($null -ne $PatchObject) {
+        foreach ($Property in $PatchObject.PSObject.Properties) {
+            $Merged[$Property.Name] = $Property.Value
+        }
+    }
+    return ($Merged | ConvertTo-Json -Depth 100)
+}
+
+function Process-JsonLanguageContent {
+    param([string]$LanguageName, [string]$ArchiveContent)
+
+    $CustomLanguagePath = Join-Path $LangDir $LanguageName
+    if (-not (Test-Path $CustomLanguagePath)) { return $ArchiveContent }
+
+    Write-Host "Patching JSON language: $LanguageName"
+    return (Apply-JsonLanguagePatch $ArchiveContent (Read-Utf8File $CustomLanguagePath))
+}
+
+function Create-MissingJsonLanguagesPack {
+    param([hashtable]$Info, [string]$MinecraftJar, [string]$OutputDir)
+
+    if (-not $Info["JsonLanguageProcessing"] -or $script:CustomJsonLanguageFiles.Count -eq 0) { return }
+
+    $ExistingEntries = @{}
+    $Archive = $null
+    try {
+        $Archive = [System.IO.Compression.ZipFile]::OpenRead($MinecraftJar)
+        foreach ($Entry in $Archive.Entries) {
+            $ExistingEntries[$Entry.FullName.ToLowerInvariant()] = $true
+        }
+    }
+    finally { if ($Archive) { $Archive.Dispose() } }
+
+    $MissingFiles = @($script:CustomJsonLanguageFiles | Where-Object {
+        -not $ExistingEntries.ContainsKey(("$($Info["TranslationJarPath"])/$($_.Name)").ToLowerInvariant())
+    })
+    if ($MissingFiles.Count -eq 0) {
+        Write-Host "All custom JSON languages already exist in the JAR."
+        return
+    }
+
+    $ResourcePackPath = Join-Path $OutputDir "additional_languages_resourcepack.zip"
+    if (Test-Path $ResourcePackPath) { Remove-Item $ResourcePackPath -Force }
+
+    if ($Info["Id"] -eq "3D-Shareware-v1.34") {
+        $PackMetaPath = Join-Path $LangDir "pack.mcmeta"
+        if (-not (Test-Path -LiteralPath $PackMetaPath -PathType Leaf)) {
+            throw "Resource pack pack.mcmeta was not found: $PackMetaPath"
+        }
+        $PackMeta = Read-Utf8File $PackMetaPath
+    }
+    else {
+        $PackMeta = @'
+{
+  "pack": {
+    "pack_format": 4,
+    "description": "Additional languages"
+  }
+}
+'@
+    }
+    $OutputArchive = $null
+    try {
+        $OutputArchive = [System.IO.Compression.ZipFile]::Open($ResourcePackPath, [System.IO.Compression.ZipArchiveMode]::Create)
+        Add-TextEntry $OutputArchive "pack.mcmeta" $PackMeta
+        foreach ($LanguageFile in $MissingFiles) {
+            Write-Host "Adding missing language to resource pack: $($LanguageFile.Name)"
+            $FinalContent = Apply-JsonLanguagePatch "{}" (Read-Utf8File $LanguageFile.FullName)
+            Add-TextEntry $OutputArchive "$($Info["TranslationJarPath"])/$($LanguageFile.Name)" $FinalContent
+        }
+    }
+    finally { if ($OutputArchive) { $OutputArchive.Dispose() } }
+
+    Write-Host "Created: $ResourcePackPath"
+    Write-Host "Additional JSON languages: $($MissingFiles.Count)"
+}
+
+function Create-JsonLanguagesResourcePack {
+    param([hashtable]$Info, [string]$OutputDir)
+
+    if (-not $Info["JsonLanguagesInResourcePack"]) { return }
+
+    $ResourcePackPath = Join-Path $OutputDir "translations_resourcepack.zip"
+    if (Test-Path $ResourcePackPath) { Remove-Item $ResourcePackPath -Force }
+
+    # The resource pack contains only translation entries explicitly supplied
+    # by this project. Do not download or copy full Mojang language files.
+    # en_us.json is intentionally excluded because it is patched inside the JAR.
+    $PackMetaPath = Join-Path $LangDir "pack.mcmeta"
+    if (-not (Test-Path -LiteralPath $PackMetaPath -PathType Leaf)) {
+        throw "Resource pack pack.mcmeta was not found: $PackMetaPath"
+    }
+    $PackMeta = Read-Utf8File $PackMetaPath
+
+    $LanguagePatches = @{}
+    foreach ($File in $script:CustomJsonLanguageFiles) {
+        if ($File.Name -ieq "en_us.json") { continue }
+
+        $PatchObject = Read-Utf8File $File.FullName | ConvertFrom-Json
+        if ($null -ne $PatchObject -and @($PatchObject.PSObject.Properties).Count -gt 0) {
+            $LanguagePatches[$File.Name] = $PatchObject | ConvertTo-Json -Depth 100
+        }
+    }
+
+    $Archive = $null
+    try {
+        $Archive = [System.IO.Compression.ZipFile]::Open($ResourcePackPath, [System.IO.Compression.ZipArchiveMode]::Create)
+        Add-TextEntry $Archive "pack.mcmeta" $PackMeta
+        foreach ($Name in @($LanguagePatches.Keys | Sort-Object)) {
+            Write-Host "Adding project translation entries to resource pack: $Name"
+            Add-TextEntry $Archive "$($Info["TranslationJarPath"])/$Name" $LanguagePatches[$Name]
+        }
+
+    } finally { if ($Archive) { $Archive.Dispose() } }
+
+    Write-Host "Created: $ResourcePackPath"
+    Write-Host "Language files with project translation entries: $($LanguagePatches.Count)"
+    Write-Host "Only entries from project translation files are included; en_us.json remains patched in the JAR."
+}
+
+function Export-JsonLanguages {
+    param([hashtable]$Info, [string]$MinecraftJar, [string]$OutputDir)
+
+    $OutputLangDir = Join-Path $OutputDir ($Info["TranslationJarPath"] -replace '/', '\')
+    New-Item -ItemType Directory -Force -Path $OutputLangDir | Out-Null
+    $LanguageContents = @{}
+
+    # Start with all downloaded official languages, including languages
+    # which are not embedded in the client JAR.
+    if ($Info["ExternalLanguageSource"] -and $script:ExternalLanguageCache) {
+        $LanguageExtension = [string]$Info["LanguageFileExtension"]
+        if ([string]::IsNullOrWhiteSpace($LanguageExtension)) {
+            $LanguageExtension = ".lang"
+        }
+        foreach ($LanguageFile in Get-ChildItem -Path $script:ExternalLanguageCache -Filter "*$LanguageExtension" -File) {
+            $LanguageContents[$LanguageFile.Name] = Read-Utf8File $LanguageFile.FullName
+        }
+    }
+
+    $Archive = $null
+    try {
+        $Archive = [System.IO.Compression.ZipFile]::OpenRead($MinecraftJar)
+        foreach ($Entry in $Archive.Entries) {
+            if ($Entry.FullName.StartsWith("$($Info["TranslationJarPath"])/", [System.StringComparison]::OrdinalIgnoreCase) -and
+                $Entry.FullName.EndsWith(".json", [System.StringComparison]::OrdinalIgnoreCase)) {
+                $LanguageName = [System.IO.Path]::GetFileName($Entry.FullName)
+                if (-not $LanguageContents.ContainsKey($LanguageName)) {
+                    $LanguageContents[$LanguageName] = Read-LanguageEntry $Entry
+                }
+            }
+        }
+    }
+    finally { if ($Archive) { $Archive.Dispose() } }
+
+    foreach ($LanguageName in @($LanguageContents.Keys | Sort-Object)) {
+        $FinalContent = Process-JsonLanguageContent $LanguageName $LanguageContents[$LanguageName]
+        [System.IO.File]::WriteAllText((Join-Path $OutputLangDir $LanguageName), $FinalContent, [System.Text.Encoding]::UTF8)
+    }
+    Write-Host "JSON language files prepared: $OutputLangDir"
+    Write-Host "JSON language files exported: $($LanguageContents.Count)"
+}
+
+# ============================================================
 # Texture helpers
 #
 # Returns an ordered map:  jar entry name -> full file path
@@ -1098,29 +1422,123 @@ function Get-TextureEntries {
 
     $Result = [ordered]@{}
 
-    if (-not $Info.ContainsKey("TextureDir")) {
-        return $Result
+    if ($Info.ContainsKey("TextureDir")) {
+        $TextureRoot = Join-Path $Root $Info["TextureDir"]
+
+        if (-not (Test-Path $TextureRoot)) {
+            Write-Host "Texture directory not found - skipping textures: $TextureRoot"
+        }
+        else {
+            $TextureRoot = (Resolve-Path $TextureRoot).Path.TrimEnd('\', '/')
+            $JarBase = ([string]$Info["TextureJarPath"]).Trim('/', '\')
+
+            foreach ($File in Get-ChildItem -Path $TextureRoot -Recurse -File) {
+                $Relative = $File.FullName.Substring($TextureRoot.Length).TrimStart('\', '/')
+                $Relative = $Relative -replace '\\', '/'
+                $Result["$JarBase/$Relative"] = $File.FullName
+            }
+        }
     }
 
-    $TextureRoot = Join-Path $Root $Info["TextureDir"]
-
-    if (-not (Test-Path $TextureRoot)) {
-        Write-Host "Texture directory not found - skipping textures: $TextureRoot"
-        return $Result
+    # Localized ORDER files are copied from the ORDER subfolder into the JAR root,
+    # beside the original ORDER.FRM and class files. Do not recurse into folders.
+    if ($Info["Id"] -eq "3D-Shareware-v1.34") {
+        $OrderRoot = Join-Path $Root "3D Shareware v1.34\ORDER"
+        if (Test-Path -LiteralPath $OrderRoot -PathType Container) {
+            foreach ($File in Get-ChildItem -LiteralPath $OrderRoot -File) {
+                $Result[$File.Name] = $File.FullName
+            }
+        }
+        else {
+            Write-Host "ORDER directory not found - skipping ORDER files: $OrderRoot" -ForegroundColor Yellow
+        }
     }
 
-    $TextureRoot = (Resolve-Path $TextureRoot).Path.TrimEnd('\', '/')
-
-    $JarBase = ([string]$Info["TextureJarPath"]).Trim('/', '\')
-
-    foreach ($File in Get-ChildItem -Path $TextureRoot -Recurse -File) {
-
-        $Relative = $File.FullName.Substring($TextureRoot.Length).TrimStart('\', '/')
-        $Relative = $Relative -replace '\\', '/'
-
-        $Result["$JarBase/$Relative"] = $File.FullName
+    # Version-specific localized loading screens belong in the JAR,
+    # not in translations_resourcepack.zip.
+    $LoadingTextureDir = [string]$Info["LoadingTextureDir"]
+    if (-not [string]::IsNullOrWhiteSpace($LoadingTextureDir)) {
+        $LoadingSourceDir = Join-Path $Root $LoadingTextureDir
+        if (Test-Path -LiteralPath $LoadingSourceDir -PathType Container) {
+            $LoadingRoot = (Resolve-Path -LiteralPath $LoadingSourceDir).Path.TrimEnd('\', '/')
+            foreach ($File in Get-ChildItem -LiteralPath $LoadingRoot -File -Recurse) {
+                $Relative = $File.FullName.Substring($LoadingRoot.Length).TrimStart('\', '/')
+                $Relative = $Relative -replace '\\', '/'
+                $Result["assets/minecraft/textures/gui/$Relative"] = $File.FullName
+            }
+        }
+        else {
+            Write-Host "Loading texture directory not found - skipping JAR textures: $LoadingSourceDir" -ForegroundColor Yellow
+        }
     }
 
+    # Localized hotbar textures belong in the JAR under
+    # assets/minecraft/textures/gui/, alongside loading textures.
+    $HotbarTextureDir = [string]$Info["HotbarTextureDir"]
+    if (-not [string]::IsNullOrWhiteSpace($HotbarTextureDir)) {
+        $HotbarSourceDir = Join-Path $Root $HotbarTextureDir
+
+        if (Test-Path -LiteralPath $HotbarSourceDir -PathType Container) {
+            $HotbarRoot = (Resolve-Path -LiteralPath $HotbarSourceDir).Path.TrimEnd('\', '/')
+            $HotbarFiles = @(Get-ChildItem -LiteralPath $HotbarRoot -File -Recurse)
+
+            foreach ($File in $HotbarFiles) {
+                $Relative = $File.FullName.Substring($HotbarRoot.Length).TrimStart('\', '/')
+                $Relative = $Relative -replace '\\', '/'
+                $Result["assets/minecraft/textures/gui/$Relative"] = $File.FullName
+            }
+
+            Write-Host "Hotbar texture files found: $($HotbarFiles.Count)"
+        }
+        else {
+            Write-Host "Hotbar texture directory not found - skipping JAR textures: $HotbarSourceDir" -ForegroundColor Yellow
+        }
+    }
+
+    # Localized splash text files are inserted into the JAR under
+    # assets/minecraft/texts/, where dux.class looks for them.
+    $SplashDir = [string]$Info["SplashDir"]
+    if (-not [string]::IsNullOrWhiteSpace($SplashDir)) {
+        $SplashSourceDir = Join-Path $Root $SplashDir
+
+        if (Test-Path -LiteralPath $SplashSourceDir -PathType Container) {
+            $SplashRoot = (Resolve-Path -LiteralPath $SplashSourceDir).Path.TrimEnd('\', '/')
+            $SplashFiles = @(Get-ChildItem -LiteralPath $SplashRoot -File -Recurse)
+
+            foreach ($File in $SplashFiles) {
+                $Relative = $File.FullName.Substring($SplashRoot.Length).TrimStart('\', '/')
+                $Relative = $Relative -replace '\\', '/'
+                $Result["assets/minecraft/texts/$Relative"] = $File.FullName
+            }
+
+            Write-Host "Splash text files found: $($SplashFiles.Count)"
+        }
+        else {
+            Write-Host "Splash directory not found - skipping localized splashes: $SplashSourceDir" -ForegroundColor Yellow
+        }
+    }
+
+    # Localized boss-mode textures
+    $BossModeTextureDir = [string]$Info["BossModeTextureDir"]
+    if (-not [string]::IsNullOrWhiteSpace($BossModeTextureDir)) {
+        $BossModeSourceDir = Join-Path $Root $BossModeTextureDir
+
+        if (Test-Path -LiteralPath $BossModeSourceDir -PathType Container) {
+            $BossModeRoot = (Resolve-Path -LiteralPath $BossModeSourceDir).Path.TrimEnd('\', '/')
+            $BossModeFiles = @(Get-ChildItem -LiteralPath $BossModeRoot -Recurse -File)
+
+            foreach ($File in $BossModeFiles) {
+                $Relative = $File.FullName.Substring($BossModeRoot.Length).TrimStart('\', '/')
+                $Relative = $Relative -replace '\\', '/'
+                $Result["assets/minecraft/textures/gui/$Relative"] = $File.FullName
+            }
+
+            Write-Host "Boss-mode texture files found: $($BossModeFiles.Count)"
+        }
+        else {
+            Write-Host "Boss-mode texture directory not found: $BossModeSourceDir" -ForegroundColor Yellow
+        }
+    }
     return $Result
 }
 
@@ -1545,6 +1963,7 @@ function Build-Version {
     # Reset per-version state.
     $script:EnglishOverrideMap = @{}
     $script:ExternalLanguageCache = $null
+    $script:CustomJsonLanguageFiles = @()
     $script:ApplyVanillaFixes = ($Info["ApplyVanillaFixes"] -ne $false)
 
     if ($Info["ProcessLanguages"] -ne $false -and -not (Test-Path $LangDir)) {
@@ -1579,7 +1998,19 @@ $($Info["TranslationDir"])\
 
     if ($Info["ExternalLanguageSource"]) {
 
-        Prepare-ExternalLanguages $Info
+        if ($Info["JsonLanguagesInResourcePack"]) {
+            # 3D Shareware needs no downloaded vanilla language bundle:
+            # en_us.json is extracted from the original JAR below, while the
+            # resource pack is built only from this project's translation files.
+            $CacheName = [string]$Info["LanguageCacheDir"]
+            if ([string]::IsNullOrWhiteSpace($CacheName)) { $CacheName = "$($Info["Id"])-lang" }
+            $script:ExternalLanguageCache = Join-Path $DepsDir $CacheName
+            New-Item -ItemType Directory -Force -Path $script:ExternalLanguageCache | Out-Null
+            Write-Host "Skipping Mojang language downloads; only en_us.json will be extracted from the original JAR."
+        }
+        else {
+            Prepare-ExternalLanguages $Info
+        }
     }
 
     # --------------------------------------------------------
@@ -1596,6 +2027,13 @@ $($Info["TranslationDir"])\
                 -Filter "*.lang" `
                 -File
         )
+    }
+
+    if ($Info["JsonLanguageProcessing"]) {
+        $script:CustomJsonLanguageFiles = @(Get-ChildItem -Path $LangDir -Filter "*.json" -File)
+    }
+    else {
+        $script:CustomJsonLanguageFiles = @()
     }
 
     # --------------------------------------------------------
@@ -1712,6 +2150,10 @@ The downloaded file was deleted.
         Write-Host "SHA-256 OK."
     }
 
+    # Keep the game's own en_us language file in the per-version language cache.
+    # en_us is often omitted from Mojang's downloadable asset index.
+    Copy-EnglishLanguageFromJarToCache $MinecraftJar $Info
+
     # ========================================================
     # Prepare output directory
     # ========================================================
@@ -1735,12 +2177,15 @@ The downloaded file was deleted.
     # This is created for BOTH output modes.
     # ========================================================
 
-    if ($Info["ExternalLanguageSource"]) {
-
+    if ($Info["JsonLanguagesInResourcePack"]) {
+        Create-JsonLanguagesResourcePack $Info $OutputDir
+    }
+    elseif ($Info["ExternalLanguageSource"] -and -not $Info["JsonLanguageProcessing"]) {
         Create-AdditionalLanguagesPack `
             $Info `
             $OutputDir
     }
+
 
     # ========================================================
     # Prepare source/class lists
@@ -1753,6 +2198,11 @@ The downloaded file was deleted.
     $ClassesToReplace = @(
         $Info["Classes"]
     )
+
+    if ($Info["Id"] -eq "3D-Shareware-v1.34") {
+        $SourcesToCompile += "3D Shareware v1.34\CuxCompileFixes.java"
+        $ClassesToReplace += "CuxCompileFixes.class"
+    }
 
     if ($UseFontFix -and $Info["FontFixSource"]) {
 
@@ -1798,7 +2248,28 @@ The downloaded file was deleted.
         $CommonsIoJar
         $Log4jApiJar
         $Log4jCoreJar
+        $BrigadierJar
+        $GsonJar
+        $AuthlibJar
+        $DataFixerUpperJar
+        $Jsr305Jar
+        $Lwjgl3Jar
+        $LwjglGlfwJar
     ) -join [System.IO.Path]::PathSeparator
+
+    if ($Info["Id"] -eq "3D-Shareware-v1.34") {
+        $NettyJar = Join-Path $env:APPDATA 'ElyPrismLauncher\libraries\io\netty\netty-all\4.1.25.Final\netty-all-4.1.25.Final.jar'
+        $BridgeJar = Join-Path $env:APPDATA 'ElyPrismLauncher\libraries\com\mojang\javabridge\1.0.22\javabridge-1.0.22.jar'
+
+        foreach ($Dependency in @($NettyJar, $BridgeJar)) {
+            if (-not (Test-Path -LiteralPath $Dependency)) {
+                throw "Required 3D Shareware dependency not found: $Dependency"
+            }
+            $Classpath += [System.IO.Path]::PathSeparator + $Dependency
+        }
+    }
+
+
 
     $SourcePaths = @()
     foreach ($SourceRelative in $SourcesToCompile) {
@@ -1851,11 +2322,16 @@ The downloaded file was deleted.
 
     if ($OutputFormat -eq "classes") {
 
-        Export-ProcessedLanguages `
-            $Info `
-            $MinecraftJar `
-            $OutputDir `
-            $Info["HasLanguagesFile"]
+        if ($Info["JsonLanguageProcessing"]) {
+            Export-JsonLanguages $Info $MinecraftJar $OutputDir
+        }
+        else {
+            Export-ProcessedLanguages `
+                $Info `
+                $MinecraftJar `
+                $OutputDir `
+                $Info["HasLanguagesFile"]
+        }
 
         Export-Textures `
             $TextureEntries `
@@ -1983,6 +2459,34 @@ The downloaded file was deleted.
                 # -------------------------------------------------
 
                 if (
+                    $Info["JsonLanguageProcessing"] -and
+                    $EntryName.StartsWith(
+                        "$($Info["TranslationJarPath"])/",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    ) -and
+                    $EntryName.EndsWith(
+                        ".json",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    )
+                ) {
+                    $LanguageName = [System.IO.Path]::GetFileName($EntryName)
+                    $ArchiveLanguages[$LanguageName] = $true
+                    $ArchiveContent = Read-LanguageEntry $Entry
+
+                    # 3D Shareware reads en_us.json from the JAR. Keep that
+                    # file patched in-place; all other downloaded languages
+                    # are supplied by translations_resourcepack.zip.
+                    if ($Info["JsonLanguagesInResourcePack"] -and $LanguageName -ine "en_us.json") {
+                        Add-TextEntry $OutputArchive $EntryName $ArchiveContent
+                    }
+                    else {
+                        $FinalContent = Process-JsonLanguageContent $LanguageName $ArchiveContent
+                        Add-TextEntry $OutputArchive $EntryName $FinalContent
+                    }
+                    continue
+                }
+
+                if (
                     $Info["ProcessLanguages"] -ne $false -and
                     $EntryName.StartsWith(
                         "$($Info["TranslationJarPath"])/",
@@ -2071,11 +2575,16 @@ The downloaded file was deleted.
             # belong in the JAR.
             # =================================================
 
-            if ($Info["ExternalLanguageSource"]) {
+            if ($Info["ExternalLanguageSource"] -and -not $Info["JsonLanguagesInResourcePack"]) {
+
+                $LanguageExtension = [string]$Info["LanguageFileExtension"]
+                if ([string]::IsNullOrWhiteSpace($LanguageExtension)) {
+                    $LanguageExtension = ".lang"
+                }
 
                 foreach ($LanguageFile in Get-ChildItem `
                     -Path $script:ExternalLanguageCache `
-                    -Filter "*.lang" `
+                    -Filter "*$LanguageExtension" `
                     -File) {
 
                     $LanguageName = $LanguageFile.Name
@@ -2087,12 +2596,13 @@ The downloaded file was deleted.
 
                     Write-Host "Adding $($Info["DisplayName"]) language to JAR: $LanguageName"
 
-                    $Content = Read-Utf8File `
-                        $LanguageFile.FullName
-
-                    $FinalContent = Process-LanguageContent `
-                        $LanguageName `
-                        $Content
+                    $Content = Read-Utf8File $LanguageFile.FullName
+                    if ($Info["JsonLanguageProcessing"]) {
+                        $FinalContent = Process-JsonLanguageContent $LanguageName $Content
+                    }
+                    else {
+                        $FinalContent = Process-LanguageContent $LanguageName $Content
+                    }
 
                     Add-TextEntry `
                         $OutputArchive `
@@ -2273,8 +2783,10 @@ try {
             Write-Host "  build\$($Version.Id)\"
         }
 
-        if ($Version["ExternalLanguageSource"]) {
-
+        if ($Version["JsonLanguagesInResourcePack"]) {
+            Write-Host "  build\$($Version.Id)\translations_resourcepack.zip"
+        }
+        elseif ($Version["ExternalLanguageSource"]) {
             Write-Host "  build\$($Version.Id)\additional_languages_resourcepack.zip"
         }
     }
