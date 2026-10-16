@@ -38,7 +38,7 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * Добавляет возможность перевести текст на текстуре таблички `sign2.png` с текстом «OBEY» («ПОДЧИНЯЙТЕСЬ»). Текстура определяется по коду языка: `sign2_<код_языка>.png`, например, `sign2_ru_ru.png` для русского. В случае отсутствия текстуры используется `sign2.png`.
 
 #### 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
-* Добавляет возможность перевести текст на текстурах `boss_mode.png`, `hotbar.png`, `loading.png`, сплэшах `splashes.txt` и бланка заказа `ORDER.FRM`.
+* Добавляет возможность перевести текст на текстурах `boss_mode.png`, `hotbar.png`, `loading.png`, сплэшах `splashes.txt` и бланка заказа `ORDER.FRM`. Файл определяется по коду языка: `<название_файла>_<код_языка>.<расширение>`, например, `splashes_ru_ru.txt`. В случае отсутствия текстуры используется оригинальный файл.
 
 ### Поддерживаемые версии
 
@@ -308,7 +308,7 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 
 #### 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
 
-- Allows the text on the `boss_mode.png`, `hotbar.png`, and `loading.png` textures, the splashes in `splashes.txt`, and the order form in `ORDER.FRM` to be translated.
+- Allows the text on the `boss_mode.png`, `hotbar.png`, and `loading.png` textures, the splash texts in `splashes.txt`, and the order sheet form in `ORDER.FRM` to be translated. Files are identified by language code using the `<filename>_<language_code>.<extension>` format. For example, `splashes_en_gb.txt`. If a language-specific file is unavailable, the original file is used as a fallback.
 
 ### Supported versions
 
