@@ -30,12 +30,15 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * Добавляет ключи перевода для сплэша `APRIL FOOLS!`.
 * Добавляет перевод для сообщений в облачках у блоков.
 
-#### 15w14a
+#### 15w14a (The Love and Hugs Update)
 * Добавляет ключи перевода для сплэша `Minecraft is love, Minecraft is life`.
 * Добавляет ключи перевода для названия создаваемого мира в меню создания мира, меню сброса мира и в файле `level.dat` мира, отображаемого при загрузки этого мира в другой версии.
 
-#### 1.RV-Pre1
+#### 1.RV-Pre1 (Trendy Update)
 * Добавляет возможность перевести текст на текстуре таблички `sign2.png` с текстом «OBEY» («ПОДЧИНЯЙТЕСЬ»). Текстура определяется по коду языка: `sign2_<код_языка>.png`, например, `sign2_ru_ru.png` для русского. В случае отсутствия текстуры используется `sign2.png`.
+
+#### 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
+* Добавляет возможность перевести текст на текстурах `boss_mode.png`, `hotbar.png`, `loading.png`, сплэшах `splashes.txt` и бланка заказа `ORDER.FRM`.
 
 ### Поддерживаемые версии
 
@@ -45,6 +48,7 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * 2.0 Preview
 * 15w14a (The Love and Hugs Update)
 * 1.RV-Pre1 (Trendy Update)
+* 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
 
 Список поддерживаемых версий будет расширяться по мере добавления новых первоапрельских версий Minecraft.
 
@@ -96,6 +100,13 @@ build.ps1
 ```text
 build.ps1
 1.RV-Pre1\
+```
+
+Для 3D Shareware v1.34:
+
+```text
+build.ps1
+3D Shareware v1.34\
 ```
 
 В будущих версиях структура файлов может отличаться. Если для конкретной версии требуются дополнительные общие файлы, это будет указано в её разделе.
@@ -195,7 +206,7 @@ build\
 
 Скачайте соответствующую оригинальную версию Minecraft.
 
-Для **2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a). Для **1.RV-Pre1** оригинальные JAR-файлы можно найти на странице [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1).
+Для **2.0** оригинальные JAR-файлы можно найти на страницах [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) и [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29). Для **15w14a** оригинальные JAR-файлы можно найти на странице [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a). Для **1.RV-Pre1** оригинальные JAR-файлы можно найти на странице [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1). Для **3D Shareware v1.34** оригинальные JAR-файлы можно найти на странице [Java Edition 3D Shareware v1.34](https://minecraft.wiki/w/Java_Edition_3D_Shareware_v1.34).
 
 Все необходимые ссылки на клиентские и серверные JAR-файлы находятся в инфобоксе в разделе **Downloads** на этих страницах. Также там доступны соответствующие `.json`-файлы.
 
@@ -254,6 +265,8 @@ build\
 
 Для 15w14a и 1.RV-Pre1 создаётся набор ресурсов `additional_languages_resourcepack.zip` с дополнительными переводами, для 2.0 эти переводы встроены в .jar-файл.
 
+Для 3D Shareware v1.34 все переводы находятся в созданном наборе ресурсов `translations_resourcepack.zip`, для 2.0, 15w14a и 1.RV-Pre1 эти переводы встроены в .jar-файл.
+
 ## Нужно ли модифицировать сервер?
 Сервер модифицировать не нужно. Модификация работает полностью со стороны клиента.
 
@@ -284,14 +297,18 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 - Adds translation keys for the `APRIL FOOLS!` splash.
 - Adds translation support for block speech bubble messages.
 
-#### 15w14a
+#### 15w14a (The Love and Hugs Update)
 
 - Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
 - Adds translation keys for the created world's name in the world creation menu and the world reset menu. Also translates the world name stored in `level.dat`, which is visible when the world is loaded in another version.
 
-#### 1.RV-Pre1
+#### 1.RV-Pre1 (Trendy Update)
 
 - Allows the text "OBEY" on the `sign2.png` sign texture to be translated. Language-specific textures use the language code in their filenames, following the `sign2_<language_code>.png` format. For example, `sign2_en_gb.png` is used for UK English. If a language-specific texture is unavailable, the game falls back to `sign2.png`.
+
+#### 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
+
+- Allows the text on the `boss_mode.png`, `hotbar.png`, and `loading.png` textures, the splashes in `splashes.txt`, and the order form in `ORDER.FRM` to be translated.
 
 ### Supported versions
 
@@ -301,6 +318,7 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 - 2.0 Preview
 - 15w14a (The Love and Hugs Update)
 - 1.RV-Pre1 (Trendy Update)
+- 3D Shareware v1.34 (MineCraft 3D: Memory Block Edition)
 
 The list of supported versions will expand as new Minecraft April Fools' versions are added.
 
@@ -352,6 +370,13 @@ For 1.RV-Pre1:
 ```text
 build.ps1
 1.RV-Pre1\
+```
+
+For 3D Shareware v1.34:
+
+```text
+build.ps1
+3D Shareware v1.34\
 ```
 
 In future versions, the file structure may differ. If a particular version requires additional shared files, this will be specified in its respective section.
@@ -451,7 +476,7 @@ Each folder will contain the modified `.class` files and processed translation f
 
 Download the corresponding original version of Minecraft.
 
-For **2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page. For **1.RV-Pre1**, the original JAR files can be found on the [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1).
+For **2.0**, the original JAR files can be found on the [Java Edition 2.0](https://minecraft.wiki/w/Java_Edition_2.0) and [Java Edition 2.0 (preview)](https://minecraft.wiki/w/Java_Edition_2.0_%28preview%29) pages. For **15w14a**, the original JAR files can be found on the [Java Edition 15w14a](https://minecraft.wiki/w/Java_Edition_15w14a) page. For **1.RV-Pre1**, the original JAR files can be found on the [Java Edition 1.RV-Pre1](https://minecraft.wiki/w/Java_Edition_1.RV-Pre1). For **3D Shareware v1.34**, the original JAR files can be found on the [Java Edition 3D Shareware v1.34](https://minecraft.wiki/w/Java_Edition_3D_Shareware_v1.34).
 
 All required client and server JAR links are available in the **Downloads** section of the infobox on these pages. The corresponding `.json` files are also available there.
 
@@ -504,6 +529,8 @@ In 2.0, these entries were renamed:
 If a custom translation file exists for a language, the corresponding custom language patch is applied instead of the standard fixes.
 
 For 15w14a and 1.RV-Pre1, a resource pack `additional_languages_resourcepack.zip` containing additional translations is created. For 2.0, these translations are included directly in the JAR file.
+
+For 3D Shareware v1.34, translations are provided in the generated `translations_resourcepack.zip` resource pack. For 2.0, 15w14a, and 1.RV-Pre1, these translations are included directly in the JAR file.
 
 ## Do I need to modify the server?
 
