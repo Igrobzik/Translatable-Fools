@@ -405,7 +405,7 @@ public class cux extends agf<Runnable> implements ahc, cts, AutoCloseable {
 
       var3.forEach(var2x -> cux.a(var1, var2, var2x));
 
-      dwy<dce> var6 = new dwy<>(cux::a, cux::b);
+      dwy<dce> var6 = new dwy<>(cux::b, cux::a);
       this.Y.a(dwz.a, var1);
       this.Y.a(dwz.b, var2);
       this.Y.a(dwz.c, var6);
