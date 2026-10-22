@@ -219,11 +219,13 @@ $Versions = @(
         ApplyVanillaFixes = $false
 
         Sources = @(
+            "15w14a\aaa.java"
             "15w14a\axe.java"
             "15w14a\aye.java"
         )
 
         Classes = @(
+            "aaa.class"
             "axe.class"
             "aye.class"
         )
