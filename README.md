@@ -27,12 +27,13 @@ Modifications of Minecraft's April Fools' versions that add missing translation 
 * Содержит необязательные исправления некоторых известных проблем, связанных с отображением текста.
 
 #### 2.0
-* Добавляет ключи перевода для сплэша `APRIL FOOLS!`.
+* Добавляет ключ перевода для сплэша `APRIL FOOLS!`.
 * Добавляет перевод для сообщений в облачках у блоков.
 
 #### 15w14a (The Love and Hugs Update)
-* Добавляет ключи перевода для сплэша `Minecraft is love, Minecraft is life`.
+* Добавляет ключ перевода для сплэша `Minecraft is love, Minecraft is life`.
 * Добавляет ключи перевода для названия создаваемого мира в меню создания мира, меню сброса мира и в файле `level.dat` мира, отображаемого при загрузки этого мира в другой версии.
+* Добавляет ключ перевода для бумаги с названием `Thanks for your donation`, иногда выдаваемой крестьянами вместо торговли.
 
 #### 1.RV-Pre1 (Trendy Update)
 * Добавляет возможность перевести текст на текстуре таблички `sign2.png` с текстом «OBEY» («ПОДЧИНЯЙТЕСЬ»). Текстура определяется по коду языка: `sign2_<код_языка>.png`, например, `sign2_ru_ru.png` для русского. В случае отсутствия текстуры используется `sign2.png`.
@@ -294,13 +295,14 @@ The project makes content introduced in Minecraft's April Fools' versions transl
 
 #### 2.0
 
-- Adds translation keys for the `APRIL FOOLS!` splash.
+- Adds a translation key for the `APRIL FOOLS!` splash.
 - Adds translation support for block speech bubble messages.
 
 #### 15w14a (The Love and Hugs Update)
 
-- Adds translation keys for the `Minecraft is love, Minecraft is life` splash.
+- Adds a translation key for the `Minecraft is love, Minecraft is life` splash.
 - Adds translation keys for the created world's name in the world creation menu and the world reset menu. Also translates the world name stored in `level.dat`, which is visible when the world is loaded in another version.
+- Adds a translation key for the paper named `Thanks for your donation`, which Villagers sometimes give out instead of trading.
 
 #### 1.RV-Pre1 (Trendy Update)
 
