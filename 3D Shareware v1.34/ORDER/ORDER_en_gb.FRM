@@ -2,11 +2,11 @@
                             MOJANG ORDER SHEET
                                 PAGE 1 OF 2
      ===================================================================
-false
+
                   *** Mark all items you wish to order ***
-false
-false
-false
+
+
+
  [ ] MineCraft 3D
     Immersive virtual-reality mining simulation with intense crafting capabilities!
     Our freshest and radicalest game!
@@ -23,60 +23,60 @@ false
     "Better than nothing". Ideal for your younger sibling!
  [COMMING SOON] MineCraft 3D: Action figurine set
     You have to acquire them all!
-false
+
   [ ] MineCraft 2
     Classic 2D Minecraft experience. If you haven't played it yet, shame on you!
   [ ] MineCraft 2: Swedish Parliamentary Elections edition
     Finally, the expansion pack you've been waiting for!
   [ ] MineCraft 2: All the guns!
     'Nuff said
-false
+
  [ ] Fermented Herring Simulator VII
     Why do you keep asking for this?
  [ ] Fermented Herring Simulator VII: Thorium Pack
     No! Really, stop!
  [ ] Fermented Herring Simulator VII: Scratch and sniff
-false
+
  [ ] Doom 2
     Completely not related to other games named Doom. This one is about gardening.
-false
-false
+
+
 GRAPHICS:  [ ] SVGA  [ ] VGA  [ ] EGA  [ ] Other:__________________________
-false
+
 COMPUTER:  [ ] PENTIUM/586 (fancy)  [ ] 486  [ ] Other:________________
-false
+
 SOUND CARD:  [ ] Sound Blaster & Pro  [ ] SB 16  [ ] SB AWE 32  [ ] Ad Lib
              [ ] PAS 16  [ ] GUS  [ ] None  [ ] Other:_____________________
-false
+
                              --- continued ---
-false
+
      ===================================================================
                              MOJANG ORDER SHEET
                                 PAGE 2 OF 2
      ===================================================================
-false
+
 !!! Orders must be received by 1 April 1995 or while stocks last !!!
-false
+
 Name (please print)________________________________________________________
-false
+
 Address ___________________________________________________________________
-false
+
 Address ___________________________________________________________________
-false
+
 City _____________________ County/Region ________________ Postcode ________
-false
+
 Country (if not USA) ____________________ Phone/Fax _______________________
-false
+
 Mail to:  Mojang PC Repair and Software AB
           Söder Mälarstrand 43
           118 25 Stockholm
           Sweden
-false
+
 Thank you for your order!
 All items subject to availability.
-false
+
 Where do you get Minecraft 3D Shareware (tick favourite two only)?
-false
+
   [ ] Mojang home BBS: only for cool people
   [ ] CompuServe
   [ ] America Online
@@ -86,13 +86,13 @@ false
   [ ] Retail shop, off a rack, in a box or other simple packaging
   [ ] CD-ROM disc
   [ ] Other:_______________________________________________________________
-false
+
 What do you like/dislike about Mojang, our games, business with us, etc.?
-false
+
 ___________________________________________________________________________
-false
+
 ___________________________________________________________________________
-false
+
 ___________________________________________________________________________
-false
+
 Thank you!
