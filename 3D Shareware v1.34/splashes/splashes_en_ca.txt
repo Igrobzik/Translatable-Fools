@@ -1,6 +1,6 @@
 mov ax, 13h
 int 10h
-Thousands of colors!
+Thousands of colours!
 No co-processor required!
 MIDI support comming soon!
 Available on most BBSes!

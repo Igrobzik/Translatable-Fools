@@ -55,7 +55,7 @@ SOUND CARD:  [ ] Sound Blaster & Pro  [ ] SB 16  [ ] SB AWE 32  [ ] Ad Lib
                                 PAGE 2 OF 2
      ===================================================================
 
-!!! Orders must be received by April 1st 1995 or while stocks last !!!
+!!! Orders must be received by 1 April 1995 or while stocks last !!!
 
 Name (please print)________________________________________________________
 
@@ -65,7 +65,7 @@ Address ___________________________________________________________________
 
 City ________________________ Region __________________ Postcode __________
 
-Country (if not USA) ____________________ Phone/Fax _______________________
+Country (if not New Zealand) ____________________ Phone/Fax _______________
 
 Mail to:  Mojang PC Repair and Software AB
           Söder Mälarstrand 43
@@ -75,16 +75,16 @@ Mail to:  Mojang PC Repair and Software AB
 Thank you for your order!
 All items subject to availability.
 
-Where do you get Minecraft 3D Shareware (check favourite two only)?
+Where do you get Minecraft 3D Shareware (tick favourite two only)?
 
   [ ] Mojang home BBS: only for cool people
   [ ] CompuServe
   [ ] America Online
   [ ] Other BBS -- Please write name:
-  [ ] Shareware catalog -- Please write name:
+  [ ] Shareware catalogue -- Please write name:
   [ ] Work, a friend or a relative
   [ ] Retail store, off a rack, in a box or other simple packaging
-  [ ] CD-ROM disk
+  [ ] CD-ROM disc
   [ ] Other:_______________________________________________________________
 
 What do you like/dislike about Mojang, our games, business with us, etc.?

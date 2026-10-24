@@ -1,6 +1,6 @@
 mov ax, 13h
 int 10h
-Thousands of colors!
+Thousands of colours!
 No co-processor required!
 MIDI support comming soon!
 Available on most BBSes!
@@ -57,7 +57,7 @@ Superman is dead!
 Look at that mullet!
 What if Greedo shot first?
 Ewoks? What next, talking seahorse!?
-My mom says it's nice!
+My mum says it's nice!
 Smells Like Teen Spirit!
 By the power of Grayskull!
 Over 50mph!
